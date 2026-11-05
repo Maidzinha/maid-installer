@@ -1,4 +1,4 @@
-<#
+﻿<#
   Gera a entrega completa do Maid Installer (versão Release).
 
   1. Roda os testes automatizados (para se algum falhar).
