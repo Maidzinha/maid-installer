@@ -1,0 +1,28 @@
+{
+  // Perfis prontos. Só usam ids do catalog.json (os IDs WinGet verificados ficam lá).
+  // Ao abrir o app pela primeira vez, cada perfil é copiado para Profiles/ e passa a ser editável.
+  "schemaVersion": 1,
+  "profiles": [
+    {
+      "builtInId": "pc-gamer",
+      "name": "PC Gamer",
+      "glyph": "",
+      "description": "Plataformas de jogos, Discord, gravação com o OBS e os componentes que muitos jogos pedem (Visual C++ e DirectX). Drivers de vídeo da NVIDIA e da AMD não têm pacote no WinGet: baixe pelo site oficial da sua placa.",
+      "appIds": [ "steam", "epic", "eaapp", "ubisoft", "discord", "obs", "operagx", "spotify", "7zip", "vcredist-x64", "vcredist-x86", "directx" ]
+    },
+    {
+      "builtInId": "pc-trabalho",
+      "name": "PC Trabalho",
+      "glyph": "",
+      "description": "Navegador, pacote de escritório gratuito, leitor de PDF, compactador, utilitários de produtividade e comunicação.",
+      "appIds": [ "chrome", "libreoffice", "acrobatreader", "7zip", "powertoys", "everything", "whatsapp", "telegram", "vlc" ]
+    },
+    {
+      "builtInId": "pc-completo",
+      "name": "PC Completo",
+      "glyph": "",
+      "description": "Uma seleção ampla e gratuita de todas as categorias: navegadores, comunicação, jogos, utilitários, multimídia, programação, componentes e escritório.",
+      "appIds": [ "chrome", "firefox", "discord", "whatsapp", "telegram", "steam", "epic", "7zip", "everything", "sharex", "powertoys", "vlc", "spotify", "obs", "audacity", "vscode", "git", "libreoffice", "acrobatreader", "vcredist-x64", "vcredist-x86", "directx" ]
+    }
+  ]
+}

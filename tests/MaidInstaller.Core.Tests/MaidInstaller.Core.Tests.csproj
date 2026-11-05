@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="Xunit" />
+    <ProjectReference Include="..\..\src\MaidInstaller.Core\MaidInstaller.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\MaidInstaller.App\Catalog\knowledge.json" Link="Catalog\knowledge.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\src\MaidInstaller.App\Catalog\catalog.json" Link="Catalog\catalog.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\src\MaidInstaller.App\Catalog\profiles.json" Link="Catalog\profiles.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\src\MaidInstaller.App\Defaults\settings.default.json" Link="Defaults\settings.default.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

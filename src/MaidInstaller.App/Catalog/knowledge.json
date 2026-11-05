@@ -1,0 +1,219 @@
+{
+  // Base de conhecimento da Maid Assistant. Somente informações verificadas.
+  // A assistente NÃO responde nada que não esteja aqui (com ou sem a IA local).
+  "schemaVersion": 1,
+  "apps": [
+    {
+      "id": "discord",
+      "name": "Discord",
+      "aliases": ["discord", "dc"],
+      "category": "Comunicação",
+      "developer": "Discord Inc.",
+      "license": "Gratuito, com assinatura opcional (Nitro)",
+      "summary": "O Discord é um aplicativo de comunicação para conversar por texto, voz e vídeo, muito usado por comunidades e grupos de jogos.",
+      "highlights": [
+        "Servidores com canais de texto e de voz",
+        "Chamadas de voz e vídeo e compartilhamento de tela",
+        "Mensagens diretas e grupos com amigos"
+      ],
+      "officialUrl": "https://discord.com"
+    },
+    {
+      "id": "steam",
+      "name": "Steam",
+      "aliases": ["steam"],
+      "category": "Jogos e plataformas",
+      "developer": "Valve",
+      "license": "Gratuito (os jogos são vendidos separadamente)",
+      "summary": "A Steam é a loja e biblioteca de jogos para PC da Valve: você compra, baixa, atualiza e abre seus jogos por ela.",
+      "highlights": [
+        "Biblioteca de jogos com atualizações automáticas",
+        "Lista de amigos e chat",
+        "Salvamento na nuvem nos jogos compatíveis"
+      ],
+      "officialUrl": "https://store.steampowered.com"
+    },
+    {
+      "id": "chrome",
+      "name": "Google Chrome",
+      "aliases": ["chrome", "google chrome"],
+      "category": "Navegadores",
+      "developer": "Google",
+      "license": "Gratuito",
+      "summary": "O Google Chrome é um navegador de internet do Google.",
+      "highlights": [
+        "Sincroniza favoritos, senhas e histórico com a conta Google",
+        "Extensões pela Chrome Web Store"
+      ],
+      "officialUrl": "https://www.google.com/chrome/"
+    },
+    {
+      "id": "operagx",
+      "name": "Opera GX",
+      "aliases": ["opera gx", "operagx", "opera"],
+      "category": "Navegadores",
+      "developer": "Opera",
+      "license": "Gratuito",
+      "summary": "O Opera GX é um navegador da Opera voltado para gamers.",
+      "highlights": [
+        "Limitadores de uso de RAM, CPU e rede",
+        "Barra lateral com integrações como Discord e Twitch",
+        "Temas e personalização visual"
+      ],
+      "officialUrl": "https://www.opera.com/gx"
+    },
+    {
+      "id": "whatsapp",
+      "name": "WhatsApp",
+      "aliases": ["whatsapp", "zap", "zapzap", "wpp"],
+      "category": "Comunicação",
+      "developer": "Meta",
+      "license": "Gratuito",
+      "summary": "O WhatsApp para Windows permite usar suas conversas do WhatsApp no computador.",
+      "highlights": [
+        "Mensagens, arquivos e chamadas de voz e vídeo",
+        "Conectado à sua conta do WhatsApp no celular"
+      ],
+      "officialUrl": "https://www.whatsapp.com/download"
+    },
+    {
+      "id": "spotify",
+      "name": "Spotify",
+      "aliases": ["spotify"],
+      "category": "Multimídia",
+      "developer": "Spotify AB",
+      "license": "Gratuito com anúncios; plano Premium pago remove anúncios e libera downloads",
+      "summary": "O Spotify é um serviço de streaming de músicas e podcasts.",
+      "highlights": [
+        "Playlists e recomendações personalizadas",
+        "Podcasts",
+        "Controle da reprodução entre dispositivos (Spotify Connect)"
+      ],
+      "officialUrl": "https://www.spotify.com"
+    },
+    {
+      "id": "obs",
+      "name": "OBS Studio",
+      "aliases": ["obs", "obs studio"],
+      "category": "Multimídia",
+      "developer": "OBS Project",
+      "license": "Gratuito e de código aberto (GPL v2)",
+      "summary": "O OBS Studio é um programa para gravar a tela e fazer transmissões ao vivo.",
+      "highlights": [
+        "Cenas com várias fontes: tela, câmera, janelas e áudio",
+        "Transmissão para Twitch, YouTube e outros serviços",
+        "Gravação local em vídeo"
+      ],
+      "officialUrl": "https://obsproject.com"
+    },
+    {
+      "id": "minecraft",
+      "name": "Minecraft Launcher",
+      "aliases": ["minecraft", "mine"],
+      "category": "Jogos e plataformas",
+      "developer": "Mojang Studios (Microsoft)",
+      "license": "O launcher é gratuito; o jogo é pago",
+      "summary": "O Minecraft Launcher é o programa oficial para instalar e abrir o Minecraft no PC.",
+      "highlights": [
+        "Abre o Minecraft: Java Edition e a versão para Windows",
+        "Entra com a conta Microsoft"
+      ],
+      "officialUrl": "https://www.minecraft.net"
+    },
+    {
+      "id": "7zip",
+      "name": "7-Zip",
+      "aliases": ["7zip", "7 zip", "7z"],
+      "category": "Utilitários",
+      "developer": "Igor Pavlov",
+      "license": "Gratuito e de código aberto",
+      "summary": "O 7-Zip é um compactador de arquivos: abre e cria arquivos .7z, .zip e outros formatos (também extrai .rar).",
+      "highlights": [
+        "Formato 7z com alta taxa de compressão",
+        "Integração com o menu de contexto do Explorer"
+      ],
+      "officialUrl": "https://www.7-zip.org"
+    },
+    {
+      "id": "vlc",
+      "name": "VLC Media Player",
+      "aliases": ["vlc"],
+      "category": "Multimídia",
+      "developer": "VideoLAN",
+      "license": "Gratuito e de código aberto",
+      "summary": "O VLC é um reprodutor de vídeo e áudio que abre praticamente qualquer formato sem precisar instalar codecs.",
+      "highlights": [
+        "Reproduz arquivos, DVDs e transmissões de rede",
+        "Suporte a legendas"
+      ],
+      "officialUrl": "https://www.videolan.org/vlc/"
+    }
+  ],
+  "topics": [
+    {
+      "id": "administrador",
+      "keywords": ["administrador", "admin", "uac", "controle de conta", "permissao", "pede senha"],
+      "answer": "Alguns instaladores pedem permissão de administrador, {nome}: o Windows abre a janela do Controle de Conta de Usuário (UAC). O Maid Installer sempre mostra o que vai instalar e pede sua confirmação antes; a instalação só continua se você clicar em Sim nessa janela. Se recusar, nada é instalado ♡"
+    },
+    {
+      "id": "reiniciar",
+      "keywords": ["reiniciar", "reinicia", "reinicio", "reboot", "reiniciou"],
+      "answer": "Alguns programas, como drivers e runtimes, pedem para reiniciar o PC para terminar a instalação. Eu nunca reinicio o computador sozinha, {nome}: o Maid Installer só mostra um aviso, e você reinicia quando for melhor para você ♡"
+    },
+    {
+      "id": "seguranca-download",
+      "keywords": ["seguro", "segura", "virus", "confiavel", "fonte oficial", "pirata", "crack"],
+      "answer": "O Maid Installer instala pelo WinGet, que baixa os instaladores do endereço oficial registrado no repositório da Microsoft e confere o hash (SHA-256) de cada arquivo antes de instalar. Programas sem pacote no WinGet aparecem só com o link do site oficial. Nada de versões modificadas ou piratas por aqui ♡"
+    },
+    {
+      "id": "codigo-aberto",
+      "keywords": ["codigo aberto", "open source", "opensource", "software livre", "gpl"],
+      "answer": "Software de código aberto (open source) é aquele cujo código-fonte é público e pode ser estudado e modificado, conforme a licença dele (por exemplo GPL ou MIT). Na maioria das vezes ele também é gratuito ♡"
+    },
+    {
+      "id": "atualizacoes",
+      "keywords": ["atualizacao", "atualizacoes", "atualizar", "update", "versao nova", "desatualizado"],
+      "answer": "Na tela Atualizações, o Maid Installer pergunta ao WinGet quais programas têm versão nova e mostra a versão instalada e a disponível. Nada é atualizado sem você escolher e confirmar, {nome} ♡"
+    },
+    {
+      "id": "dll-faltando",
+      "keywords": ["dll", "msvcp140", "vcruntime140", "msvcp", "vcruntime"],
+      "answer": "Quando um programa ou jogo reclama que faltam arquivos como MSVCP140.dll ou VCRUNTIME140.dll, normalmente falta o Microsoft Visual C++ Redistributable. Ele está no catálogo (versões x64 e x86) e no Kit Pós-Formatação. Evite baixar DLLs soltas de sites desconhecidos ♡"
+    },
+    {
+      "id": "desinstalar",
+      "keywords": ["desinstalar", "desinstalo", "remover", "tirar programa", "apagar programa"],
+      "answer": "O Maid Installer não desinstala programas, {nome}. Para remover um, use as Configurações do Windows › Aplicativos › Aplicativos instalados (no Windows 10, \"Aplicativos e recursos\"), escolha o programa e clique em Desinstalar ♡"
+    },
+    {
+      "id": "ia-local",
+      "keywords": ["ia", "inteligencia artificial", "modelo", "qwen", "chatgpt", "offline"],
+      "answer": "Minhas respostas vêm da base local do Maid Installer, {nome}. Se você baixar a IA local (em Configurações › Maid Assistant), eu passo a explicar de um jeito mais natural, mas sempre usando só os fatos da base e sem precisar de internet. E eu nunca instalo nem executo nada sozinha ♡"
+    },
+    {
+      "id": "essenciais",
+      "keywords": ["essencia", "essenciais", "basico", "basicos", "indispensave", "primeiros", "recomenda"],
+      "answer": "Depois de formatar, {nome}, uma boa base é: um navegador (Chrome, Firefox, Brave ou Opera GX), um compactador (7-Zip), um reprodutor de mídia (VLC), os runtimes Microsoft Visual C++ Redistributable (muitos programas e jogos precisam deles) e o driver da sua placa de vídeo. O resto depende do uso: jogos, trabalho ou estudo ♡"
+    },
+    {
+      "id": "kit-pos",
+      "keywords": ["kit", "pos formatacao", "formatacao", "formatar", "formatei"],
+      "answer": "O Kit Pós-Formatação reúne ações para preparar o Windows depois de formatar: verificar o Windows Update e o WinGet, instalar runtimes, conferir drivers, limpar arquivos temporários, ajustar o plano de energia e ver os programas de inicialização. Cada ação é separada, tem explicação e pede sua confirmação antes de mudar qualquer coisa ♡"
+    },
+    {
+      "id": "winget",
+      "keywords": ["winget", "gerenciador de pacotes", "package manager"],
+      "answer": "O WinGet é o gerenciador de pacotes oficial da Microsoft (Windows Package Manager). Ele vem com o Windows 11 e com as versões recentes do Windows 10 através do 'Instalador de Aplicativo'. O Maid Installer usa o WinGet para instalar e atualizar programas a partir de fontes oficiais ♡"
+    },
+    {
+      "id": "portatil",
+      "keywords": ["portatil", "pendrive", "ventoy", "pen drive"],
+      "answer": "No modo portátil, eu fico toda dentro do pendrive, {nome}: configurações, listas, perfis e logs ficam na própria pasta do Maid Installer, sem gravar dados no computador. Para montar o pendrive (funciona com Ventoy), use Configurações › Criar cópia portátil: eu levo suas configurações, perfis e listas. O que ativa o modo é o arquivo MaidInstaller.portable ao lado do MaidInstaller.exe ♡"
+    },
+    {
+      "id": "quem-e-voce",
+      "keywords": ["quem e voce", "quem voce", "seu nome", "o que voce faz"],
+      "answer": "Eu sou a Maid Assistant, sua ajudante no Maid Installer! ♡ Explico para que serve cada aplicativo do catálogo, comparo programas e acompanho as instalações com você. Eu não instalo nada sozinha: quem faz isso é o Maid Installer, sempre com a sua autorização."
+    }
+  ]
+}

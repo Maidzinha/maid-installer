@@ -1,0 +1,31 @@
+{
+  // Configuração padrão do Maid Installer.
+  // Só é usada na PRIMEIRA execução, quando ainda não existe Config/settings.json.
+  // Depois disso, o app grava as escolhas do usuário em Config/settings.json e este arquivo não é mais lido.
+  // Pode ser editado sem recompilar (ex.: trocar o nome ou os favoritos antes de copiar para o pendrive).
+  "schemaVersion": 1,
+
+  // Como a Maid chama o usuário.
+  "userName": "Helder",
+  "language": "pt-BR",
+  "theme": "BlackPink",
+  "assistantMinimized": false,
+
+  // Usar a IA local quando o modelo estiver na pasta Models (ela continua opcional: sem o modelo, a Maid usa a base).
+  "assistantAiEnabled": true,
+
+  // Barra de Acesso Rápido. "matchNames" são os nomes como aparecem no Menu Iniciar do Windows.
+  "favorites": [
+    { "name": "Steam", "matchNames": [ "Steam" ] },
+    { "name": "Discord", "matchNames": [ "Discord" ] },
+    { "name": "Google Chrome", "matchNames": [ "Google Chrome" ] },
+    { "name": "Opera GX", "matchNames": [ "Opera GX Browser", "Opera GX" ] },
+    { "name": "WhatsApp", "matchNames": [ "WhatsApp" ] },
+    { "name": "Spotify", "matchNames": [ "Spotify" ] },
+    { "name": "OBS Studio", "matchNames": [ "OBS Studio" ] },
+    { "name": "Minecraft", "matchNames": [ "Minecraft Launcher", "Minecraft" ] }
+  ],
+
+  // Controle interno dos perfis prontos já criados (deixe vazio).
+  "seededProfiles": []
+}

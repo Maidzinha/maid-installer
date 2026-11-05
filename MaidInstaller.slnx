@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/MaidInstaller.AI/MaidInstaller.AI.csproj" />
+    <Project Path="src/MaidInstaller.App/MaidInstaller.App.csproj" />
+    <Project Path="src/MaidInstaller.Core/MaidInstaller.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/MaidInstaller.Core.Tests/MaidInstaller.Core.Tests.csproj" />
+  </Folder>
+</Solution>

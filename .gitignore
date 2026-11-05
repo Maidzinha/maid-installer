@@ -1,0 +1,12 @@
+bin/
+obj/
+*.user
+.vs/
+TestResults/
+
+# Saídas do build (publicação e pacotes de entrega; os .zip passam de 100 MB)
+dist/
+
+# Modelos de IA (baixados pelo app)
+*.gguf
+*.part

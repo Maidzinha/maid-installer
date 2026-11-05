@@ -1,0 +1,247 @@
+﻿using System.Windows;
+using System.Windows.Input;
+using MaidInstaller.App.Mvvm;
+using MaidInstaller.App.Services;
+using MaidInstaller.Core.Catalog;
+using MaidInstaller.Core.Installation;
+
+namespace MaidInstaller.App.ViewModels;
+
+public enum PageKey { Home, Library, Profiles, Lists, PostFormat, Updates, Settings, About }
+
+public sealed record NavItem(PageKey Key, string Title, string Glyph)
+{
+    public override string ToString() => Title; // nome lido por leitores de tela
+}
+
+/// <summary>Janela principal: navegação lateral, página atual, diálogos e coordenação das instalações.</summary>
+public sealed class MainViewModel : ObservableObject
+{
+    private readonly AppServices _services;
+    private readonly Dictionary<PageKey, object> _pages = [];
+    private NavItem? _selectedNav;
+    private object _currentPage = null!;
+    private DialogViewModel? _dialog;
+
+    public MainViewModel(AppServices services)
+    {
+        _services = services;
+        Assistant = new AssistantViewModel(services);
+        SystemStatus = new SystemStatusViewModel(services.SystemMonitor, services.Logger);
+        QuickAccess = new QuickAccessViewModel(services, Assistant, () => Navigate(PageKey.Library));
+        Installs = new InstallsViewModel(services);
+        Assistant.InstallStatusProvider = Installs.DescribeForAssistant;
+        _ = QuickAccess.LoadAsync();
+        HookAssistantToInstaller();
+
+        NavItems =
+        [
+            new(PageKey.Home, "Início", ""),
+            new(PageKey.Library, "Biblioteca de Apps", ""),
+            new(PageKey.Profiles, "Perfis de Instalação", ""),
+            new(PageKey.Lists, "Minhas Listas", ""),
+            new(PageKey.PostFormat, "Kit Pós-Formatação", ""),
+            new(PageKey.Updates, "Atualizações", ""),
+            new(PageKey.Settings, "Configurações", ""),
+            new(PageKey.About, "Sobre", ""),
+        ];
+        _selectedNav = NavItems[0];
+        CurrentPage = GetPage(PageKey.Home);
+        SystemStatus.Start();
+        ShowInstallsCommand = new RelayCommand(ShowInstalls);
+    }
+
+    public IReadOnlyList<NavItem> NavItems { get; }
+    public AssistantViewModel Assistant { get; }
+    public SystemStatusViewModel SystemStatus { get; }
+    public QuickAccessViewModel QuickAccess { get; }
+    public InstallsViewModel Installs { get; }
+    public ICommand ShowInstallsCommand { get; }
+
+    public string VersionText => $"v{_services.Version}";
+    public bool IsPortable => _services.Paths.IsPortable;
+    public string ModeText => IsPortable ? "Modo Portátil" : "Modo Instalado";
+    public string ModeTooltip => $"Dados em: {_services.Paths.DataRoot}";
+
+    public NavItem? SelectedNav
+    {
+        get => _selectedNav;
+        set
+        {
+            if (value is null || !SetProperty(ref _selectedNav, value)) return;
+            CurrentPage = GetPage(value.Key);
+            if (CurrentPage is PostFormatViewModel kit) kit.OnShown();
+            if (CurrentPage is UpdatesViewModel updates) updates.OnShown();
+            // O painel de hardware só fica visível no Início: não consome recursos nas outras páginas.
+            if (value.Key == PageKey.Home) SystemStatus.Start(); else SystemStatus.Stop();
+        }
+    }
+
+    public object CurrentPage
+    {
+        get => _currentPage;
+        private set => SetProperty(ref _currentPage, value);
+    }
+
+    /// <summary>Diálogo de confirmação aberto (null = nenhum).</summary>
+    public DialogViewModel? Dialog
+    {
+        get => _dialog;
+        private set => SetProperty(ref _dialog, value);
+    }
+
+    public void Navigate(PageKey key) => SelectedNav = NavItems.First(n => n.Key == key);
+
+    /// <summary>A Biblioteca guarda o status real de cada app; Perfis e Listas reaproveitam os mesmos itens.</summary>
+    public LibraryViewModel Library => (LibraryViewModel)GetPage(PageKey.Library);
+
+    /// <summary>"Salvar como lista" na Biblioteca: cria a lista e abre Minhas Listas.</summary>
+    public void SaveAsList(IEnumerable<string> appIds)
+    {
+        var lists = (CollectionsViewModel)GetPage(PageKey.Lists);
+        lists.CreateFrom(appIds);
+        Navigate(PageKey.Lists);
+    }
+
+    /// <summary>Abre a tela de acompanhamento (fora da barra lateral).</summary>
+    public void ShowInstalls()
+    {
+        _selectedNav = null;
+        OnPropertyChanged(nameof(SelectedNav));
+        SystemStatus.Stop();
+        CurrentPage = Installs;
+    }
+
+    public async Task<bool> ShowDialogAsync(DialogViewModel dialog)
+    {
+        Dialog = dialog;
+        try { return await dialog.Result; }
+        finally { Dialog = null; }
+    }
+
+    /// <summary>
+    /// Pedido de instalação vindo da Biblioteca (ou, depois, de Perfis e Listas).
+    /// Separa o que dá para instalar, mostra tudo numa confirmação e só então coloca na fila.
+    /// </summary>
+    public async Task<bool> RequestInstallAsync(IEnumerable<CatalogApp> apps, Func<CatalogApp, bool> isInstalled)
+    {
+        var plan = InstallRequest.Plan(apps, isInstalled, _services.Installer.Jobs);
+        var (toInstall, already, inQueue, noPackage) = (plan.ToInstall, plan.AlreadyInstalled, plan.InQueue, plan.NoPackage);
+        var name = _services.Settings.UserName;
+
+        var notes = new List<string>();
+        if (inQueue.Count > 0) notes.Add($"Já estão na fila: {string.Join(", ", inQueue.Select(a => a.Name))}.");
+        if (already.Count > 0) notes.Add($"Já instalados (serão pulados): {string.Join(", ", already.Select(a => a.Name))}.");
+        if (noPackage.Count > 0) notes.Add($"Sem pacote no WinGet (baixe pelo site oficial na Biblioteca): {string.Join(", ", noPackage.Select(a => a.Name))}.");
+
+        if (toInstall.Count == 0)
+        {
+            await ShowDialogAsync(new DialogViewModel("Nada para instalar", $"{name}, nenhum dos aplicativos escolhidos precisa ser instalado agora.",
+                [], notes, "Entendi", cancelText: null));
+            return false;
+        }
+
+        notes.InsertRange(0,
+        [
+            "Os programas são baixados das fontes oficiais pelo WinGet e instalados em modo silencioso, um de cada vez.",
+            "Alguns instaladores pedem permissão de administrador: o Windows mostra o aviso (UAC) e você decide. Se recusar, só aquele app é cancelado.",
+            "Ao confirmar, você aceita as licenças desses programas.",
+            "Nada já instalado será atualizado, e o PC não será reiniciado automaticamente.",
+        ]);
+        foreach (var app in toInstall.Where(a => !a.IsFree))
+            notes.Add($"{app.Name}: {app.Price}.");
+
+        var confirmed = await ShowDialogAsync(new DialogViewModel(
+            toInstall.Count == 1 ? $"Instalar {toInstall[0].Name}?" : $"Instalar {toInstall.Count} aplicativos?",
+            "Confira o que será instalado neste PC:",
+            [.. toInstall.Select(a => new DialogItem(a.Name, a.WinGetSource == "msstore" ? "Microsoft Store" : $"WinGet · {a.WinGetId}"))],
+            notes,
+            toInstall.Count == 1 ? "Instalar" : $"Instalar {toInstall.Count}"));
+
+        if (!confirmed)
+        {
+            _services.Logger.Info("Instalação cancelada na confirmação.");
+            return false;
+        }
+
+        _services.Logger.Info($"Instalação autorizada: {string.Join(", ", toInstall.Select(a => a.WinGetId))}");
+        foreach (var app in already) _services.Installer.AddAlreadyInstalled(app);
+        foreach (var app in toInstall) _services.Installer.Enqueue(app);
+        ShowInstalls();
+        return true;
+    }
+
+    /// <summary>A assistente recebe as informações reais da fila. Ela só comenta; não executa nada.</summary>
+    private void HookAssistantToInstaller()
+    {
+        var installer = _services.Installer;
+        var name = _services.Settings.UserName;
+
+        installer.JobStarted += job => OnUi(() =>
+        {
+            var summary = _services.Knowledge.Apps.FirstOrDefault(a => a.Id == job.App.Id)?.Summary;
+            Assistant.Post($"{name}, estou {(job.Operation == InstallOperation.Upgrade ? "atualizando" : "instalando")} o {job.App.Name}! ♡" + (summary is null ? "" : $" {FirstSentence(summary)}"), expand: false);
+        });
+
+        installer.JobFinished += job => OnUi(() =>
+        {
+            switch (job.State)
+            {
+                case InstallJobState.Completed:
+                    Assistant.Post($"Prontinho, {job.App.Name} {(job.Operation == InstallOperation.Upgrade ? "atualizado" : "instalado")}! ♡" + (job.RebootRequired ? " Ele pediu para reiniciar o PC; faça isso quando puder." : ""), expand: false);
+                    break;
+                case InstallJobState.Failed:
+                    Assistant.Post($"Ops, {name}, o {job.App.Name} não foi {(job.Operation == InstallOperation.Upgrade ? "atualizado" : "instalado")}. {job.Message} Você pode tentar de novo na tela de instalações.", expand: false);
+                    break;
+                case InstallJobState.Cancelled when job.StartedAt is not null:
+                    Assistant.Post($"Tudo bem, a {(job.Operation == InstallOperation.Upgrade ? "atualização" : "instalação")} do {job.App.Name} foi cancelada. {job.Message}", expand: false);
+                    break;
+            }
+        });
+
+        installer.QueueDrained += () => OnUi(() =>
+        {
+            var jobs = installer.Jobs;
+            var ok = jobs.Count(j => j.State == InstallJobState.Completed);
+            var failed = jobs.Count(j => j.State == InstallJobState.Failed);
+            Assistant.Post(failed == 0
+                ? $"Prontinho, {name}! Terminei a fila: {ok} instalação(ões) concluída(s). ♡"
+                : $"Terminei a fila, {name}: {ok} concluída(s) e {failed} com falha. Os detalhes estão na tela de instalações ♡", expand: false);
+
+            // Atualiza o que está instalado (Biblioteca e Acesso Rápido).
+            _services.ShellApps.Invalidate();
+            _ = QuickAccess.LoadAsync();
+            if (_pages.TryGetValue(PageKey.Library, out var lib) && lib is LibraryViewModel library) _ = library.RefreshStatusAsync();
+            if (_pages.TryGetValue(PageKey.Updates, out var up) && up is UpdatesViewModel updatesPage && jobs.Any(j => j.Operation == InstallOperation.Upgrade)) _ = updatesPage.CheckAsync();
+        });
+    }
+
+    private static string FirstSentence(string text)
+    {
+        var i = text.IndexOf(". ", StringComparison.Ordinal);
+        return i > 0 ? text[..(i + 1)] : text;
+    }
+
+    private static void OnUi(Action action) => Application.Current?.Dispatcher.InvokeAsync(action);
+
+    private object GetPage(PageKey key)
+    {
+        if (_pages.TryGetValue(key, out var page)) return page;
+        page = key switch
+        {
+            PageKey.Home => new HomeViewModel(this, _services),
+            PageKey.Library => new LibraryViewModel(_services, QuickAccess, this),
+            PageKey.Profiles => new CollectionsViewModel(_services, this, Core.Collections.CollectionKind.Profile),
+            PageKey.Lists => new CollectionsViewModel(_services, this, Core.Collections.CollectionKind.List),
+            PageKey.PostFormat => new PostFormatViewModel(_services, this),
+            PageKey.Updates => new UpdatesViewModel(_services, this),
+            PageKey.Settings => new SettingsViewModel(_services, this),
+            PageKey.About => new AboutViewModel(_services),
+            _ => PlaceholderViewModel.For(key, NavItems.First(n => n.Key == key)),
+        };
+        _pages[key] = page;
+        return page;
+    }
+
+    public void Shutdown() => SystemStatus.Stop();
+}

@@ -1,0 +1,650 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============ MAID INSTALLER — BLACK & PINK EDITION ♡ ============ -->
+
+    <!-- Paleta -->
+    <Color x:Key="BgColor">#FF0A0608</Color>
+    <Color x:Key="Bg2Color">#FF150A10</Color>
+    <Color x:Key="CardColor">#C21A1116</Color>
+    <Color x:Key="PinkNeonColor">#FFFF4FA3</Color>
+    <Color x:Key="PinkHotColor">#FFFF2E8C</Color>
+    <Color x:Key="PinkPastelColor">#FFF7A8CC</Color>
+    <Color x:Key="TextColor">#FFFBEFF4</Color>
+    <Color x:Key="TextDimColor">#FFC4A6B4</Color>
+
+    <SolidColorBrush x:Key="BgBrush" Color="{StaticResource BgColor}" />
+    <SolidColorBrush x:Key="CardBrush" Color="{StaticResource CardColor}" />
+    <SolidColorBrush x:Key="PinkNeonBrush" Color="{StaticResource PinkNeonColor}" />
+    <SolidColorBrush x:Key="PinkPastelBrush" Color="{StaticResource PinkPastelColor}" />
+    <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}" />
+    <SolidColorBrush x:Key="TextDimBrush" Color="{StaticResource TextDimColor}" />
+    <SolidColorBrush x:Key="BorderBrushPink" Color="#66FF4FA3" />
+    <SolidColorBrush x:Key="BorderBrushSoft" Color="#33FF7DBA" />
+    <SolidColorBrush x:Key="TrackBrush" Color="#33FFFFFF" />
+
+    <LinearGradientBrush x:Key="SidebarBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#F2120A0E" Offset="0" />
+        <GradientStop Color="#F20D070A" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="NeonGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#FFFF5FAE" Offset="0" />
+        <GradientStop Color="#FFE0287A" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="GlassBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#CC22141B" Offset="0" />
+        <GradientStop Color="#B3140C11" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ShortcutBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#E62A1520" Offset="0" />
+        <GradientStop Color="#E6190D13" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ShortcutHoverBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#F23D1A2C" Offset="0" />
+        <GradientStop Color="#F2220F19" Offset="1" />
+    </LinearGradientBrush>
+
+    <DropShadowEffect x:Key="PinkGlow" Color="#FFFF4FA3" BlurRadius="22" ShadowDepth="0" Opacity="0.35" />
+    <DropShadowEffect x:Key="PinkGlowStrong" Color="#FFFF4FA3" BlurRadius="26" ShadowDepth="0" Opacity="0.6" />
+    <DropShadowEffect x:Key="TextGlow" Color="#FFFF4FA3" BlurRadius="14" ShadowDepth="0" Opacity="0.7" />
+
+    <FontFamily x:Key="IconFont">Segoe Fluent Icons, Segoe MDL2 Assets</FontFamily>
+
+    <!-- Flor de sakura (decoração discreta) -->
+    <DrawingImage x:Key="SakuraFlower">
+        <DrawingImage.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#FFF06AA8" Geometry="M0,0 C-7,-8 -7,-19 0,-24 C7,-19 7,-8 0,0Z" />
+                    <GeometryDrawing Brush="#FFF06AA8">
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry Figures="M0,0 C-7,-8 -7,-19 0,-24 C7,-19 7,-8 0,0Z">
+                                <PathGeometry.Transform><RotateTransform Angle="72" /></PathGeometry.Transform>
+                            </PathGeometry>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FFF06AA8">
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry Figures="M0,0 C-7,-8 -7,-19 0,-24 C7,-19 7,-8 0,0Z">
+                                <PathGeometry.Transform><RotateTransform Angle="144" /></PathGeometry.Transform>
+                            </PathGeometry>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FFF06AA8">
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry Figures="M0,0 C-7,-8 -7,-19 0,-24 C7,-19 7,-8 0,0Z">
+                                <PathGeometry.Transform><RotateTransform Angle="216" /></PathGeometry.Transform>
+                            </PathGeometry>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FFF06AA8">
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry Figures="M0,0 C-7,-8 -7,-19 0,-24 C7,-19 7,-8 0,0Z">
+                                <PathGeometry.Transform><RotateTransform Angle="288" /></PathGeometry.Transform>
+                            </PathGeometry>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FFFFD1E6">
+                        <GeometryDrawing.Geometry><EllipseGeometry Center="0,0" RadiusX="4" RadiusY="4" /></GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+    <!-- Texto -->
+    <Style x:Key="IconText" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource IconFont}" />
+        <Setter Property="Foreground" Value="{StaticResource PinkNeonBrush}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="PanelTitle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <!-- Painel de vidro -->
+    <Style x:Key="GlassPanel" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource GlassBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrushPink}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="18" />
+        <Setter Property="Padding" Value="18" />
+        <Setter Property="Effect" Value="{StaticResource PinkGlow}" />
+    </Style>
+
+    <!-- Página: aparece suavemente -->
+    <Style x:Key="PageRoot" TargetType="Grid">
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.28">
+                            <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut" /></DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Botões da barra de título -->
+    <Style x:Key="ChromeButton" TargetType="Button">
+        <Setter Property="Width" Value="46" />
+        <Setter Property="Height" Value="34" />
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="FontFamily" Value="{StaticResource IconFont}" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" Background="Transparent" CornerRadius="8">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="#33FF4FA3" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="#55FF4FA3" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ChromeCloseButton" TargetType="Button" BasedOn="{StaticResource ChromeButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" Background="Transparent" CornerRadius="8">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="#E0FF2E6E" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Itens da barra lateral -->
+    <Style x:Key="NavItem" TargetType="ListBoxItem">
+        <Setter Property="Margin" Value="0,0,0,6" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="Bd" CornerRadius="14" Height="46" Padding="16,0" Background="Transparent"
+                            BorderBrush="Transparent" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="34" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="Glyph" Text="{Binding Glyph}" Style="{StaticResource IconText}" FontSize="18"
+                                       HorizontalAlignment="Left" Foreground="{StaticResource PinkPastelBrush}" />
+                            <TextBlock x:Name="Label" Grid.Column="1" Text="{Binding Title}" FontSize="15" VerticalAlignment="Center"
+                                       Foreground="{StaticResource TextBrush}" />
+                            <TextBlock x:Name="Chevron" Grid.Column="2" Text="&#xE76C;" Style="{StaticResource IconText}"
+                                       FontSize="10" Foreground="White" Visibility="Collapsed" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="#1FFF4FA3" />
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="#33FF4FA3" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource NeonGradient}" />
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="#FFFF8CC4" />
+                            <Setter TargetName="Bd" Property="Effect" Value="{StaticResource PinkGlowStrong}" />
+                            <Setter TargetName="Glyph" Property="Foreground" Value="White" />
+                            <Setter TargetName="Label" Property="Foreground" Value="White" />
+                            <Setter TargetName="Chevron" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Atalho compacto da tela inicial -->
+    <Style x:Key="ShortcutButton" TargetType="Button">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+        <Setter Property="RenderTransform"><Setter.Value><ScaleTransform /></Setter.Value></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" CornerRadius="14" BorderThickness="1" BorderBrush="{StaticResource BorderBrushPink}"
+                            Background="{StaticResource ShortcutBrush}" Padding="12,10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource ShortcutHoverBrush}" />
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource PinkNeonBrush}" />
+                            <Setter TargetName="Bd" Property="Effect" Value="{StaticResource PinkGlowStrong}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Bd" Property="Opacity" Value="0.85" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" To="1.03" Duration="0:0:0.15" />
+                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" To="1.03" Duration="0:0:0.15" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" To="1" Duration="0:0:0.2" />
+                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" To="1" Duration="0:0:0.2" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Ícone da barra de acesso rápido -->
+    <Style x:Key="QuickAppButton" TargetType="Button">
+        <Setter Property="Width" Value="54" />
+        <Setter Property="Height" Value="54" />
+        <Setter Property="Margin" Value="0,0,10,0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" CornerRadius="14" Background="#B3201218" BorderThickness="1" BorderBrush="{StaticResource BorderBrushSoft}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource PinkNeonBrush}" />
+                            <Setter TargetName="Bd" Property="Effect" Value="{StaticResource PinkGlowStrong}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Pílula de sugestão da assistente -->
+    <Style x:Key="SuggestionButton" TargetType="Button">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Margin" Value="0,0,0,8" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" CornerRadius="12" Padding="12,7" Background="#991E1117" BorderThickness="1" BorderBrush="{StaticResource BorderBrushPink}">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="#4DFF4FA3" />
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource PinkNeonBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Bd" Property="Opacity" Value="0.5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Botão circular pequeno (minimizar painel) -->
+    <Style x:Key="IconButton" TargetType="Button">
+        <Setter Property="Width" Value="32" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="FontFamily" Value="{StaticResource IconFont}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" CornerRadius="10" Background="#33FFFFFF" BorderThickness="1" BorderBrush="{StaticResource BorderBrushSoft}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="#55FF4FA3" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Botão de ação principal (enviar, abrir pasta…) -->
+    <Style x:Key="AccentButton" TargetType="Button">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Padding" Value="16,8" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" CornerRadius="12" Background="{StaticResource NeonGradient}" Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Effect" Value="{StaticResource PinkGlowStrong}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Bd" Property="Opacity" Value="0.45" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Campo de texto -->
+    <Style x:Key="ChatTextBox" TargetType="TextBox">
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="CaretBrush" Value="{StaticResource PinkNeonBrush}" />
+        <Setter Property="SelectionBrush" Value="{StaticResource PinkNeonBrush}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="Bd" CornerRadius="12" Background="#CC120A0E" BorderThickness="1" BorderBrush="{StaticResource BorderBrushPink}" Padding="12,0">
+                        <Grid>
+                            <TextBlock x:Name="Hint" Text="{TemplateBinding Tag}" Foreground="{StaticResource TextDimBrush}" VerticalAlignment="Center"
+                                       IsHitTestVisible="False" Visibility="Collapsed" Margin="2,0,0,0" />
+                            <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Text" Value="">
+                            <Setter TargetName="Hint" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource PinkNeonBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Barra de uso (CPU/GPU/RAM) -->
+    <Style x:Key="PinkMeter" TargetType="ProgressBar">
+        <Setter Property="Height" Value="8" />
+        <Setter Property="Minimum" Value="0" />
+        <Setter Property="Maximum" Value="100" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Grid>
+                        <Border x:Name="PART_Track" CornerRadius="4" Background="{StaticResource TrackBrush}" />
+                        <Border x:Name="PART_Indicator" CornerRadius="4" HorizontalAlignment="Left" Background="{StaticResource NeonGradient}">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#FFFF4FA3" BlurRadius="8" ShadowDepth="0" Opacity="0.8" />
+                            </Border.Effect>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Indicador de atividade (quando o WinGet não informa porcentagem real) -->
+    <Style x:Key="ActivityBar" TargetType="ProgressBar" BasedOn="{StaticResource PinkMeter}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Grid ClipToBounds="True">
+                        <Border x:Name="PART_Track" CornerRadius="4" Background="{StaticResource TrackBrush}" />
+                        <Border x:Name="PART_Indicator" CornerRadius="4" HorizontalAlignment="Left" Background="{StaticResource NeonGradient}" />
+                        <Rectangle x:Name="Activity" RadiusX="4" RadiusY="4" Visibility="Collapsed">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TranslateTransform X="-1" />
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#00FF4FA3" Offset="0" />
+                                    <GradientStop Color="#FFFF4FA3" Offset="0.5" />
+                                    <GradientStop Color="#00FF4FA3" Offset="1" />
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsIndeterminate" Value="True">
+                            <Setter TargetName="PART_Indicator" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="Activity" Property="Visibility" Value="Visible" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard x:Name="Sweep">
+                                    <Storyboard RepeatBehavior="Forever">
+                                        <DoubleAnimation Storyboard.TargetName="Activity"
+                                                         Storyboard.TargetProperty="(Rectangle.Fill).(Brush.RelativeTransform).(TranslateTransform.X)"
+                                                         From="-1" To="1" Duration="0:0:1.4" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <StopStoryboard BeginStoryboardName="Sweep" />
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Barra de rolagem fina -->
+    <Style TargetType="ScrollBar">
+        <Setter Property="Width" Value="6" />
+        <Setter Property="MinWidth" Value="6" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollBar">
+                    <Track x:Name="PART_Track" IsDirectionReversed="True">
+                        <Track.Thumb>
+                            <Thumb>
+                                <Thumb.Template>
+                                    <ControlTemplate TargetType="Thumb">
+                                        <Border CornerRadius="3" Background="#80FF4FA3" />
+                                    </ControlTemplate>
+                                </Thumb.Template>
+                            </Thumb>
+                        </Track.Thumb>
+                    </Track>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Botão contornado (ações secundárias) -->
+    <Style x:Key="GhostButton" TargetType="Button">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Padding" Value="14,7" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" CornerRadius="11" Background="#661E1117" BorderThickness="1"
+                            BorderBrush="{StaticResource BorderBrushPink}" Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="#40FF4FA3" />
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource PinkNeonBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Bd" Property="Opacity" Value="0.45" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Filtro em pílula (RadioButton e ToggleButton) -->
+    <Style x:Key="PillToggle" TargetType="ToggleButton">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Margin" Value="0,0,8,0" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border x:Name="Bd" CornerRadius="15" Padding="14,6" Background="#661E1117" BorderThickness="1"
+                            BorderBrush="{StaticResource BorderBrushSoft}">
+                        <ContentPresenter VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource PinkNeonBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource NeonGradient}" />
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="#FFFF8CC4" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="PillRadio" TargetType="RadioButton" BasedOn="{StaticResource PillToggle}" />
+
+    <!-- Caixa de seleção rosa -->
+    <Style x:Key="PinkCheck" TargetType="CheckBox">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Border x:Name="Box" Width="20" Height="20" CornerRadius="6" BorderThickness="1.5"
+                            BorderBrush="{StaticResource PinkPastelBrush}" Background="#33000000">
+                        <TextBlock x:Name="Mark" Text="&#xE73E;" FontFamily="{StaticResource IconFont}" FontSize="11"
+                                   Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Box" Property="Background" Value="{StaticResource NeonGradient}" />
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{StaticResource PinkNeonBrush}" />
+                            <Setter TargetName="Mark" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{StaticResource PinkNeonBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Item de categoria (lista à esquerda da Biblioteca) -->
+    <Style x:Key="CategoryItem" TargetType="ListBoxItem">
+        <Setter Property="Margin" Value="0,0,0,4" />
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="Bd" CornerRadius="11" Padding="12,8" Background="Transparent" BorderThickness="1" BorderBrush="Transparent">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="#1FFF4FA3" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="#40FF4FA3" />
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource PinkNeonBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Cartão de app na Biblioteca -->
+    <Style x:Key="AppCard" TargetType="ListBoxItem">
+        <Setter Property="Margin" Value="0,0,10,10" />
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="Bd" CornerRadius="14" Padding="10,10" Width="228" Height="76" BorderThickness="1"
+                            Background="{StaticResource ShortcutBrush}" BorderBrush="{StaticResource BorderBrushSoft}">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource BorderBrushPink}" />
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource ShortcutHoverBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource PinkNeonBrush}" />
+                            <Setter TargetName="Bd" Property="Effect" Value="{StaticResource PinkGlow}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Selo de status -->
+    <Style x:Key="Chip" TargetType="Border">
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Padding" Value="7,2" />
+        <Setter Property="Background" Value="#33FFFFFF" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+
+    <Style TargetType="ToolTip">
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="Background" Value="#F01A1116" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrushPink}" />
+        <Setter Property="Padding" Value="10,6" />
+    </Style>
+
+</ResourceDictionary>

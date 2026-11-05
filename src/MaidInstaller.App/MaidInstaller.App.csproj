@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>MaidInstaller.App</RootNamespace>
+    <AssemblyName>MaidInstaller</AssemblyName>
+    <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
+    <Version>1.0.0</Version>
+    <Product>Maid Installer — Personal Edition</Product>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <!-- Só as traduções em português das bibliotecas (deixa a versão portátil menor). -->
+    <SatelliteResourceLanguages>pt-BR</SatelliteResourceLanguages>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MaidInstaller.Core\MaidInstaller.Core.csproj" />
+    <ProjectReference Include="..\MaidInstaller.AI\MaidInstaller.AI.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\avatar.png" />
+    <Resource Include="Assets\logo.png" />
+    <Resource Include="Assets\icon.ico" />
+    <!-- A mascote é carregada como arquivo local (Assets\mascot.png), podendo ser trocada sem recompilar. -->
+    <Content Include="Assets\mascot.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\AppIcons\*.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Catalog\**\*.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Defaults\settings.default.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

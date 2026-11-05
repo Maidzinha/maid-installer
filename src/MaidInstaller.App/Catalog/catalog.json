@@ -1,0 +1,337 @@
+{
+  // Catálogo do Maid Installer.
+  // Todo "winGetId" foi conferido com `winget show --id <id> -e` em 2026-11-04 (versão em "verifiedVersion").
+  // Apps sem pacote no WinGet ficam com "winGetId": null e só o link oficial.
+  // O catálogo NUNCA contém comandos: só dados. O instalador aceita apenas IDs validados.
+  "schemaVersion": 1,
+  "verifiedOn": "2026-11-04",
+  "categories": [
+    { "id": "navegadores", "name": "Navegadores", "glyph": "" },
+    { "id": "comunicacao", "name": "Comunicação", "glyph": "" },
+    { "id": "jogos", "name": "Jogos e plataformas", "glyph": "" },
+    { "id": "utilitarios", "name": "Utilitários", "glyph": "" },
+    { "id": "multimidia", "name": "Multimídia", "glyph": "" },
+    { "id": "desenvolvimento", "name": "Desenvolvimento", "glyph": "" },
+    { "id": "drivers", "name": "Drivers e componentes", "glyph": "" },
+    { "id": "escritorio", "name": "Escritório", "glyph": "" }
+  ],
+  "apps": [
+    {
+      "id": "chrome", "name": "Google Chrome", "category": "navegadores", "developer": "Google",
+      "description": "Navegador do Google, com sincronização pela conta Google e extensões da Chrome Web Store.",
+      "price": "Gratuito", "license": "Freeware",
+      "officialUrl": "https://www.google.com/chrome/",
+      "winGetId": "Google.Chrome", "winGetSource": "winget", "verifiedVersion": "157.0.8103.39",
+      "startMenuNames": ["Google Chrome"], "aliases": ["chrome"]
+    },
+    {
+      "id": "operagx", "name": "Opera GX", "category": "navegadores", "developer": "Opera Software",
+      "description": "Navegador voltado para gamers, com limitadores de RAM, CPU e rede e barra lateral com Discord e Twitch.",
+      "price": "Gratuito", "license": "Freeware",
+      "officialUrl": "https://www.opera.com/gx",
+      "winGetId": "Opera.OperaGX", "winGetSource": "winget", "verifiedVersion": "138.0.6044.65",
+      "startMenuNames": ["Opera GX Browser", "Opera GX"], "aliases": ["opera", "opera gx", "operagx"]
+    },
+    {
+      "id": "firefox", "name": "Mozilla Firefox", "category": "navegadores", "developer": "Mozilla",
+      "description": "Navegador de código aberto da Mozilla, com foco em privacidade. Esta é a versão em português (Brasil).",
+      "price": "Gratuito (código aberto)", "license": "MPL-2.0",
+      "officialUrl": "https://www.mozilla.org/firefox/",
+      "winGetId": "Mozilla.Firefox.pt-BR", "winGetSource": "winget", "verifiedVersion": "159.0",
+      "startMenuNames": ["Firefox", "Mozilla Firefox"], "aliases": ["firefox", "mozilla"]
+    },
+    {
+      "id": "brave", "name": "Brave", "category": "navegadores", "developer": "Brave Software",
+      "description": "Navegador baseado no Chromium com bloqueio de anúncios e rastreadores já embutido.",
+      "price": "Gratuito (código aberto)", "license": "MPL-2.0",
+      "officialUrl": "https://brave.com/download",
+      "winGetId": "Brave.Brave", "winGetSource": "winget", "verifiedVersion": "156.1.98.63",
+      "startMenuNames": ["Brave"], "aliases": ["brave"]
+    },
+    {
+      "id": "discord", "name": "Discord", "category": "comunicacao", "developer": "Discord Inc.",
+      "description": "Comunicação por texto, voz e vídeo, com servidores, canais e compartilhamento de tela.",
+      "price": "Gratuito (assinatura Nitro opcional)", "license": "Proprietária",
+      "officialUrl": "https://discord.com/download",
+      "winGetId": "Discord.Discord", "winGetSource": "winget", "verifiedVersion": "1.0.9267",
+      "startMenuNames": ["Discord"], "aliases": ["discord", "dc"]
+    },
+    {
+      "id": "whatsapp", "name": "WhatsApp", "category": "comunicacao", "developer": "WhatsApp Inc. (Meta)",
+      "description": "App oficial do WhatsApp para Windows: conversas, arquivos e chamadas conectados ao seu celular.",
+      "price": "Gratuito", "license": "Proprietária",
+      "officialUrl": "https://www.whatsapp.com/download",
+      "winGetId": "9NKSQGP7F2NH", "winGetSource": "msstore", "verifiedVersion": null,
+      "startMenuNames": ["WhatsApp"], "aliases": ["whatsapp", "zap", "zapzap", "wpp"],
+      "notes": "Instalado pela Microsoft Store (o WinGet usa a fonte msstore)."
+    },
+    {
+      "id": "telegram", "name": "Telegram Desktop", "category": "comunicacao", "developer": "Telegram FZ-LLC",
+      "description": "Mensagens sincronizadas na nuvem, com grupos e canais grandes e envio de arquivos.",
+      "price": "Gratuito (código aberto)", "license": "GPL-3.0",
+      "officialUrl": "https://desktop.telegram.org/",
+      "winGetId": "Telegram.TelegramDesktop", "winGetSource": "winget", "verifiedVersion": "7.3.3",
+      "startMenuNames": ["Telegram"], "aliases": ["telegram"]
+    },
+    {
+      "id": "steam", "name": "Steam", "category": "jogos", "developer": "Valve",
+      "description": "Loja e biblioteca de jogos para PC: compra, download, atualização e salvamento na nuvem.",
+      "price": "Gratuito (jogos à parte)", "license": "Proprietária",
+      "officialUrl": "https://store.steampowered.com/about/",
+      "winGetId": "Valve.Steam", "winGetSource": "winget", "verifiedVersion": "2.10.91.91",
+      "startMenuNames": ["Steam"], "aliases": ["steam"]
+    },
+    {
+      "id": "epic", "name": "Epic Games Launcher", "category": "jogos", "developer": "Epic Games",
+      "description": "Loja e biblioteca de jogos da Epic Games, que também distribui jogos gratuitos periodicamente.",
+      "price": "Gratuito (jogos à parte)", "license": "Proprietária",
+      "officialUrl": "https://epicgames.com/download",
+      "winGetId": "EpicGames.EpicGamesLauncher", "winGetSource": "winget", "verifiedVersion": "1.3.210.0",
+      "startMenuNames": ["Epic Games Launcher"], "aliases": ["epic", "epic games"]
+    },
+    {
+      "id": "riot", "name": "Riot Client", "category": "jogos", "developer": "Riot Games",
+      "description": "Inicializador dos jogos da Riot (League of Legends, VALORANT…). Vem junto com o instalador de cada jogo.",
+      "price": "Gratuito", "license": "Proprietária",
+      "officialUrl": "https://www.riotgames.com/",
+      "winGetId": null, "winGetSource": null, "verifiedVersion": null,
+      "startMenuNames": ["Riot Client"], "aliases": ["riot", "riot client"],
+      "notes": "Não existe pacote do Riot Client sozinho no WinGet. Baixe o jogo desejado pelo site oficial."
+    },
+    {
+      "id": "ubisoft", "name": "Ubisoft Connect", "category": "jogos", "developer": "Ubisoft",
+      "description": "Loja e inicializador dos jogos da Ubisoft.",
+      "price": "Gratuito (jogos à parte)", "license": "Proprietária",
+      "officialUrl": "https://ubisoftconnect.com/",
+      "winGetId": "Ubisoft.Connect", "winGetSource": "winget", "verifiedVersion": "175.0.0.13393",
+      "startMenuNames": ["Ubisoft Connect"], "aliases": ["ubisoft", "uplay"]
+    },
+    {
+      "id": "eaapp", "name": "EA app", "category": "jogos", "developer": "Electronic Arts",
+      "description": "Loja e inicializador dos jogos da Electronic Arts (substituiu o Origin).",
+      "price": "Gratuito (jogos à parte)", "license": "Proprietária",
+      "officialUrl": "https://www.ea.com/ea-app",
+      "winGetId": "ElectronicArts.EADesktop", "winGetSource": "winget", "verifiedVersion": "13.813.1.6327",
+      "startMenuNames": ["EA", "EA app"], "aliases": ["ea", "ea app", "origin"]
+    },
+    {
+      "id": "minecraft", "name": "Minecraft Launcher", "category": "jogos", "developer": "Mojang Studios",
+      "description": "Programa oficial para instalar e abrir o Minecraft no PC, usando a conta Microsoft.",
+      "price": "Launcher gratuito (jogo pago)", "license": "Proprietária",
+      "officialUrl": "https://www.minecraft.net/download",
+      "winGetId": "Mojang.MinecraftLauncher", "winGetSource": "winget", "verifiedVersion": "2.0.0.0",
+      "startMenuNames": ["Minecraft Launcher", "Minecraft"], "aliases": ["minecraft", "mine"]
+    },
+    {
+      "id": "7zip", "name": "7-Zip", "category": "utilitarios", "developer": "Igor Pavlov",
+      "description": "Compactador de arquivos: cria e abre .7z e .zip e extrai .rar e muitos outros formatos.",
+      "price": "Gratuito (código aberto)", "license": "LGPL-2.1",
+      "officialUrl": "https://7-zip.org/download.html",
+      "winGetId": "7zip.7zip", "winGetSource": "winget", "verifiedVersion": "26.05",
+      "startMenuNames": ["7-Zip File Manager", "7-Zip"], "aliases": ["7zip", "7 zip", "7z"]
+    },
+    {
+      "id": "winrar", "name": "WinRAR", "category": "utilitarios", "developer": "win.rar GmbH",
+      "description": "Compactador de arquivos com suporte completo ao formato RAR.",
+      "price": "Avaliação gratuita (licença paga)", "license": "Proprietária (shareware)",
+      "officialUrl": "https://www.win-rar.com/",
+      "winGetId": "RARLab.WinRAR", "winGetSource": "winget", "verifiedVersion": "7.23.0",
+      "startMenuNames": ["WinRAR"], "aliases": ["winrar", "rar"]
+    },
+    {
+      "id": "everything", "name": "Everything", "category": "utilitarios", "developer": "voidtools",
+      "description": "Busca arquivos e pastas pelo nome instantaneamente em todo o computador.",
+      "price": "Gratuito", "license": "MIT",
+      "officialUrl": "https://www.voidtools.com/",
+      "winGetId": "voidtools.Everything", "winGetSource": "winget", "verifiedVersion": "1.4.1.1032",
+      "startMenuNames": ["Everything"], "aliases": ["everything", "voidtools"]
+    },
+    {
+      "id": "sharex", "name": "ShareX", "category": "utilitarios", "developer": "ShareX Team",
+      "description": "Captura e gravação de tela, com edição rápida e envio para vários serviços.",
+      "price": "Gratuito (código aberto)", "license": "GPL-3.0",
+      "officialUrl": "https://getsharex.com/",
+      "winGetId": "ShareX.ShareX", "winGetSource": "winget", "verifiedVersion": "21.0.0",
+      "startMenuNames": ["ShareX"], "aliases": ["sharex"]
+    },
+    {
+      "id": "powertoys", "name": "Microsoft PowerToys", "category": "utilitarios", "developer": "Microsoft",
+      "description": "Conjunto de utilitários da Microsoft para o Windows, como FancyZones, PowerRename e seletor de cores.",
+      "price": "Gratuito (código aberto)", "license": "MIT",
+      "officialUrl": "https://github.com/microsoft/PowerToys",
+      "winGetId": "Microsoft.PowerToys", "winGetSource": "winget", "verifiedVersion": "0.102.3001",
+      "startMenuNames": ["PowerToys"], "aliases": ["powertoys"]
+    },
+    {
+      "id": "vlc", "name": "VLC Media Player", "category": "multimidia", "developer": "VideoLAN",
+      "description": "Reprodutor de vídeo e áudio que abre praticamente qualquer formato sem codecs extras.",
+      "price": "Gratuito (código aberto)", "license": "GPL-2.0",
+      "officialUrl": "https://www.videolan.org/vlc/",
+      "winGetId": "VideoLAN.VLC", "winGetSource": "winget", "verifiedVersion": "3.0.24",
+      "startMenuNames": ["VLC media player"], "aliases": ["vlc"]
+    },
+    {
+      "id": "spotify", "name": "Spotify", "category": "multimidia", "developer": "Spotify AB",
+      "description": "Streaming de músicas e podcasts.",
+      "price": "Gratuito com anúncios (Premium pago)", "license": "Proprietária",
+      "officialUrl": "https://www.spotify.com/download/windows/",
+      "winGetId": "Spotify.Spotify", "winGetSource": "winget", "verifiedVersion": "1.3.6.1921",
+      "startMenuNames": ["Spotify"], "aliases": ["spotify"]
+    },
+    {
+      "id": "obs", "name": "OBS Studio", "category": "multimidia", "developer": "OBS Project",
+      "description": "Gravação de tela e transmissão ao vivo com cenas, várias fontes de vídeo e áudio.",
+      "price": "Gratuito (código aberto)", "license": "GPL-2.0",
+      "officialUrl": "https://obsproject.com/",
+      "winGetId": "OBSProject.OBSStudio", "winGetSource": "winget", "verifiedVersion": "33.0.0",
+      "startMenuNames": ["OBS Studio"], "aliases": ["obs", "obs studio"]
+    },
+    {
+      "id": "audacity", "name": "Audacity", "category": "multimidia", "developer": "Audacity Team",
+      "description": "Editor e gravador de áudio: cortar, mixar, remover ruído e aplicar efeitos.",
+      "price": "Gratuito (código aberto)", "license": "GPL-3.0",
+      "officialUrl": "https://www.audacityteam.org/",
+      "winGetId": "Audacity.Audacity", "winGetSource": "winget", "verifiedVersion": "4.0.2",
+      "startMenuNames": ["Audacity"], "aliases": ["audacity"]
+    },
+    {
+      "id": "vscode", "name": "Visual Studio Code", "category": "desenvolvimento", "developer": "Microsoft",
+      "description": "Editor de código leve, com extensões para praticamente todas as linguagens e Git integrado.",
+      "price": "Gratuito", "license": "Licença Microsoft",
+      "officialUrl": "https://code.visualstudio.com/",
+      "winGetId": "Microsoft.VisualStudioCode", "winGetSource": "winget", "verifiedVersion": "1.143.1",
+      "startMenuNames": ["Visual Studio Code"], "aliases": ["vscode", "vs code", "code"]
+    },
+    {
+      "id": "git", "name": "Git", "category": "desenvolvimento", "developer": "Git for Windows",
+      "description": "Controle de versão de código, com Git Bash e integração ao Explorer.",
+      "price": "Gratuito (código aberto)", "license": "GPL-2.0",
+      "officialUrl": "https://gitforwindows.org/",
+      "winGetId": "Git.Git", "winGetSource": "winget", "verifiedVersion": "2.56.0.4",
+      "startMenuNames": ["Git Bash"], "aliases": ["git"]
+    },
+    {
+      "id": "python", "name": "Python 3.14", "category": "desenvolvimento", "developer": "Python Software Foundation",
+      "description": "Linguagem de programação Python, com o interpretador, o pip e o IDLE.",
+      "price": "Gratuito (código aberto)", "license": "PSF-2.0",
+      "officialUrl": "https://www.python.org/",
+      "winGetId": "Python.Python.3.14", "winGetSource": "winget", "verifiedVersion": "3.14.10",
+      "startMenuNames": ["Python 3.14", "IDLE (Python 3.14)"], "aliases": ["python", "py"]
+    },
+    {
+      "id": "nodejs", "name": "Node.js LTS", "category": "desenvolvimento", "developer": "OpenJS Foundation",
+      "description": "Ambiente para rodar JavaScript fora do navegador, com o npm. Versão de suporte longo (LTS).",
+      "price": "Gratuito (código aberto)", "license": "MIT",
+      "officialUrl": "https://nodejs.org/",
+      "winGetId": "OpenJS.NodeJS.LTS", "winGetSource": "winget", "verifiedVersion": "26.13.0",
+      "startMenuNames": ["Node.js"], "aliases": ["node", "nodejs", "node js", "npm"]
+    },
+    {
+      "id": "vscommunity", "name": "Visual Studio Community 2026", "category": "desenvolvimento", "developer": "Microsoft",
+      "description": "IDE completa da Microsoft para C#, C++ e .NET. Instalação grande; os componentes são escolhidos no Visual Studio Installer.",
+      "price": "Gratuito (uso individual e estudo)", "license": "Proprietária",
+      "officialUrl": "https://visualstudio.microsoft.com/",
+      "winGetId": "Microsoft.VisualStudio.Community", "winGetSource": "winget", "verifiedVersion": "18.11.3",
+      "startMenuNames": ["Visual Studio 2026"], "aliases": ["visual studio", "vs community", "visual studio community"]
+    },
+    {
+      "id": "nvidiaapp", "name": "NVIDIA App", "category": "drivers", "developer": "NVIDIA",
+      "description": "Aplicativo da NVIDIA para baixar drivers GeForce e ajustar jogos e gravação.",
+      "price": "Gratuito", "license": "Proprietária",
+      "officialUrl": "https://www.nvidia.com/pt-br/software/nvidia-app/",
+      "winGetId": null, "winGetSource": null, "verifiedVersion": null,
+      "startMenuNames": ["NVIDIA App"], "aliases": ["nvidia", "nvidia app", "geforce"],
+      "notes": "Não há pacote oficial do NVIDIA App no WinGet. Baixe pelo site da NVIDIA."
+    },
+    {
+      "id": "amdsoftware", "name": "AMD Software: Adrenalin Edition", "category": "drivers", "developer": "AMD",
+      "description": "Driver e painel das placas de vídeo Radeon e dos processadores Ryzen com vídeo integrado.",
+      "price": "Gratuito", "license": "Proprietária",
+      "officialUrl": "https://www.amd.com/pt/support/download/drivers.html",
+      "winGetId": null, "winGetSource": null, "verifiedVersion": null,
+      "startMenuNames": ["AMD Software: Adrenalin Edition", "AMD Software"], "aliases": ["amd", "adrenalin", "radeon"],
+      "notes": "O pacote 'AMD Software: Cloud Edition' do WinGet é outro produto. Baixe o Adrenalin pelo site da AMD."
+    },
+    {
+      "id": "inteldsa", "name": "Intel Driver & Support Assistant", "category": "drivers", "developer": "Intel",
+      "description": "Detecta o hardware Intel do PC e indica os drivers atualizados.",
+      "price": "Gratuito", "license": "Proprietária",
+      "officialUrl": "https://www.intel.com/content/www/us/en/support/intel-driver-support-assistant.html",
+      "winGetId": "Intel.IntelDriverAndSupportAssistant", "winGetSource": "winget", "verifiedVersion": "26.2.0.7",
+      "startMenuNames": ["Intel® Driver & Support Assistant", "Intel Driver & Support Assistant"], "aliases": ["intel", "intel dsa", "dsa"]
+    },
+    {
+      "id": "vcredist-x64", "name": "Visual C++ Redistributable (x64)", "category": "drivers", "developer": "Microsoft",
+      "description": "Bibliotecas do Visual C++ 2015–2026 (64 bits) exigidas por muitos programas e jogos.",
+      "price": "Gratuito", "license": "Proprietária (freeware)",
+      "officialUrl": "https://learn.microsoft.com/cpp/windows/latest-supported-vc-redist",
+      "winGetId": "Microsoft.VCRedist.2015+.x64", "winGetSource": "winget", "verifiedVersion": "14.51.36247.0",
+      "startMenuNames": [], "aliases": ["vcredist", "visual c++", "c++ redistributable", "redistributable"]
+    },
+    {
+      "id": "vcredist-x86", "name": "Visual C++ Redistributable (x86)", "category": "drivers", "developer": "Microsoft",
+      "description": "As mesmas bibliotecas em 32 bits, necessárias para programas e jogos de 32 bits.",
+      "price": "Gratuito", "license": "Proprietária (freeware)",
+      "officialUrl": "https://learn.microsoft.com/cpp/windows/latest-supported-vc-redist",
+      "winGetId": "Microsoft.VCRedist.2015+.x86", "winGetSource": "winget", "verifiedVersion": "14.51.36247.0",
+      "startMenuNames": [], "aliases": ["vcredist x86", "visual c++ x86"]
+    },
+    {
+      "id": "dotnet-desktop-8", "name": ".NET Desktop Runtime 8", "category": "drivers", "developer": "Microsoft",
+      "description": "Runtime do .NET 8 para programas de janela (WPF e Windows Forms). Muitos utilitários pedem ele para abrir.",
+      "price": "Gratuito (código aberto)", "license": "MIT",
+      "officialUrl": "https://dotnet.microsoft.com/download/dotnet/8.0",
+      "winGetId": "Microsoft.DotNet.DesktopRuntime.8", "winGetSource": "winget", "verifiedVersion": "8.0.33",
+      "startMenuNames": [], "aliases": [".net 8", "dotnet 8", "net runtime", "runtime"]
+    },
+    {
+      "id": "dotnet-desktop-10", "name": ".NET Desktop Runtime 10", "category": "drivers", "developer": "Microsoft",
+      "description": "Runtime do .NET 10 (a versão mais nova) para programas de janela feitos em .NET.",
+      "price": "Gratuito (código aberto)", "license": "MIT",
+      "officialUrl": "https://dotnet.microsoft.com/download/dotnet/10.0",
+      "winGetId": "Microsoft.DotNet.DesktopRuntime.10", "winGetSource": "winget", "verifiedVersion": "10.0.14",
+      "startMenuNames": [], "aliases": [".net 10", "dotnet 10", "net runtime", "runtime"]
+    },
+    {
+      "id": "java-temurin-21", "name": "Java (Eclipse Temurin JRE 21)", "category": "drivers", "developer": "Eclipse Adoptium",
+      "description": "Java gratuito e de código aberto para rodar programas Java, servidores e mods de Minecraft que pedem Java instalado.",
+      "price": "Gratuito (código aberto)", "license": "GPL-2.0 com Classpath Exception",
+      "officialUrl": "https://adoptium.net/",
+      "winGetId": "EclipseAdoptium.Temurin.21.JRE", "winGetSource": "winget", "verifiedVersion": "21.0.13.9",
+      "startMenuNames": [], "aliases": ["java", "jre", "temurin", "runtime"]
+    },
+    {
+      "id": "directx", "name": "DirectX End-User Runtime", "category": "drivers", "developer": "Microsoft",
+      "description": "Componentes antigos do DirectX (9, 10 e 11) que alguns jogos mais velhos ainda pedem. O DirectX 12 já vem no Windows.",
+      "price": "Gratuito", "license": "Proprietária (freeware)",
+      "officialUrl": "https://www.microsoft.com/pt-br/download/details.aspx?id=35",
+      "winGetId": "Microsoft.DirectX", "winGetSource": "winget", "verifiedVersion": "9.29.1974.0",
+      "startMenuNames": [], "aliases": ["directx", "dx"]
+    },
+    {
+      "id": "libreoffice", "name": "LibreOffice", "category": "escritorio", "developer": "The Document Foundation",
+      "description": "Pacote de escritório com editor de texto, planilhas e apresentações, compatível com arquivos do Office.",
+      "price": "Gratuito (código aberto)", "license": "MPL-2.0",
+      "officialUrl": "https://www.libreoffice.org/",
+      "winGetId": "TheDocumentFoundation.LibreOffice", "winGetSource": "winget", "verifiedVersion": "26.8.2.2",
+      "startMenuNames": ["LibreOffice"], "aliases": ["libreoffice", "libre office"]
+    },
+    {
+      "id": "office", "name": "Microsoft 365", "category": "escritorio", "developer": "Microsoft",
+      "description": "Word, Excel, PowerPoint e Outlook. Só funciona com uma assinatura ou licença Microsoft 365.",
+      "price": "Pago (assinatura)", "license": "Comercial",
+      "officialUrl": "https://www.office.com/",
+      "winGetId": "Microsoft.Office", "winGetSource": "winget", "verifiedVersion": "16.0.20228.20124",
+      "startMenuNames": ["Word", "Excel"], "aliases": ["office", "microsoft 365", "word", "excel", "powerpoint"],
+      "notes": "O pacote do WinGet é o 'Microsoft 365 Apps for enterprise'. Instale só se tiver licença."
+    },
+    {
+      "id": "acrobatreader", "name": "Adobe Acrobat Reader", "category": "escritorio", "developer": "Adobe",
+      "description": "Leitor de PDF da Adobe, com assinatura e preenchimento de formulários.",
+      "price": "Gratuito", "license": "Proprietária",
+      "officialUrl": "https://get.adobe.com/reader/",
+      "winGetId": "Adobe.Acrobat.Reader.64-bit", "winGetSource": "winget", "verifiedVersion": "26.003.22075",
+      "startMenuNames": ["Adobe Acrobat", "Adobe Acrobat Reader"], "aliases": ["acrobat", "adobe reader", "pdf"]
+    }
+  ]
+}
