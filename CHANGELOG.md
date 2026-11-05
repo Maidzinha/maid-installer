@@ -1,6 +1,20 @@
 # Histórico de versões — Maid Installer
 
+**Português** · [English](docs/en/CHANGELOG.md)
+
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). As versões seguem `MAIOR.MENOR.CORREÇÃO`.
+
+## [1.1.0] — 2026-11-05
+
+- **Inglês** no app inteiro: telas, mensagens, erros, catálogo, base de conhecimento da Maid Assistant e perfis prontos.
+  O português (Brasil) continua disponível. Instalações novas abrem em inglês.
+- Seleção de idioma em **Configurações › Idioma e aparência**: English, Português (Brasil) ou Automático (segue o Windows).
+- Temas **Escuro** (novo padrão) e **Claro**, além do **Preto e rosa** original, que continua igual.
+- Trocar idioma ou tema reabre só o app, nunca o PC, e espera instalações, downloads e cópias em andamento.
+- O nome do usuário agora é opcional e vem vazio: sem nome, a Maid fala com você sem vocativo.
+- A Maid Assistant entende perguntas em inglês.
+- Instalador e desinstalador bilíngues (seguem o idioma do Windows) e documentação em inglês (`README.en.md`, `docs/en`).
+- Teste que falha se algum texto de interface ficar sem tradução em inglês.
 
 ## [1.0.0] — 2026-11-04
 

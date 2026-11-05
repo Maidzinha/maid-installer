@@ -1,6 +1,7 @@
 <UserControl x:Class="MaidInstaller.App.Views.HomeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:loc="clr-namespace:MaidInstaller.App.Localization">
     <Grid Style="{StaticResource PageRoot}" Margin="20,10,18,18">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -18,11 +19,11 @@
             <!-- Saudação -->
             <StackPanel HorizontalAlignment="Center" Margin="0,22,0,0">
                 <TextBlock HorizontalAlignment="Center" FontSize="40" FontWeight="Bold">
-                    <Run Text="Bem-vindo, " /><Run Text="{Binding UserName, Mode=OneWay}" FontStyle="Italic"
+                    <Run Text="{Binding WelcomePrefix, Mode=OneWay}" /><Run Text="{Binding UserName, Mode=OneWay}" FontStyle="Italic"
                          Foreground="{StaticResource PinkNeonBrush}" /><Run Text="! " /><Run Text="♡" Foreground="{StaticResource PinkNeonBrush}" />
                 </TextBlock>
                 <TextBlock HorizontalAlignment="Center" Margin="0,4,0,0" FontSize="15" Foreground="{StaticResource TextDimBrush}"
-                           Text="Maid Installer — Prepare seu PC de forma rápida, completa e personalizada." />
+                           Text="{loc:T 'Maid Installer — Prepare seu PC de forma rápida, completa e personalizada.'}" />
             </StackPanel>
 
             <!-- Mascote + atalhos -->
@@ -61,8 +62,8 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <TextBlock Text="&#xE945;" Style="{StaticResource IconText}" FontSize="16" />
-                        <TextBlock Text="Acesso Rápido" Style="{StaticResource PanelTitle}" Margin="10,0,0,0" />
-                        <TextBlock Text="  carregando…" Foreground="{StaticResource TextDimBrush}" VerticalAlignment="Center"
+                        <TextBlock Text="{loc:T 'Acesso Rápido'}" Style="{StaticResource PanelTitle}" Margin="10,0,0,0" />
+                        <TextBlock Text="{loc:T '  carregando…'}" Foreground="{StaticResource TextDimBrush}" VerticalAlignment="Center"
                                    Visibility="{Binding IsLoading, Converter={StaticResource BoolToVis}}" />
                     </StackPanel>
                     <ItemsControl ItemsSource="{Binding Items}">
@@ -96,7 +97,7 @@
             </Border>
             <Button Grid.Row="2" Style="{StaticResource IconButton}" DataContext="{Binding QuickAccess}" Command="{Binding AddCommand}"
                     HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,14,14,0" Content="&#xE710;"
-                    ToolTip="Adicionar favoritos pela Biblioteca de Apps" />
+                    ToolTip="{loc:T 'Adicionar favoritos pela Biblioteca de Apps'}" />
         </Grid>
 
         <!-- ================= Painel direito ================= -->
@@ -112,7 +113,7 @@
                     <Grid Margin="0,0,0,14">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="&#xE945;" Style="{StaticResource IconText}" FontSize="18" />
-                            <TextBlock Text="Status do Sistema" Style="{StaticResource PanelTitle}" Margin="10,0,0,0" />
+                            <TextBlock Text="{loc:T 'Status do Sistema'}" Style="{StaticResource PanelTitle}" Margin="10,0,0,0" />
                         </StackPanel>
                         <Path HorizontalAlignment="Right" Stroke="{StaticResource PinkNeonBrush}" StrokeThickness="1.6" Opacity="0.9"
                               Data="M0,10 L22,10 L27,2 L32,18 L37,6 L41,10 L56,10" Effect="{StaticResource TextGlow}" />
@@ -172,14 +173,14 @@
                     </Grid>
 
                     <!-- Temperatura -->
-                    <Grid ToolTip="Temperaturas aparecem quando o hardware/driver permite (NVIDIA via nvidia-smi; zona térmica ACPI normalmente só como administrador).">
+                    <Grid ToolTip="{loc:T 'Temperaturas aparecem quando o hardware/driver permite (NVIDIA via nvidia-smi; zona térmica ACPI normalmente só como administrador).'}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="30" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="&#xE9CA;" Style="{StaticResource IconText}" FontSize="15" HorizontalAlignment="Left" />
                         <TextBlock Grid.Column="1" FontSize="13" Foreground="{StaticResource TextDimBrush}">
-                            <Run Text="Temperatura: " /><Run Text="{Binding TemperatureText, Mode=OneWay}" Foreground="{StaticResource TextBrush}" />
+                            <Run Text="{loc:T 'Temperatura: '}" /><Run Text="{Binding TemperatureText, Mode=OneWay}" Foreground="{StaticResource TextBrush}" />
                         </TextBlock>
                     </Grid>
                 </StackPanel>
@@ -235,7 +236,7 @@
                                 </TextBlock>
                             </Button.Content>
                             <Button.ToolTip>
-                                <ToolTip Content="Minimizar / expandir a assistente" />
+                                <ToolTip Content="{loc:T 'Minimizar / expandir a assistente'}" />
                             </Button.ToolTip>
                         </Button>
                     </Grid>
@@ -247,13 +248,13 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Border x:Name="Bubble" CornerRadius="14" Padding="12,9" Margin="0,0,0,8" MaxWidth="290" ToolTip="{Binding SourceNote}"
-                                            HorizontalAlignment="Left" Background="#B33A1427" BorderThickness="1" BorderBrush="{StaticResource BorderBrushPink}">
+                                            HorizontalAlignment="Left" Background="{StaticResource B_B33A1427}" BorderThickness="1" BorderBrush="{StaticResource BorderBrushPink}">
                                         <TextBlock Text="{Binding Text}" TextWrapping="Wrap" FontSize="13.5" LineHeight="19" />
                                     </Border>
                                     <DataTemplate.Triggers>
                                         <DataTrigger Binding="{Binding FromUser}" Value="True">
                                             <Setter TargetName="Bubble" Property="HorizontalAlignment" Value="Right" />
-                                            <Setter TargetName="Bubble" Property="Background" Value="#CC24161D" />
+                                            <Setter TargetName="Bubble" Property="Background" Value="{StaticResource B_CC24161D}" />
                                             <Setter TargetName="Bubble" Property="BorderBrush" Value="{StaticResource BorderBrushSoft}" />
                                         </DataTrigger>
                                     </DataTemplate.Triggers>
@@ -285,14 +286,14 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBox Style="{StaticResource ChatTextBox}" Tag="Pergunte sobre os aplicativos…" MaxLength="300"
+                        <TextBox Style="{StaticResource ChatTextBox}" Tag="{loc:T 'Pergunte sobre os aplicativos…'}" MaxLength="300"
                                  Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}">
                             <TextBox.InputBindings>
                                 <KeyBinding Key="Return" Command="{Binding SendCommand}" />
                             </TextBox.InputBindings>
                         </TextBox>
                         <Button Grid.Column="1" Style="{StaticResource AccentButton}" Width="48" Margin="8,0,0,0" Padding="0"
-                                Command="{Binding SendCommand}" ToolTip="Enviar" AutomationProperties.Name="Enviar">
+                                Command="{Binding SendCommand}" ToolTip="{loc:T 'Enviar'}" AutomationProperties.Name="{loc:T 'Enviar'}">
                             <TextBlock Text="&#xE724;" FontFamily="{StaticResource IconFont}" FontSize="16" />
                         </Button>
                     </Grid>

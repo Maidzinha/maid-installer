@@ -1,5 +1,7 @@
 # Instalação — Maid Installer ♡
 
+**Português** · [English](en/INSTALL.md)
+
 O Maid Installer vem em dois pacotes. Os dois levam o .NET junto, então abrem até num Windows recém-formatado,
 sem instalar nada antes.
 
@@ -21,7 +23,7 @@ sem instalar nada antes.
 Junto dos `.zip` vem o `SHA256SUMS.txt`. No PowerShell:
 
 ```powershell
-Get-FileHash .\MaidInstaller-1.0.0-win-x64.zip -Algorithm SHA256
+Get-FileHash .\MaidInstaller-1.1.0-win-x64.zip -Algorithm SHA256
 ```
 
 O resultado precisa ser igual ao do arquivo (sem diferenciar maiúsculas e minúsculas).
@@ -46,7 +48,7 @@ perfis e listas (e o modelo de IA, se marcar a opção).
 
 1. Extraia o `.zip` inteiro numa pasta qualquer (por exemplo, Downloads).
 2. Dê dois cliques em **`Instalar.cmd`**.
-3. O instalador mostra o que vai fazer e pede confirmação:
+3. O instalador mostra o que vai fazer e pede confirmação (no idioma do Windows):
    - copia o app para `%LocalAppData%\Programs\MaidInstaller`;
    - cria o atalho **Maid Installer** no Menu Iniciar e, se você quiser, na Área de Trabalho.
 
@@ -65,14 +67,25 @@ No PowerShell:
 powershell -ExecutionPolicy Bypass -File "$env:LOCALAPPDATA\Programs\MaidInstaller\Desinstalar.ps1"
 ```
 
-O desinstalador remove o programa e os atalhos. Seus dados só são apagados se você responder **S** à pergunta específica.
+O desinstalador remove o programa e os atalhos. Seus dados só são apagados se você responder **S** (ou **Y**, em inglês) à pergunta específica.
 Os programas instalados pelo Maid Installer **continuam no PC**.
 
-## Primeira execução e configuração padrão
+## Primeira execução, idioma e configuração padrão
 
 Na primeira vez, o app lê `Defaults\settings.default.json` (na pasta do programa) e cria seu `Config\settings.json`.
-Para trocar o nome ou os favoritos **antes** da primeira abertura (por exemplo, num pendrive novo), edite esse arquivo
-no Bloco de Notas. Depois disso, o que vale é o `settings.json` e as mudanças feitas pelo app.
+Uma instalação nova abre em **inglês**, no tema **Escuro** e sem nome de usuário.
+
+Para trocar idioma, tema, nome ou favoritos, use **Configurações** no app (idioma e tema valem ao reabrir o app; só o app
+reabre, nunca o PC). Para deixar tudo pronto **antes** da primeira abertura (por exemplo, num pendrive novo), edite o
+`settings.default.json` no Bloco de Notas:
+
+| Campo | Valores |
+|---|---|
+| `language` | `"en"` (inglês), `"pt-BR"` (português), `"auto"` (o mesmo do Windows) |
+| `theme` | `"Dark"` (escuro), `"Light"` (claro), `"BlackPink"` (preto e rosa) |
+| `userName` | Como a Maid te chama; `""` = sem nome |
+
+Depois disso, o que vale é o `settings.json` e as mudanças feitas pelo app.
 
 ## Compilar a partir do código
 

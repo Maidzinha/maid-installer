@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Data;
@@ -36,7 +36,7 @@ public sealed class LibraryViewModel : ObservableObject
     private bool _onlyFree, _onlyWinGet;
     private AppItemViewModel? _current;
     private bool _isRefreshing;
-    private string _statusLine = "Verificando programas instalados…";
+    private string _statusLine = L.T("Verificando programas instalados…");
     private int _selectedCount;
     private IReadOnlyList<Core.WinGet.InstalledPackage>? _winget;
     private IReadOnlyList<ShellApp>? _shell;
@@ -51,7 +51,7 @@ public sealed class LibraryViewModel : ObservableObject
 
         foreach (var app in catalog.Apps.OrderBy(a => a.Name, StringComparer.CurrentCultureIgnoreCase))
         {
-            var item = new AppItemViewModel(app, catalog.FindCategory(app.Category)?.Name ?? app.Category, OnSelectionChanged);
+            var item = new AppItemViewModel(app, L.T(catalog.FindCategory(app.Category)?.Name ?? app.Category), OnSelectionChanged);
             item.IsFavorite = quickAccess.IsFavorite(app.Name);
             item.Icon = BundledIcons.Get(app.Id); // ícone oficial que vem com o app; o do Windows substitui quando existir
             Apps.Add(item);
@@ -59,8 +59,8 @@ public sealed class LibraryViewModel : ObservableObject
 
         Categories =
         [
-            new CategoryFilter(null, "Todas", "", catalog.Apps.Count),
-            .. catalog.Categories.Select(c => new CategoryFilter(c.Id, c.Name, c.Glyph, catalog.Apps.Count(a => a.Category == c.Id))),
+            new CategoryFilter(null, L.T("Todas"), "", catalog.Apps.Count),
+            .. catalog.Categories.Select(c => new CategoryFilter(c.Id, L.T(c.Name), c.Glyph, catalog.Apps.Count(a => a.Category == c.Id))),
         ];
         _selectedCategory = Categories[0];
 
@@ -132,7 +132,7 @@ public sealed class LibraryViewModel : ObservableObject
     }
 
     public string Subtitle =>
-        $"{_services.Catalog.Apps.Count} aplicativos · identificadores WinGet verificados em {_services.Catalog.VerifiedOn ?? "—"}";
+        L.T($"{_services.Catalog.Apps.Count} aplicativos · identificadores WinGet verificados em {_services.Catalog.VerifiedOn ?? "—"}");
 
     public CategoryFilter SelectedCategory
     {
@@ -193,9 +193,9 @@ public sealed class LibraryViewModel : ObservableObject
 
     public string SelectionText => SelectedCount switch
     {
-        0 => "Nenhum aplicativo selecionado",
-        1 => "1 aplicativo selecionado",
-        var n => $"{n} aplicativos selecionados",
+        0 => L.T("Nenhum aplicativo selecionado"),
+        1 => L.T("1 aplicativo selecionado"),
+        var n => L.T($"{n} aplicativos selecionados"),
     };
 
     public int VisibleCount => AppsView.Cast<object>().Count();
@@ -240,7 +240,7 @@ public sealed class LibraryViewModel : ObservableObject
         if (cache is null) return;
         _winget = cache.Packages;
         UpdateStatuses();
-        StatusLine = $"Última verificação: {cache.CheckedAt.ToLocalTime():dd/MM HH:mm} · atualizando…";
+        StatusLine = L.T($"Última verificação: {cache.CheckedAt.ToLocalTime():dd/MM HH:mm} · atualizando…");
     }
 
     private async Task InitializeAsync()
@@ -267,12 +267,12 @@ public sealed class LibraryViewModel : ObservableObject
     {
         if (IsRefreshing) return;
         IsRefreshing = true;
-        StatusLine = "Perguntando ao WinGet o que está instalado… (pode levar alguns segundos)";
+        StatusLine = L.T("Perguntando ao WinGet o que está instalado… (pode levar alguns segundos)");
         try
         {
             if (!await _services.WinGet.IsAvailableAsync())
             {
-                StatusLine = "WinGet não encontrado neste PC — status pelo Menu Iniciar. (Instale o 'Instalador de Aplicativo' da Microsoft Store.)";
+                StatusLine = L.T("WinGet não encontrado neste PC — status pelo Menu Iniciar. (Instale o 'Instalador de Aplicativo' da Microsoft Store.)");
                 _winget = null;
                 UpdateStatuses();
                 return;
@@ -281,12 +281,12 @@ public sealed class LibraryViewModel : ObservableObject
             _winget = packages;
             new InstalledCache { CheckedAt = DateTime.UtcNow, Packages = [.. packages] }.Save(_cacheFile);
             UpdateStatuses();
-            StatusLine = $"Verificado pelo WinGet às {DateTime.Now:HH:mm} · {Apps.Count(a => a.IsInstalled)} do catálogo instalados";
+            StatusLine = L.T($"Verificado pelo WinGet às {DateTime.Now:HH:mm} · {Apps.Count(a => a.IsInstalled)} do catálogo instalados");
         }
         catch (Exception ex)
         {
             _services.Logger.Error("Falha ao verificar programas instalados.", ex);
-            StatusLine = "Não consegui consultar o WinGet agora. Detalhes nos logs.";
+            StatusLine = L.T("Não consegui consultar o WinGet agora. Detalhes nos logs.");
         }
         finally
         {
@@ -308,12 +308,12 @@ public sealed class LibraryViewModel : ObservableObject
         try
         {
             var version = await _services.WinGet.GetAvailableVersionAsync(item.App);
-            item.LiveVersion = version ?? "não informada pela fonte";
+            item.LiveVersion = version ?? L.T("não informada pela fonte");
         }
         catch (Exception ex)
         {
             _services.Logger.Error($"Falha ao consultar versão de {item.App.Name}.", ex);
-            item.LiveVersion = "falha na consulta";
+            item.LiveVersion = L.T("falha na consulta");
         }
         finally
         {
@@ -358,7 +358,7 @@ public sealed class AppItemViewModel(CatalogApp app, string categoryName, Action
         set { if (SetProperty(ref _isFavorite, value)) OnPropertyChanged(nameof(FavoriteText)); }
     }
 
-    public string FavoriteText => IsFavorite ? "Remover do Acesso Rápido" : "Adicionar ao Acesso Rápido";
+    public string FavoriteText => IsFavorite ? L.T("Remover do Acesso Rápido") : L.T("Adicionar ao Acesso Rápido");
 
     public ImageSource? Icon
     {
@@ -382,33 +382,33 @@ public sealed class AppItemViewModel(CatalogApp app, string categoryName, Action
     public bool CanInstall => App.HasWinGet && !IsInstalled;
 
     public string InstallButtonText =>
-        !App.HasWinGet ? "Sem pacote WinGet — use o site oficial"
-        : IsInstalled ? "Já instalado"
-        : "Instalar";
+        !App.HasWinGet ? L.T("Sem pacote WinGet — use o site oficial")
+        : IsInstalled ? L.T("Já instalado")
+        : L.T("Instalar");
 
     public bool IsInstalled => Status.State is InstallState.Installed or InstallState.DetectedInStartMenu;
 
     public string StatusText => Status.State switch
     {
-        InstallState.Installed => Status.InstalledVersion is { Length: > 0 } v && v != "Unknown" ? $"Instalado · v{v}" : "Instalado",
-        InstallState.DetectedInStartMenu => "Instalado (Menu Iniciar)",
-        InstallState.NotInstalled => "Não instalado",
-        InstallState.NotVerified => "Não verificado (sem WinGet)",
-        _ => "Verificando…",
+        InstallState.Installed => Status.InstalledVersion is { Length: > 0 } v && v != "Unknown" ? L.T($"Instalado · v{v}") : L.T("Instalado"),
+        InstallState.DetectedInStartMenu => L.T("Instalado (Menu Iniciar)"),
+        InstallState.NotInstalled => L.T("Não instalado"),
+        InstallState.NotVerified => L.T("Não verificado (sem WinGet)"),
+        _ => L.T("Verificando…"),
     };
 
     public string SourceText => App.WinGetSource switch
     {
-        "winget" => $"WinGet · {App.WinGetId}",
-        "msstore" => $"Microsoft Store (WinGet) · {App.WinGetId}",
-        _ => "Sem pacote no WinGet · download pelo site oficial",
+        "winget" => L.T($"WinGet · {App.WinGetId}"),
+        "msstore" => L.T($"Microsoft Store (WinGet) · {App.WinGetId}"),
+        _ => L.T("Sem pacote no WinGet · download pelo site oficial"),
     };
 
-    public string SizeText => App.ApproxSize ?? "Não informado";
+    public string SizeText => App.ApproxSize ?? L.T("Não informado");
 
     public string VerifiedVersionText => App.VerifiedVersion is null
         ? "—"
-        : $"{App.VerifiedVersion} (verificada no catálogo)";
+        : L.T($"{App.VerifiedVersion} (verificada no catálogo)");
 
     public bool IsCheckingVersion
     {

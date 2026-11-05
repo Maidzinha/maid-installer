@@ -29,9 +29,34 @@ public static class DefaultProfiles
             if (missing.Count > 0) logger.Warn($"Perfil pronto {p.BuiltInId}: apps fora do catálogo ignorados: {string.Join(", ", missing)}");
             p.AppIds = [.. p.AppIds.Except(missing).Distinct()];
             p.Id = p.BuiltInId!;
+            p.Name = L.T(p.Name);
+            if (p.Description is not null) p.Description = L.T(p.Description);
             result.Add(p);
         }
         return result;
+    }
+
+    /// <summary>
+    /// Perfis prontos já criados em outro idioma: se o nome ou a descrição ainda forem os padrões (em qualquer idioma),
+    /// passam para o idioma atual. O que o usuário escreveu nunca é trocado.
+    /// </summary>
+    /// <returns>Quantos perfis foram atualizados.</returns>
+    public static int Relabel(CollectionStore store, IReadOnlyList<AppCollection> defaults, IReadOnlyList<AppCollection> existing)
+    {
+        var changed = 0;
+        foreach (var e in existing.Where(e => e.BuiltInId is not null))
+        {
+            var d = defaults.FirstOrDefault(d => d.BuiltInId == e.BuiltInId);
+            if (d is null) continue;
+            var copy = e.Clone();
+            if (copy.Name != d.Name && L.Variants(d.Name).Contains(copy.Name)) copy.Name = d.Name;
+            if (d.Description is not null && copy.Description is not null && copy.Description != d.Description
+                && L.Variants(d.Description).Contains(copy.Description)) copy.Description = d.Description;
+            if (copy.Name == e.Name && copy.Description == e.Description) continue;
+            store.Save(copy);
+            changed++;
+        }
+        return changed;
     }
 
     /// <summary>

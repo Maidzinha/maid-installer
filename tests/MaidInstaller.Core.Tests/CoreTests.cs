@@ -1,4 +1,4 @@
-using MaidInstaller.Core.Assistant;
+﻿using MaidInstaller.Core.Assistant;
 using MaidInstaller.Core.Logging;
 using MaidInstaller.Core.Settings;
 using MaidInstaller.Core.Shell;
@@ -59,7 +59,9 @@ public class SettingsTests
         var loaded = svc.Load();
         Assert.True(loaded.AssistantMinimized);
         Assert.Single(loaded.Favorites);
-        Assert.Equal("Helder", loaded.UserName);
+        Assert.Equal("", loaded.UserName); // app público: sem nome por padrão
+        Assert.Equal("en", loaded.Language);
+        Assert.Equal("Dark", loaded.Theme);
     }
 
     [Fact]
@@ -69,7 +71,7 @@ public class SettingsTests
         var file = Path.Combine(dir.Path, "settings.json");
         File.WriteAllText(file, "{ isto não é json");
         var s = new SettingsService(file, NullLogger.Instance).Load();
-        Assert.Equal("Helder", s.UserName);
+        Assert.Equal("", s.UserName);
         Assert.Single(Directory.GetFiles(dir.Path, "settings.json.corrompido-*"));
     }
 
@@ -82,6 +84,8 @@ public class SettingsTests
         var fromFile = new SettingsService(Path.Combine(dir.Path, "settings.json"), NullLogger.Instance, BundledDefaults).LoadDefaults();
         var code = new AppSettings();
         Assert.Equal(code.UserName, fromFile.UserName);
+        Assert.Equal(code.Language, fromFile.Language);
+        Assert.Equal(code.Theme, fromFile.Theme);
         Assert.Equal(code.AssistantAiEnabled, fromFile.AssistantAiEnabled);
         Assert.Equal(code.SchemaVersion, fromFile.SchemaVersion);
         Assert.Equal(code.Favorites.Select(f => f.Name), fromFile.Favorites.Select(f => f.Name));
@@ -101,11 +105,28 @@ public class SettingsTests
         var first = svc.Load();
         Assert.Equal("Maria", first.UserName);
         Assert.False(first.AssistantAiEnabled);
-        first.UserName = "Helder";
+        first.UserName = "Ana";
         svc.Save(first);
 
         File.WriteAllText(defaults, """{ "userName": "Outra" }""");
-        Assert.Equal("Helder", svc.Load().UserName); // o arquivo do usuário manda
+        Assert.Equal("Ana", svc.Load().UserName); // o arquivo do usuário manda
+    }
+
+    [Fact]
+    public void Unknown_language_or_theme_fall_back_to_defaults_and_empty_name_is_kept()
+    {
+        using var dir = new TempDir();
+        var file = Path.Combine(dir.Path, "settings.json");
+        File.WriteAllText(file, """{ "userName": "  ", "language": "klingon", "theme": "Neon" }""");
+        var s = new SettingsService(file, NullLogger.Instance).Load();
+        Assert.Equal("", s.UserName);
+        Assert.Equal("en", s.Language);
+        Assert.Equal("Dark", s.Theme);
+
+        File.WriteAllText(file, """{ "language": "pt-BR", "theme": "BlackPink" }""");
+        s = new SettingsService(file, NullLogger.Instance).Load();
+        Assert.Equal("pt-BR", s.Language);
+        Assert.Equal("BlackPink", s.Theme);
     }
 
     [Fact]
@@ -115,7 +136,7 @@ public class SettingsTests
         var defaults = Path.Combine(dir.Path, "settings.default.json");
         File.WriteAllText(defaults, "{ quebrado");
         var s = new SettingsService(Path.Combine(dir.Path, "settings.json"), NullLogger.Instance, defaults).Load();
-        Assert.Equal("Helder", s.UserName);
+        Assert.Equal("", s.UserName);
         Assert.Equal(8, s.Favorites.Count);
     }
 

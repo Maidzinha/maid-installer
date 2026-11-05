@@ -36,7 +36,7 @@ public sealed partial class WinGetClient(IAppLogger logger) : IWinGetProcessRunn
         };
         foreach (var a in args) psi.ArgumentList.Add(a);
 
-        using var process = Process.Start(psi) ?? throw new InvalidOperationException("Não foi possível iniciar o winget.");
+        using var process = Process.Start(psi) ?? throw new InvalidOperationException(L.T("Não foi possível iniciar o winget."));
         logger.Info($"winget {string.Join(' ', psi.ArgumentList)} (pid {process.Id})");
 
         var stdout = PumpAsync(process.StandardOutput, onLine);
@@ -244,7 +244,7 @@ public sealed partial class WinGetClient(IAppLogger logger) : IWinGetProcessRunn
         };
         foreach (var a in args) psi.ArgumentList.Add(a);
 
-        using var process = Process.Start(psi) ?? throw new InvalidOperationException("Não foi possível iniciar o winget.");
+        using var process = Process.Start(psi) ?? throw new InvalidOperationException(L.T("Não foi possível iniciar o winget."));
         using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
         timeoutCts.CancelAfter(timeout);
         var stdout = process.StandardOutput.ReadToEndAsync(timeoutCts.Token);

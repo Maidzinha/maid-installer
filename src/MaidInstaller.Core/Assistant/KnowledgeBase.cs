@@ -16,6 +16,23 @@ public sealed class KnowledgeBase
         JsonStore.Read<KnowledgeBase>(path) ?? new KnowledgeBase();
 
     /// <summary>
+    /// Passa os textos para o idioma do app (chamar antes de <see cref="AddFromCatalog"/>, com o catálogo já traduzido).
+    /// A categoria continua em português: é a chave da busca; ela é traduzida só na hora de mostrar.
+    /// As palavras-chave dos temas já valem nos dois idiomas.
+    /// </summary>
+    public void Localize()
+    {
+        foreach (var app in Apps)
+        {
+            app.Summary = L.T(app.Summary);
+            app.License = L.T(app.License);
+            app.Highlights = [.. app.Highlights.Select(L.T)];
+            if (app.Notes is not null) app.Notes = L.T(app.Notes);
+        }
+        foreach (var topic in Topics) topic.Answer = L.T(topic.Answer);
+    }
+
+    /// <summary>
     /// Inclui os apps do catálogo que não têm ficha própria em knowledge.json, usando apenas
     /// os dados verificados do catálogo (descrição, desenvolvedor, preço, licença).
     /// </summary>

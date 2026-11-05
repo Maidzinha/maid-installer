@@ -37,7 +37,7 @@ public static class RuntimeDetector
             catch (Exception ex) when (ex is System.Security.SecurityException or UnauthorizedAccessException or IOException) { }
         }
         if (Environment.GetEnvironmentVariable("JAVA_HOME") is { Length: > 0 } home && File.Exists(Path.Combine(home, "bin", "java.exe")))
-            return "encontrado (JAVA_HOME)";
+            return L.T("encontrado (JAVA_HOME)");
         var pathVar = Environment.GetEnvironmentVariable("PATH") ?? "";
         foreach (var p in pathVar.Split(';', StringSplitOptions.RemoveEmptyEntries))
         {
@@ -45,7 +45,7 @@ public static class RuntimeDetector
             {
                 // O "java.exe" falso da Microsoft (atalho da Loja) fica em WindowsApps e não conta.
                 if (p.Contains("WindowsApps", StringComparison.OrdinalIgnoreCase)) continue;
-                if (File.Exists(Path.Combine(p.Trim(), "java.exe"))) return "encontrado (PATH)";
+                if (File.Exists(Path.Combine(p.Trim(), "java.exe"))) return L.T("encontrado (PATH)");
             }
             catch (ArgumentException) { }
         }
@@ -63,7 +63,7 @@ public static class RuntimeDetector
             using var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, x64 ? RegistryView.Registry64 : RegistryView.Registry32);
             using var key = hklm.OpenSubKey($@"SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\{(x64 ? "x64" : "x86")}");
             if (key?.GetValue("Installed") is int installed && installed == 1)
-                return key.GetValue("Version") as string is { Length: > 0 } v ? v.TrimStart('v') : "encontrado";
+                return key.GetValue("Version") as string is { Length: > 0 } v ? v.TrimStart('v') : L.T("encontrado");
         }
         catch (Exception ex) when (ex is System.Security.SecurityException or UnauthorizedAccessException or IOException) { }
         return null;
@@ -73,7 +73,7 @@ public static class RuntimeDetector
     public static string? DirectXLegacy(string? system32 = null)
     {
         var dir = system32 ?? Environment.GetFolderPath(Environment.SpecialFolder.System);
-        return File.Exists(Path.Combine(dir, "d3dx9_43.dll")) ? "d3dx9_43.dll presente" : null;
+        return File.Exists(Path.Combine(dir, "d3dx9_43.dll")) ? L.T("d3dx9_43.dll presente") : null;
     }
 
     /// <summary>Detecção extra por id do catálogo. Null = este app não tem detecção extra.</summary>

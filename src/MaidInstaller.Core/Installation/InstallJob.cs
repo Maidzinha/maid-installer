@@ -27,7 +27,7 @@ public sealed class InstallJob(CatalogApp app, InstallOperation operation) : INo
 {
     private InstallJobState _state = InstallJobState.Waiting;
     private double? _progress;
-    private string _message = "Aguardando a vez na fila.";
+    private string _message = L.T("Aguardando a vez na fila.");
     private int? _exitCode;
     private bool _rebootRequired;
     private string? _logFile;

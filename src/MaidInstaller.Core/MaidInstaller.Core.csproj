@@ -14,4 +14,8 @@
   <ItemGroup>
     <InternalsVisibleTo Include="MaidInstaller.Core.Tests" />
   </ItemGroup>
+  <ItemGroup>
+    <!-- Tradução (L.T) disponível em todos os arquivos. -->
+    <Using Include="MaidInstaller.Core.Localization" />
+  </ItemGroup>
 </Project>

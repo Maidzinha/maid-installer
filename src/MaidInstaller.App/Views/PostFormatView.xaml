@@ -1,6 +1,7 @@
-<UserControl x:Class="MaidInstaller.App.Views.PostFormatView"
+﻿<UserControl x:Class="MaidInstaller.App.Views.PostFormatView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:loc="clr-namespace:MaidInstaller.App.Localization"
              xmlns:vm="clr-namespace:MaidInstaller.App.ViewModels">
     <UserControl.Resources>
         <DataTemplate x:Key="KitCard" DataType="{x:Type vm:KitCardViewModel}">
@@ -12,7 +13,7 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border Width="42" Height="42" CornerRadius="12" Background="#33FF4FA3" VerticalAlignment="Top">
+                        <Border Width="42" Height="42" CornerRadius="12" Background="{StaticResource B_33FF4FA3}" VerticalAlignment="Top">
                             <TextBlock Text="{Binding Glyph}" Style="{StaticResource IconText}" FontSize="19" />
                         </Border>
                         <StackPanel Grid.Column="1" Margin="12,0,0,0">
@@ -66,16 +67,16 @@
             </Border>
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding Level}" Value="Ok">
-                    <Setter TargetName="Chip" Property="Background" Value="#5532C878" />
+                    <Setter TargetName="Chip" Property="Background" Value="{StaticResource B_5532C878}" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Level}" Value="Warning">
-                    <Setter TargetName="Chip" Property="Background" Value="#77E0A034" />
+                    <Setter TargetName="Chip" Property="Background" Value="{StaticResource B_77E0A034}" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Level}" Value="Info">
-                    <Setter TargetName="Chip" Property="Background" Value="#44FF4FA3" />
+                    <Setter TargetName="Chip" Property="Background" Value="{StaticResource B_44FF4FA3}" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Level}" Value="Busy">
-                    <Setter TargetName="Chip" Property="Background" Value="#66FF4FA3" />
+                    <Setter TargetName="Chip" Property="Background" Value="{StaticResource B_66FF4FA3}" />
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
@@ -95,17 +96,17 @@
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="&#xE90F;" Style="{StaticResource IconText}" FontSize="24" />
-                    <TextBlock Text="Kit Pós-Formatação" FontSize="28" FontWeight="Bold" Margin="12,0,0,0" />
+                    <TextBlock Text="{loc:T 'Kit Pós-Formatação'}" FontSize="28" FontWeight="Bold" Margin="12,0,0,0" />
                     <TextBlock Text=" ♡" FontSize="28" Foreground="{StaticResource PinkNeonBrush}" />
                 </StackPanel>
                 <TextBlock FontSize="13" Foreground="{StaticResource TextDimBrush}" Margin="2,2,0,0" TextWrapping="Wrap"
-                           Text="Verificações e ajustes para deixar o Windows pronto. As verificações só leem; qualquer mudança pede sua confirmação antes." />
+                           Text="{loc:T 'Verificações e ajustes para deixar o Windows pronto. As verificações só leem; qualquer mudança pede sua confirmação antes.'}" />
             </StackPanel>
             <Button Grid.Column="1" Style="{StaticResource GhostButton}" Command="{Binding CheckAllCommand}" VerticalAlignment="Bottom"
-                    AutomationProperties.Name="Verificar tudo">
+                    AutomationProperties.Name="{loc:T 'Verificar tudo'}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="&#xE72C;" FontFamily="{StaticResource IconFont}" VerticalAlignment="Center" Margin="0,0,8,0" />
-                    <TextBlock Text="Verificar tudo" />
+                    <TextBlock Text="{loc:T 'Verificar tudo'}" />
                 </StackPanel>
             </Button>
         </Grid>

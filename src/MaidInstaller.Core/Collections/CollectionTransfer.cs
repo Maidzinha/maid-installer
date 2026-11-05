@@ -61,19 +61,19 @@ public static class CollectionTransfer
     public static ImportResult Import(string path, CollectionKind targetKind, AppCatalog catalog)
     {
         var info = new FileInfo(path);
-        if (!info.Exists) throw new InvalidDataException("O arquivo não foi encontrado.");
-        if (info.Length > MaxFileBytes) throw new InvalidDataException("O arquivo é grande demais para ser uma lista do Maid Installer.");
+        if (!info.Exists) throw new InvalidDataException(L.T("O arquivo não foi encontrado."));
+        if (info.Length > MaxFileBytes) throw new InvalidDataException(L.T("O arquivo é grande demais para ser uma lista do Maid Installer."));
 
         CollectionFile? file;
         try { file = JsonStore.Read<CollectionFile>(path); }
-        catch (JsonException) { throw new InvalidDataException("O arquivo não é um JSON válido."); }
+        catch (JsonException) { throw new InvalidDataException(L.T("O arquivo não é um JSON válido.")); }
 
         if (file is null || file.Format != CollectionFile.FormatName)
-            throw new InvalidDataException("Este arquivo não foi exportado pelo Maid Installer.");
+            throw new InvalidDataException(L.T("Este arquivo não foi exportado pelo Maid Installer."));
         if (file.SchemaVersion > 1)
-            throw new InvalidDataException("Este arquivo foi criado por uma versão mais nova do Maid Installer.");
+            throw new InvalidDataException(L.T("Este arquivo foi criado por uma versão mais nova do Maid Installer."));
         if (file.Apps is null || file.Apps.Count > MaxApps)
-            throw new InvalidDataException("A lista de aplicativos do arquivo é inválida.");
+            throw new InvalidDataException(L.T("A lista de aplicativos do arquivo é inválida."));
 
         var ids = new List<string>();
         var unknown = new List<string>();

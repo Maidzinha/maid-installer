@@ -59,7 +59,7 @@ public sealed class CollectionStore(string directory, CollectionKind kind, IAppL
 
     public void Save(AppCollection collection)
     {
-        var name = AppCollection.CleanName(collection.Name) ?? throw new ArgumentException("O nome não pode ficar vazio.", nameof(collection));
+        var name = AppCollection.CleanName(collection.Name) ?? throw new ArgumentException(L.T("O nome não pode ficar vazio."), nameof(collection));
         if (!AppCollection.IsValidId(collection.Id)) collection.Id = AppCollection.NewId(name);
         collection.Name = name;
         collection.AppIds = [.. collection.AppIds.Distinct(StringComparer.Ordinal)];
@@ -81,7 +81,7 @@ public sealed class CollectionStore(string directory, CollectionKind kind, IAppL
     public AppCollection Duplicate(AppCollection source, IEnumerable<string> existingNames)
     {
         var copy = source.Clone();
-        copy.Name = UniqueName($"{source.Name} (cópia)", existingNames);
+        copy.Name = UniqueName(L.T($"{source.Name} (cópia)"), existingNames);
         copy.Id = AppCollection.NewId(copy.Name);
         copy.BuiltInId = null;
         copy.CreatedAt = DateTime.Now;
@@ -92,7 +92,7 @@ public sealed class CollectionStore(string directory, CollectionKind kind, IAppL
     /// <summary>"Nome", "Nome 2", "Nome 3"… sem repetir um nome existente (sem diferenciar maiúsculas).</summary>
     public static string UniqueName(string baseName, IEnumerable<string> existingNames)
     {
-        var name = AppCollection.CleanName(baseName) ?? "Sem nome";
+        var name = AppCollection.CleanName(baseName) ?? L.T("Sem nome");
         var taken = existingNames.ToHashSet(StringComparer.CurrentCultureIgnoreCase);
         if (!taken.Contains(name)) return name;
         for (var i = 2; ; i++)

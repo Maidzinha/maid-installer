@@ -14,15 +14,26 @@ public interface IAssistantResponder
 /// Respostas pré-programadas da Maid Assistant, funcionando sem o modelo de IA.
 /// Só usa fatos da <see cref="KnowledgeBase"/> (e da tabela de códigos do WinGet);
 /// quando não encontra, diz que não tem a informação. Nunca inventa.
+/// As palavras-chave valem em português e em inglês (já sem acento, como sai do Normalize).
 /// </summary>
 public sealed partial class OfflineResponder(KnowledgeBase knowledge, Func<string> userName) : IAssistantResponder
 {
-    internal static readonly string[] Greetings = ["oi", "oii", "oiii", "ola", "eai", "e ai", "bom dia", "boa tarde", "boa noite", "hello", "hey"];
-    internal static readonly string[] Thanks = ["obrigado", "obrigada", "valeu", "vlw", "brigado", "brigada"];
-    internal static readonly string[] PriceWords = ["gratis", "gratuito", "gratuita", "pago", "paga", "preco", "custa", "valor", "licenca", "free"];
-    internal static readonly string[] DeveloperWords = ["quem fez", "quem faz", "desenvolvedor", "desenvolvedora", "empresa", "fabricante", "criador"];
-    internal static readonly string[] CompareWords = ["diferenca", "melhor", "comparar", "compara", "versus", "vs", "ou"];
-    internal static readonly string[] LinkWords = ["site", "link", "baixar", "download", "onde baixo", "pagina oficial"];
+    internal static readonly string[] Greetings =
+        ["oi", "oii", "oiii", "ola", "eai", "e ai", "bom dia", "boa tarde", "boa noite",
+         "hello", "hey", "hi", "hii", "good morning", "good afternoon", "good evening"];
+    internal static readonly string[] Thanks =
+        ["obrigado", "obrigada", "valeu", "vlw", "brigado", "brigada", "thanks", "thank you", "thx", "ty"];
+    internal static readonly string[] PriceWords =
+        ["gratis", "gratuito", "gratuita", "pago", "paga", "preco", "custa", "valor", "licenca",
+         "free", "price", "cost", "costs", "paid", "license", "how much"];
+    internal static readonly string[] DeveloperWords =
+        ["quem fez", "quem faz", "desenvolvedor", "desenvolvedora", "empresa", "fabricante", "criador",
+         "who made", "who makes", "who created", "who develops", "developer", "company", "maker", "publisher"];
+    internal static readonly string[] CompareWords =
+        ["diferenca", "melhor", "comparar", "compara", "versus", "vs", "ou",
+         "difference", "better", "compare", "or"];
+    internal static readonly string[] LinkWords =
+        ["site", "link", "baixar", "download", "onde baixo", "pagina oficial", "website", "official page", "where can i get"];
 
     private readonly KnowledgeRetriever _retriever = new(knowledge);
 
@@ -33,10 +44,9 @@ public sealed partial class OfflineResponder(KnowledgeBase knowledge, Func<strin
     /// <summary>Resposta sem IA para uma pergunta já analisada.</summary>
     public string Answer(string question, Retrieval r)
     {
-        var name = userName();
         var q = r.NormalizedQuestion;
         if (q.Length == 0)
-            return $"Pode perguntar, {name}! Sei falar sobre os aplicativos do Maid Installer ♡";
+            return L.T($"Pode perguntar, {L.Name(userName())}! Sei falar sobre os aplicativos do Maid Installer ♡");
 
         if (DirectAnswer(question, r) is { } direct)
             return direct;
@@ -74,10 +84,10 @@ public sealed partial class OfflineResponder(KnowledgeBase knowledge, Func<strin
         if (apps.Count >= 2 && KnowledgeRetriever.ContainsAny(q, CompareWords))
             return Compare(apps);
         if (apps.Count == 0 && KnowledgeRetriever.ContainsAny(q, Thanks))
-            return $"De nada, {name}! Estou sempre por aqui ♡";
+            return L.T($"De nada, {L.Name(name)}! Estou sempre por aqui ♡");
 
         if (apps.Count == 0 && IsOnlyGreeting(q))
-            return $"Oii, {name}! ♡ Quer que eu explique para que serve algum aplicativo?";
+            return L.T($"Oii, {L.Name(name)}! ♡ Quer que eu explique para que serve algum aplicativo?");
 
         // "Qual navegador escolher?": a lista vem pronta da base. No teste real o modelo pequeno
         // escolheu um app sem motivo nenhum nos fatos.
@@ -90,7 +100,7 @@ public sealed partial class OfflineResponder(KnowledgeBase knowledge, Func<strin
             if (KnowledgeRetriever.ContainsAny(q, PriceWords))
                 return $"{app.Name}: {app.License}.";
             if (KnowledgeRetriever.ContainsAny(q, DeveloperWords))
-                return $"O {app.Name} é desenvolvido por {app.Developer}.";
+                return L.T($"O {app.Name} é desenvolvido por {app.Developer}.");
             if (KnowledgeRetriever.ContainsAny(q, LinkWords))
                 return LinkAnswer(app);
         }
@@ -106,22 +116,21 @@ public sealed partial class OfflineResponder(KnowledgeBase knowledge, Func<strin
     }
 
     public string NotOnRecord() =>
-        $"Hmm, {userName()}, ainda não tenho essa informação cadastrada na minha base. " +
-        "Posso falar sobre os aplicativos do catálogo, como Discord, Steam ou 7-Zip ♡";
+        L.T($"Hmm, {L.Name(userName())}, ainda não tenho essa informação cadastrada na minha base. Posso falar sobre os aplicativos do catálogo, como Discord, Steam ou 7-Zip ♡");
 
-    private string TopicAnswer(TopicKnowledge topic) => topic.Answer.Replace("{nome}", userName(), StringComparison.Ordinal);
+    private string TopicAnswer(TopicKnowledge topic) => L.Address(topic.Answer, userName());
 
     private static string LinkAnswer(AppKnowledge app)
     {
         var sb = new StringBuilder();
         if (!string.IsNullOrWhiteSpace(app.OfficialUrl))
-            sb.Append($"O site oficial do {app.Name} é {app.OfficialUrl}");
+            sb.Append(L.T($"O site oficial do {app.Name} é {app.OfficialUrl}"));
         else
-            sb.Append($"Não tenho o site oficial do {app.Name} cadastrado");
+            sb.Append(L.T($"Não tenho o site oficial do {app.Name} cadastrado"));
         sb.Append(app.HasWinGetPackage switch
         {
-            true => ". Você também pode instalar pela Biblioteca do Maid Installer, que baixa da fonte oficial pelo WinGet ♡",
-            false => ". Ele não tem pacote no WinGet, então a instalação é pelo site oficial ♡",
+            true => L.T(". Você também pode instalar pela Biblioteca do Maid Installer, que baixa da fonte oficial pelo WinGet ♡"),
+            false => L.T(". Ele não tem pacote no WinGet, então a instalação é pelo site oficial ♡"),
             null => " ♡",
         });
         return sb.ToString();
@@ -132,15 +141,14 @@ public sealed partial class OfflineResponder(KnowledgeBase knowledge, Func<strin
         var hex = WinGetExitCodes.Hex(code);
         var info = WinGetExitCodes.Describe(code);
         if (!info.Known)
-            return $"Não tenho o código {hex} cadastrado, {userName()}. Quando uma instalação falha, a tela de Instalações " +
-                   "mostra a explicação que o próprio WinGet dá para o código (e o botão \"Ver log\" abre os detalhes) ♡";
+            return L.T($"Não tenho o código {hex} cadastrado, {L.Name(userName())}. Quando uma instalação falha, a tela de Instalações mostra a explicação que o próprio WinGet dá para o código (e o botão \"Ver log\" abre os detalhes) ♡");
         var tip = info.Outcome switch
         {
-            InstallOutcome.Failed => " Depois de resolver, é só usar \"Tentar novamente\" na tela de Instalações ♡",
-            InstallOutcome.Cancelled => " Nada foi instalado. Se quiser, pode tentar de novo ♡",
+            InstallOutcome.Failed => L.T(" Depois de resolver, é só usar \"Tentar novamente\" na tela de Instalações ♡"),
+            InstallOutcome.Cancelled => L.T(" Nada foi instalado. Se quiser, pode tentar de novo ♡"),
             _ => " ♡",
         };
-        return $"O código {hex} do WinGet quer dizer: {info.Message}{tip}";
+        return L.T($"O código {hex} do WinGet quer dizer: {info.Message}{tip}");
     }
 
     /// <summary>Encontra um código de erro do WinGet na pergunta (0x8A150061 ou -1978335135).</summary>
@@ -174,25 +182,25 @@ public sealed partial class OfflineResponder(KnowledgeBase knowledge, Func<strin
         {
             sb.AppendLine();
         }
-        sb.AppendLine().Append($"Desenvolvedor: {app.Developer} · {app.License}");
+        sb.AppendLine().Append(L.T($"Desenvolvedor: {app.Developer} · {app.License}"));
         if (!string.IsNullOrWhiteSpace(app.Notes)) sb.AppendLine().Append(app.Notes);
         return sb.ToString().TrimEnd();
     }
 
     private static string Compare(IReadOnlyList<AppKnowledge> apps)
     {
-        var sb = new StringBuilder("Vamos comparar! ♡").AppendLine();
+        var sb = new StringBuilder(L.T("Vamos comparar! ♡")).AppendLine();
         foreach (var app in apps.Take(3))
-            sb.AppendLine().Append($"• {app.Name} ({app.Category}): {app.Summary} — {app.License}.");
+            sb.AppendLine().Append($"• {app.Name} ({L.T(app.Category)}): {app.Summary} — {app.License}.");
         return sb.ToString();
     }
 
     private string CategoryAnswer(string category, IReadOnlyList<AppKnowledge> apps)
     {
-        var sb = new StringBuilder($"Em {category}, {userName()}, o catálogo tem:").AppendLine().AppendLine();
+        var sb = new StringBuilder(L.T($"Em {L.T(category)}, {L.Name(userName())}, o catálogo tem:")).AppendLine().AppendLine();
         foreach (var app in apps.Take(8))
             sb.Append("• ").Append(app.Name).Append(" — ").AppendLine(app.License);
-        sb.AppendLine().Append("Quer que eu explique algum deles? ♡");
+        sb.AppendLine().Append(L.T("Quer que eu explique algum deles? ♡"));
         return sb.ToString();
     }
 

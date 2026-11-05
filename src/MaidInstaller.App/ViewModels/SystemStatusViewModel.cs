@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Threading;
 using MaidInstaller.App.Mvvm;
 using MaidInstaller.Core.Logging;
@@ -15,7 +15,7 @@ public sealed class SystemStatusViewModel : ObservableObject
     private bool _sampling;
     private bool _staticLoaded;
 
-    private string _windowsVersion = "Carregando…", _windowsBuild = "", _cpuName = "…", _gpuName = "…", _ramName = "…";
+    private string _windowsVersion = L.T("Carregando…"), _windowsBuild = "", _cpuName = "…", _gpuName = "…", _ramName = "…";
     private double _cpuValue, _gpuValue, _ramValue;
     private string _cpuText = "—", _gpuText = "—", _ramText = "—", _temperatureText = "…", _ramTooltip = "";
     private bool _gpuAvailable = true;
@@ -60,17 +60,17 @@ public sealed class SystemStatusViewModel : ObservableObject
         {
             var info = await Task.Run(_monitor.GetStaticInfo);
             WindowsVersion = info.WindowsVersion;
-            WindowsBuild = $"Build {info.WindowsBuild}";
+            WindowsBuild = L.T($"Build {info.WindowsBuild}");
             CpuName = info.CpuName;
             GpuName = info.GpuName is null
-                ? "Placa de vídeo não identificada"
+                ? L.T("Placa de vídeo não identificada")
                 : info.GpuMemoryBytes is { } mem ? $"{info.GpuName} · {FormatGb(mem)}" : info.GpuName;
             RamName = $"RAM {FormatGb(info.TotalRamBytes)}";
         }
         catch (Exception ex)
         {
             _logger.Error("Falha ao ler informações do sistema.", ex);
-            WindowsVersion = "Não foi possível ler";
+            WindowsVersion = L.T("Não foi possível ler");
         }
     }
 
@@ -91,12 +91,12 @@ public sealed class SystemStatusViewModel : ObservableObject
 
             RamValue = usage.RamPercent;
             RamText = Percent(usage.RamPercent);
-            RamTooltip = $"{FormatGb(usage.RamUsedBytes)} em uso";
+            RamTooltip = L.T($"{FormatGb(usage.RamUsedBytes)} em uso");
 
             var parts = new List<string>();
-            if (usage.CpuTemperatureC is { } ct) parts.Add($"ACPI {ct:0}°C");
-            if (usage.GpuTemperatureC is { } gt) parts.Add($"GPU {gt:0}°C");
-            TemperatureText = parts.Count > 0 ? string.Join("  ·  ", parts) : "Não suportada neste PC";
+            if (usage.CpuTemperatureC is { } ct) parts.Add(L.T($"ACPI {ct:0}°C"));
+            if (usage.GpuTemperatureC is { } gt) parts.Add(L.T($"GPU {gt:0}°C"));
+            TemperatureText = parts.Count > 0 ? string.Join("  ·  ", parts) : L.T("Não suportada neste PC");
         }
         catch (Exception ex)
         {

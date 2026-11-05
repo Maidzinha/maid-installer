@@ -70,13 +70,13 @@ public sealed class ModelDownloader(HttpClient http, IAppLogger logger, Func<str
     public async Task<string> DownloadAsync(ModelInfo model, string modelsDir, IProgress<DownloadProgress>? progress, CancellationToken cancellationToken)
     {
         if (model.Url.Scheme != Uri.UriSchemeHttps || !model.Url.Host.Equals("huggingface.co", StringComparison.OrdinalIgnoreCase))
-            throw new ModelDownloadException("Endereço do modelo não é o oficial; download recusado.");
+            throw new ModelDownloadException(L.T("Endereço do modelo não é o oficial; download recusado."));
 
         Directory.CreateDirectory(modelsDir);
         var free = (freeSpaceProvider ?? DefaultFreeSpace)(modelsDir);
         if (free is { } f && f < model.SizeBytes + SpaceMargin)
             throw new ModelDownloadException(
-                $"Espaço insuficiente: o modelo precisa de {Format(model.SizeBytes + SpaceMargin)} livres e há {Format(f)}.");
+                L.T($"Espaço insuficiente: o modelo precisa de {Format(model.SizeBytes + SpaceMargin)} livres e há {Format(f)}."));
 
         var final = Path.Combine(modelsDir, model.FileName);
         var part = PartPath(modelsDir, model);
@@ -85,9 +85,9 @@ public sealed class ModelDownloader(HttpClient http, IAppLogger logger, Func<str
         {
             using var response = await http.GetAsync(model.Url, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
-                throw new ModelDownloadException($"O servidor respondeu {(int)response.StatusCode} ({response.ReasonPhrase}).");
+                throw new ModelDownloadException(L.T($"O servidor respondeu {(int)response.StatusCode} ({response.ReasonPhrase})."));
             if (response.Content.Headers.ContentLength is { } length && length != model.SizeBytes)
-                throw new ModelDownloadException($"O arquivo no servidor tem {length} bytes; o esperado era {model.SizeBytes}. Download recusado.");
+                throw new ModelDownloadException(L.T($"O arquivo no servidor tem {length} bytes; o esperado era {model.SizeBytes}. Download recusado."));
 
             using var sha = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
             long received = 0;
@@ -101,7 +101,7 @@ public sealed class ModelDownloader(HttpClient http, IAppLogger logger, Func<str
                 {
                     received += read;
                     if (received > model.SizeBytes)
-                        throw new ModelDownloadException("O servidor enviou mais dados que o esperado. Download recusado.");
+                        throw new ModelDownloadException(L.T("O servidor enviou mais dados que o esperado. Download recusado."));
                     sha.AppendData(buffer, 0, read);
                     await target.WriteAsync(buffer.AsMemory(0, read), cancellationToken).ConfigureAwait(false);
                     if (received - lastReport >= 1 << 20 || received == model.SizeBytes)
@@ -113,12 +113,12 @@ public sealed class ModelDownloader(HttpClient http, IAppLogger logger, Func<str
             }
 
             if (received != model.SizeBytes)
-                throw new ModelDownloadException($"O download terminou incompleto ({Format(received)} de {Format(model.SizeBytes)}). Tente de novo.");
+                throw new ModelDownloadException(L.T($"O download terminou incompleto ({Format(received)} de {Format(model.SizeBytes)}). Tente de novo."));
 
             progress?.Report(new DownloadProgress(received, model.SizeBytes, Verifying: true));
             var hash = Convert.ToHexStringLower(sha.GetHashAndReset());
             if (!hash.Equals(model.Sha256, StringComparison.OrdinalIgnoreCase))
-                throw new ModelDownloadException("O arquivo baixado não confere com o SHA-256 oficial. Por segurança, ele foi apagado.");
+                throw new ModelDownloadException(L.T("O arquivo baixado não confere com o SHA-256 oficial. Por segurança, ele foi apagado."));
 
             File.Move(part, final, overwrite: true);
             logger.Info($"Modelo de IA baixado e conferido (SHA-256 {hash}): {final}");
@@ -141,8 +141,8 @@ public sealed class ModelDownloader(HttpClient http, IAppLogger logger, Func<str
             TryDelete(part);
             logger.Error("Falha no download do modelo de IA.", ex);
             throw new ModelDownloadException(ex is IOException
-                ? "Não foi possível gravar o arquivo do modelo na pasta Models."
-                : "Não foi possível baixar o modelo. Verifique a conexão com a internet.", ex);
+                ? L.T("Não foi possível gravar o arquivo do modelo na pasta Models.")
+                : L.T("Não foi possível baixar o modelo. Verifique a conexão com a internet."), ex);
         }
     }
 

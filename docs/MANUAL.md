@@ -1,5 +1,7 @@
 # Manual de uso — Maid Installer ♡
 
+**Português** · [English](en/MANUAL.md)
+
 *Prepare seu PC com carinho.*
 
 O Maid Installer ajuda a deixar um PC pronto depois de formatar. Com ele você escolhe os programas, instala tudo pelas
@@ -39,7 +41,7 @@ o link oficial e se o programa já está instalado.
 2. A fila instala **um programa por vez** e mostra a etapa real (baixando, instalando).
 3. O Windows pode pedir permissão de administrador (UAC). Se você recusar, aquele programa não é instalado e os outros seguem.
 4. Em **Instalações** você acompanha a fila, cancela o que ainda não começou, tenta de novo e abre o **log** de cada programa.
-5. Se algo falhar, a mensagem explica o motivo em português (sem internet, disco cheio, arquivo em uso…).
+5. Se algo falhar, a mensagem explica o motivo no seu idioma (sem internet, disco cheio, arquivo em uso…).
 
 O app nunca atualiza um programa já instalado durante uma instalação. Para isso existe a tela Atualizações.
 
@@ -86,7 +88,7 @@ e mostra o que vai mudar:
 
 ## 7. Configurações
 
-- **Você**: o nome pelo qual a Maid te chama.
+- **Você**: o nome pelo qual a Maid te chama. É opcional: deixe vazio e ela fala com você sem usar nome.
 - **Modo portátil e armazenamento**: onde estão seus dados e quanto espaço há livre.
   - **Criar cópia portátil…** copia o app e seus dados para um pendrive (veja [INSTALACAO.md](INSTALACAO.md)).
   - **Abrir pasta de dados**.
@@ -94,6 +96,11 @@ e mostra o que vai mudar:
   - **Baixar IA local**: 469 MB, do repositório oficial da Qwen no Hugging Face. O app confere o arquivo pelo SHA-256.
   - **Usar a IA local**: liga ou desliga.
   - **Remover modelo**, **Abrir pasta Models** e **Procurar de novo**.
+- **Idioma e aparência**:
+  - **Idioma / Language**: English, Português (Brasil) ou Automático (segue o idioma do Windows).
+  - **Tema**: Escuro (padrão), Claro ou Preto e rosa.
+  - **Aplicar e reabrir o app** salva a escolha e reabre o Maid Installer com ela. Só o app reabre: o PC nunca é reiniciado.
+    Ele espera se houver instalação, download ou cópia em andamento.
 
 ## 8. Sobre
 
@@ -101,7 +108,7 @@ Mostra a versão, o modo de uso (instalado ou portátil), as pastas reais e bot�
 
 ## 9. Maid Assistant
 
-Pergunte em português, do seu jeito. Alguns exemplos:
+Pergunte do seu jeito, em português ou inglês. Alguns exemplos:
 
 - "Para que serve o 7-Zip?" · "O Discord é gratuito?" · "Quem faz o OBS?"
 - "Qual a diferença entre VLC e Spotify?" · "Qual navegador escolher?"

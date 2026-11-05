@@ -20,17 +20,20 @@ public sealed class HomeViewModel
         ICommand Go(PageKey key) => new RelayCommand(() => main.Navigate(key));
         Shortcuts =
         [
-            new("Instalar Aplicativos", "Escolha e instale programas.", "", Go(PageKey.Library)),
-            new("Usar um Perfil", "Instale um conjunto pronto.", "", Go(PageKey.Profiles)),
-            new("Kit Pós-Formatação", "Ajustes e drivers essenciais.", "", Go(PageKey.PostFormat)),
-            new("Atualizar Programas", "Verifique e atualize apps.", "", Go(PageKey.Updates)),
-            new("Minhas Listas", "Suas seleções salvas.", "", Go(PageKey.Lists)),
-            new("Configurações", "Personalize o aplicativo.", "", Go(PageKey.Settings)),
+            new(L.T("Instalar Aplicativos"), L.T("Escolha e instale programas."), "", Go(PageKey.Library)),
+            new(L.T("Usar um Perfil"), L.T("Instale um conjunto pronto."), "", Go(PageKey.Profiles)),
+            new(L.T("Kit Pós-Formatação"), L.T("Ajustes e drivers essenciais."), "", Go(PageKey.PostFormat)),
+            new(L.T("Atualizar Programas"), L.T("Verifique e atualize apps."), "", Go(PageKey.Updates)),
+            new(L.T("Minhas Listas"), L.T("Suas seleções salvas."), "", Go(PageKey.Lists)),
+            new(L.T("Configurações"), L.T("Personalize o aplicativo."), "", Go(PageKey.Settings)),
         ];
     }
 
     public MainViewModel Main { get; }
     public string UserName { get; }
+
+    /// <summary>"Bem-vindo, " antes do nome; sem nome, só "Bem-vindo".</summary>
+    public string WelcomePrefix => string.IsNullOrWhiteSpace(UserName) ? L.T("Bem-vindo") : L.T("Bem-vindo, ");
     public ImageSource? MascotImage { get; }
     public IReadOnlyList<ShortcutItem> Shortcuts { get; }
     public QuickAccessViewModel QuickAccess => Main.QuickAccess;

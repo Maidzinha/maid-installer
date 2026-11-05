@@ -9,17 +9,26 @@ namespace MaidInstaller.Core.Assistant;
 /// </summary>
 public sealed class KnowledgeRetriever(KnowledgeBase knowledge)
 {
-    /// <summary>Palavras que indicam cada categoria (nomes iguais aos do catálogo).</summary>
+    /// <summary>
+    /// Palavras (português e inglês) que indicam cada categoria. A categoria é o nome em português do catálogo,
+    /// que é a chave interna; na tela ela aparece traduzida.
+    /// </summary>
     private static readonly (string Category, string[] Words)[] CategoryWords =
     [
-        ("Navegadores", ["navegador", "navegadores", "browser", "navegar"]),
-        ("Comunicação", ["comunicacao", "conversar", "mensagem", "mensagens", "chamada", "chamadas", "chat"]),
-        ("Jogos e plataformas", ["jogo", "jogos", "game", "games", "jogar", "launcher"]),
-        ("Utilitários", ["utilitario", "utilitarios", "compactar", "compactador", "descompactar", "extrair", "captura de tela", "print"]),
-        ("Multimídia", ["multimidia", "musica", "musicas", "video", "videos", "gravar", "gravacao", "transmitir", "live", "audio", "player"]),
-        ("Desenvolvimento", ["desenvolvimento", "programar", "programacao", "codigo", "programador", "dev"]),
-        ("Drivers e componentes", ["driver", "drivers", "placa de video", "runtime", "runtimes", "componente", "componentes"]),
-        ("Escritório", ["escritorio", "documento", "documentos", "planilha", "planilhas", "pdf", "trabalho"]),
+        ("Navegadores", ["navegador", "navegadores", "browser", "navegar", "browsers", "web browser"]),
+        ("Comunicação", ["comunicacao", "conversar", "mensagem", "mensagens", "chamada", "chamadas", "chat",
+                         "communication", "messaging", "message", "messages", "call", "calls"]),
+        ("Jogos e plataformas", ["jogo", "jogos", "game", "games", "jogar", "launcher", "gaming"]),
+        ("Utilitários", ["utilitario", "utilitarios", "compactar", "compactador", "descompactar", "extrair", "captura de tela", "print",
+                         "utility", "utilities", "compress", "unzip", "extract", "screenshot", "screenshots"]),
+        ("Multimídia", ["multimidia", "musica", "musicas", "video", "videos", "gravar", "gravacao", "transmitir", "live", "audio", "player",
+                        "multimedia", "music", "record", "recording", "stream", "streaming"]),
+        ("Desenvolvimento", ["desenvolvimento", "programar", "programacao", "codigo", "programador", "dev",
+                             "development", "programming", "coding", "code editor"]),
+        ("Drivers e componentes", ["driver", "drivers", "placa de video", "runtime", "runtimes", "componente", "componentes",
+                                   "graphics card", "component", "components"]),
+        ("Escritório", ["escritorio", "documento", "documentos", "planilha", "planilhas", "pdf", "trabalho",
+                        "office", "document", "documents", "spreadsheet", "spreadsheets"]),
     ];
 
     public KnowledgeBase Knowledge => knowledge;

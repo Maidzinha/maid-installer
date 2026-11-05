@@ -29,15 +29,15 @@ public static partial class WinGetOutputParser
             return new OutputSignal(null, Math.Clamp(p, 0, 100), null);
 
         if (StartsWithAny(line, "Downloading", "Baixando"))
-            return new OutputSignal(InstallJobState.Downloading, null, "Baixando o instalador oficial…");
+            return new OutputSignal(InstallJobState.Downloading, null, L.T("Baixando o instalador oficial…"));
         if (StartsWithAny(line, "Successfully verified installer hash", "Hash do instalador verificado"))
-            return new OutputSignal(InstallJobState.Installing, null, "Arquivo verificado. Preparando a instalação…");
+            return new OutputSignal(InstallJobState.Installing, null, L.T("Arquivo verificado. Preparando a instalação…"));
         if (StartsWithAny(line, "Starting package install", "Iniciando a instalação"))
-            return new OutputSignal(InstallJobState.Installing, null, "Instalando… (o Windows pode pedir permissão de administrador)");
+            return new OutputSignal(InstallJobState.Installing, null, L.T("Instalando… (o Windows pode pedir permissão de administrador)"));
         if (StartsWithAny(line, "Successfully installed", "Instalado com êxito", "Instalado com sucesso"))
-            return new OutputSignal(null, null, "Instalado com sucesso.");
+            return new OutputSignal(null, null, L.T("Instalado com sucesso."));
         if (StartsWithAny(line, "Found ", "Encontrado "))
-            return new OutputSignal(null, null, "Pacote encontrado na fonte oficial.");
+            return new OutputSignal(null, null, L.T("Pacote encontrado na fonte oficial."));
 
         return new OutputSignal(null, null, null);
     }

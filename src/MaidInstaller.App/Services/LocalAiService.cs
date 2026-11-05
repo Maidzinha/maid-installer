@@ -1,4 +1,4 @@
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.IO;
 using MaidInstaller.AI;
 using MaidInstaller.App.Mvvm;
@@ -82,26 +82,26 @@ public sealed class LocalAiService : ObservableObject, IDisposable
     public string ProgressText => Progress switch
     {
         null => "",
-        { Verifying: true } => "Conferindo o SHA-256 do arquivo…",
-        var p => $"{ModelDownloader.Format(p.BytesReceived)} de {ModelDownloader.Format(p.TotalBytes)} ({p.Fraction:P0})",
+        { Verifying: true } => L.T("Conferindo o SHA-256 do arquivo…"),
+        var p => L.T($"{ModelDownloader.Format(p.BytesReceived)} de {ModelDownloader.Format(p.TotalBytes)} ({p.Fraction:P0})"),
     };
 
     /// <summary>Texto curto ao lado do nome da assistente (sempre verdadeiro).</summary>
     public string AssistantStatus => State switch
     {
-        AiState.Ready => "Online · IA local (" + (_model?.DisplayName ?? "modelo") + ")",
-        AiState.Loading => "Online · carregando a IA local…",
-        _ => "Online · base local",
+        AiState.Ready => L.T("Online · IA local (") + (_model?.DisplayName ?? "modelo") + ")",
+        AiState.Loading => L.T("Online · carregando a IA local…"),
+        _ => L.T("Online · base local"),
     };
 
     public string StatusText => State switch
     {
-        AiState.NotInstalled => "A IA local não está instalada. A Maid responde com a base de conhecimento.",
-        AiState.Disabled => "A IA local está desligada. A Maid responde com a base de conhecimento.",
-        AiState.Loading => "Carregando a IA local…",
-        AiState.Ready => $"IA local ativa: {ModelFileName} (roda só neste PC, sem internet).",
-        AiState.Downloading => "Baixando o modelo…",
-        AiState.Error => "A IA local não pôde ser usada: " + (Error ?? "erro desconhecido") + " A Maid responde com a base de conhecimento.",
+        AiState.NotInstalled => L.T("A IA local não está instalada. A Maid responde com a base de conhecimento."),
+        AiState.Disabled => L.T("A IA local está desligada. A Maid responde com a base de conhecimento."),
+        AiState.Loading => L.T("Carregando a IA local…"),
+        AiState.Ready => L.T($"IA local ativa: {ModelFileName} (roda só neste PC, sem internet)."),
+        AiState.Downloading => L.T("Baixando o modelo…"),
+        AiState.Error => L.T("A IA local não pôde ser usada: ") + (Error ?? L.T("erro desconhecido")) + L.T(" A Maid responde com a base de conhecimento."),
         _ => "",
     };
 
@@ -125,7 +125,7 @@ public sealed class LocalAiService : ObservableObject, IDisposable
         catch (Exception ex)
         {
             _logger.Error($"Não foi possível carregar a IA local ({_modelPath}).", ex);
-            Error = "o arquivo do modelo não abriu (pode estar corrompido ou ser de um formato incompatível).";
+            Error = L.T("o arquivo do modelo não abriu (pode estar corrompido ou ser de um formato incompatível).");
             State = AiState.Error;
         }
     }
@@ -178,7 +178,7 @@ public sealed class LocalAiService : ObservableObject, IDisposable
         catch (OperationCanceledException)
         {
             State = previous == AiState.Downloading ? AiState.NotInstalled : previous;
-            return "Download cancelado. Nada foi instalado.";
+            return L.T("Download cancelado. Nada foi instalado.");
         }
         catch (ModelDownloadException ex)
         {
@@ -211,7 +211,7 @@ public sealed class LocalAiService : ObservableObject, IDisposable
         {
             _logger.Error($"Não foi possível apagar o modelo: {path}", ex);
             if (_settings.AssistantAiEnabled) _ = LoadAsync();
-            return "Não consegui apagar o arquivo do modelo. Ele pode estar em uso ou protegido.";
+            return L.T("Não consegui apagar o arquivo do modelo. Ele pode estar em uso ou protegido.");
         }
         _modelPath = ModelLocator.Find(_paths.ModelsDir, Model);
         OnPropertyChanged(nameof(ModelPath));

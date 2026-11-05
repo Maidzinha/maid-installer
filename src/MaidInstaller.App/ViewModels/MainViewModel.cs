@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Input;
 using MaidInstaller.App.Mvvm;
 using MaidInstaller.App.Services;
@@ -36,14 +36,14 @@ public sealed class MainViewModel : ObservableObject
 
         NavItems =
         [
-            new(PageKey.Home, "Início", ""),
-            new(PageKey.Library, "Biblioteca de Apps", ""),
-            new(PageKey.Profiles, "Perfis de Instalação", ""),
-            new(PageKey.Lists, "Minhas Listas", ""),
-            new(PageKey.PostFormat, "Kit Pós-Formatação", ""),
-            new(PageKey.Updates, "Atualizações", ""),
-            new(PageKey.Settings, "Configurações", ""),
-            new(PageKey.About, "Sobre", ""),
+            new(PageKey.Home, L.T("Início"), ""),
+            new(PageKey.Library, L.T("Biblioteca de Apps"), ""),
+            new(PageKey.Profiles, L.T("Perfis de Instalação"), ""),
+            new(PageKey.Lists, L.T("Minhas Listas"), ""),
+            new(PageKey.PostFormat, L.T("Kit Pós-Formatação"), ""),
+            new(PageKey.Updates, L.T("Atualizações"), ""),
+            new(PageKey.Settings, L.T("Configurações"), ""),
+            new(PageKey.About, L.T("Sobre"), ""),
         ];
         _selectedNav = NavItems[0];
         CurrentPage = GetPage(PageKey.Home);
@@ -60,8 +60,8 @@ public sealed class MainViewModel : ObservableObject
 
     public string VersionText => $"v{_services.Version}";
     public bool IsPortable => _services.Paths.IsPortable;
-    public string ModeText => IsPortable ? "Modo Portátil" : "Modo Instalado";
-    public string ModeTooltip => $"Dados em: {_services.Paths.DataRoot}";
+    public string ModeText => IsPortable ? L.T("Modo Portátil") : L.T("Modo Instalado");
+    public string ModeTooltip => L.T($"Dados em: {_services.Paths.DataRoot}");
 
     public NavItem? SelectedNav
     {
@@ -130,33 +130,33 @@ public sealed class MainViewModel : ObservableObject
         var name = _services.Settings.UserName;
 
         var notes = new List<string>();
-        if (inQueue.Count > 0) notes.Add($"Já estão na fila: {string.Join(", ", inQueue.Select(a => a.Name))}.");
-        if (already.Count > 0) notes.Add($"Já instalados (serão pulados): {string.Join(", ", already.Select(a => a.Name))}.");
-        if (noPackage.Count > 0) notes.Add($"Sem pacote no WinGet (baixe pelo site oficial na Biblioteca): {string.Join(", ", noPackage.Select(a => a.Name))}.");
+        if (inQueue.Count > 0) notes.Add(L.T($"Já estão na fila: {string.Join(", ", inQueue.Select(a => a.Name))}."));
+        if (already.Count > 0) notes.Add(L.T($"Já instalados (serão pulados): {string.Join(", ", already.Select(a => a.Name))}."));
+        if (noPackage.Count > 0) notes.Add(L.T($"Sem pacote no WinGet (baixe pelo site oficial na Biblioteca): {string.Join(", ", noPackage.Select(a => a.Name))}."));
 
         if (toInstall.Count == 0)
         {
-            await ShowDialogAsync(new DialogViewModel("Nada para instalar", $"{name}, nenhum dos aplicativos escolhidos precisa ser instalado agora.",
-                [], notes, "Entendi", cancelText: null));
+            await ShowDialogAsync(new DialogViewModel(L.T("Nada para instalar"), L.T($"{L.Name(name)}, nenhum dos aplicativos escolhidos precisa ser instalado agora."),
+                [], notes, L.T("Entendi"), cancelText: null));
             return false;
         }
 
         notes.InsertRange(0,
         [
-            "Os programas são baixados das fontes oficiais pelo WinGet e instalados em modo silencioso, um de cada vez.",
-            "Alguns instaladores pedem permissão de administrador: o Windows mostra o aviso (UAC) e você decide. Se recusar, só aquele app é cancelado.",
-            "Ao confirmar, você aceita as licenças desses programas.",
-            "Nada já instalado será atualizado, e o PC não será reiniciado automaticamente.",
+            L.T("Os programas são baixados das fontes oficiais pelo WinGet e instalados em modo silencioso, um de cada vez."),
+            L.T("Alguns instaladores pedem permissão de administrador: o Windows mostra o aviso (UAC) e você decide. Se recusar, só aquele app é cancelado."),
+            L.T("Ao confirmar, você aceita as licenças desses programas."),
+            L.T("Nada já instalado será atualizado, e o PC não será reiniciado automaticamente."),
         ]);
         foreach (var app in toInstall.Where(a => !a.IsFree))
             notes.Add($"{app.Name}: {app.Price}.");
 
         var confirmed = await ShowDialogAsync(new DialogViewModel(
-            toInstall.Count == 1 ? $"Instalar {toInstall[0].Name}?" : $"Instalar {toInstall.Count} aplicativos?",
-            "Confira o que será instalado neste PC:",
-            [.. toInstall.Select(a => new DialogItem(a.Name, a.WinGetSource == "msstore" ? "Microsoft Store" : $"WinGet · {a.WinGetId}"))],
+            toInstall.Count == 1 ? L.T($"Instalar {toInstall[0].Name}?") : L.T($"Instalar {toInstall.Count} aplicativos?"),
+            L.T("Confira o que será instalado neste PC:"),
+            [.. toInstall.Select(a => new DialogItem(a.Name, a.WinGetSource == "msstore" ? "Microsoft Store" : L.T($"WinGet · {a.WinGetId}")))],
             notes,
-            toInstall.Count == 1 ? "Instalar" : $"Instalar {toInstall.Count}"));
+            toInstall.Count == 1 ? L.T("Instalar") : L.T($"Instalar {toInstall.Count}")));
 
         if (!confirmed)
         {
@@ -180,7 +180,7 @@ public sealed class MainViewModel : ObservableObject
         installer.JobStarted += job => OnUi(() =>
         {
             var summary = _services.Knowledge.Apps.FirstOrDefault(a => a.Id == job.App.Id)?.Summary;
-            Assistant.Post($"{name}, estou {(job.Operation == InstallOperation.Upgrade ? "atualizando" : "instalando")} o {job.App.Name}! ♡" + (summary is null ? "" : $" {FirstSentence(summary)}"), expand: false);
+            Assistant.Post((job.Operation == InstallOperation.Upgrade ? L.T($"{L.Name(name)}, estou atualizando o {job.App.Name}! ♡") : L.T($"{L.Name(name)}, estou instalando o {job.App.Name}! ♡")) + (summary is null ? "" : $" {FirstSentence(summary)}"), expand: false);
         });
 
         installer.JobFinished += job => OnUi(() =>
@@ -188,13 +188,13 @@ public sealed class MainViewModel : ObservableObject
             switch (job.State)
             {
                 case InstallJobState.Completed:
-                    Assistant.Post($"Prontinho, {job.App.Name} {(job.Operation == InstallOperation.Upgrade ? "atualizado" : "instalado")}! ♡" + (job.RebootRequired ? " Ele pediu para reiniciar o PC; faça isso quando puder." : ""), expand: false);
+                    Assistant.Post((job.Operation == InstallOperation.Upgrade ? L.T($"Prontinho, {job.App.Name} atualizado! ♡") : L.T($"Prontinho, {job.App.Name} instalado! ♡")) + (job.RebootRequired ? L.T(" Ele pediu para reiniciar o PC; faça isso quando puder.") : ""), expand: false);
                     break;
                 case InstallJobState.Failed:
-                    Assistant.Post($"Ops, {name}, o {job.App.Name} não foi {(job.Operation == InstallOperation.Upgrade ? "atualizado" : "instalado")}. {job.Message} Você pode tentar de novo na tela de instalações.", expand: false);
+                    Assistant.Post((job.Operation == InstallOperation.Upgrade ? L.T($"Ops, {L.Name(name)}, o {job.App.Name} não foi atualizado. {job.Message} Você pode tentar de novo na tela de instalações.") : L.T($"Ops, {L.Name(name)}, o {job.App.Name} não foi instalado. {job.Message} Você pode tentar de novo na tela de instalações.")), expand: false);
                     break;
                 case InstallJobState.Cancelled when job.StartedAt is not null:
-                    Assistant.Post($"Tudo bem, a {(job.Operation == InstallOperation.Upgrade ? "atualização" : "instalação")} do {job.App.Name} foi cancelada. {job.Message}", expand: false);
+                    Assistant.Post((job.Operation == InstallOperation.Upgrade ? L.T($"Tudo bem, a atualização do {job.App.Name} foi cancelada. {job.Message}") : L.T($"Tudo bem, a instalação do {job.App.Name} foi cancelada. {job.Message}")), expand: false);
                     break;
             }
         });
@@ -205,8 +205,8 @@ public sealed class MainViewModel : ObservableObject
             var ok = jobs.Count(j => j.State == InstallJobState.Completed);
             var failed = jobs.Count(j => j.State == InstallJobState.Failed);
             Assistant.Post(failed == 0
-                ? $"Prontinho, {name}! Terminei a fila: {ok} instalação(ões) concluída(s). ♡"
-                : $"Terminei a fila, {name}: {ok} concluída(s) e {failed} com falha. Os detalhes estão na tela de instalações ♡", expand: false);
+                ? L.T($"Prontinho, {L.Name(name)}! Terminei a fila: {ok} instalação(ões) concluída(s). ♡")
+                : L.T($"Terminei a fila, {L.Name(name)}: {ok} concluída(s) e {failed} com falha. Os detalhes estão na tela de instalações ♡"), expand: false);
 
             // Atualiza o que está instalado (Biblioteca e Acesso Rápido).
             _services.ShellApps.Invalidate();

@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Data;
@@ -52,16 +52,16 @@ public sealed class CollectionsViewModel : ObservableObject
 
     public CollectionKind Kind { get; }
     public bool IsProfiles => Kind == CollectionKind.Profile;
-    public string Title => IsProfiles ? "Perfis de Instalação" : "Minhas Listas";
+    public string Title => IsProfiles ? L.T("Perfis de Instalação") : L.T("Minhas Listas");
     public string PageGlyph => IsProfiles ? "" : "";
     public string Subtitle => IsProfiles
-        ? "Conjuntos prontos para instalar de uma vez. Edite à vontade ou crie o seu."
-        : "Suas listas pessoais de programas, salvas neste PC (ou no pendrive, no modo portátil).";
-    public string NewText => IsProfiles ? "Novo perfil" : "Nova lista";
+        ? L.T("Conjuntos prontos para instalar de uma vez. Edite à vontade ou crie o seu.")
+        : L.T("Suas listas pessoais de programas, salvas neste PC (ou no pendrive, no modo portátil).");
+    public string NewText => IsProfiles ? L.T("Novo perfil") : L.T("Nova lista");
     public string EmptyText => IsProfiles
-        ? "Nenhum perfil por aqui. Crie um novo, importe um arquivo ou restaure os perfis prontos."
-        : "Nenhuma lista ainda. Crie uma nova, importe um arquivo, ou selecione apps na Biblioteca e use \"Salvar como lista\".";
-    public string FolderText => $"Arquivos em: {_store.Directory}";
+        ? L.T("Nenhum perfil por aqui. Crie um novo, importe um arquivo ou restaure os perfis prontos.")
+        : L.T("Nenhuma lista ainda. Crie uma nova, importe um arquivo, ou selecione apps na Biblioteca e use \"Salvar como lista\".");
+    public string FolderText => L.T($"Arquivos em: {_store.Directory}");
 
     public ObservableCollection<CollectionItemViewModel> Items { get; } = [];
     public ObservableCollection<AppItemViewModel> Apps { get; } = [];
@@ -94,7 +94,7 @@ public sealed class CollectionsViewModel : ObservableObject
             OnPropertyChanged(nameof(EditName));
             OnPropertyChanged(nameof(EditDescription));
             OnPropertyChanged(nameof(HasSelection));
-            SavedText = value is null ? "" : $"Atualizado em {value.Model.UpdatedAt:dd/MM/yyyy HH:mm}";
+            SavedText = value is null ? "" : L.T($"Atualizado em {value.Model.UpdatedAt:dd/MM/yyyy HH:mm}");
             RebuildApps();
         }
     }
@@ -119,7 +119,7 @@ public sealed class CollectionsViewModel : ObservableObject
             _editName = clean;
             OnPropertyChanged();
             Selected.Model.Name = clean;
-            Persist("Nome salvo");
+            Persist(L.T("Nome salvo"));
             Selected.Refresh();
         }
     }
@@ -136,7 +136,7 @@ public sealed class CollectionsViewModel : ObservableObject
             _editDescription = clean ?? "";
             OnPropertyChanged();
             Selected.Model.Description = clean;
-            Persist("Descrição salva");
+            Persist(L.T("Descrição salva"));
             Selected.Refresh();
         }
     }
@@ -176,13 +176,13 @@ public sealed class CollectionsViewModel : ObservableObject
         try
         {
             _store.Save(Selected.Model);
-            SavedText = $"{what} automaticamente às {DateTime.Now:HH:mm} ✓";
+            SavedText = L.T($"{what} automaticamente às {DateTime.Now:HH:mm} ✓");
             return true;
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
             _services.Logger.Error($"Falha ao salvar {Selected.Model.Name}.", ex);
-            SavedText = "Não consegui salvar (pasta protegida ou pendrive cheio). Detalhes nos logs.";
+            SavedText = L.T("Não consegui salvar (pasta protegida ou pendrive cheio). Detalhes nos logs.");
             return false;
         }
     }
@@ -210,7 +210,7 @@ public sealed class CollectionsViewModel : ObservableObject
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
             _services.Logger.Error("Falha ao criar.", ex);
-            SavedText = "Não consegui criar o arquivo. Detalhes nos logs.";
+            SavedText = L.T("Não consegui criar o arquivo. Detalhes nos logs.");
             return;
         }
         Reload(c.Id);
@@ -222,13 +222,13 @@ public sealed class CollectionsViewModel : ObservableObject
     {
         var c = new AppCollection
         {
-            Name = CollectionStore.UniqueName($"Lista de {DateTime.Now:dd/MM}", Items.Select(i => i.Model.Name)),
+            Name = CollectionStore.UniqueName(L.T($"Lista de {DateTime.Now:dd/MM}"), Items.Select(i => i.Model.Name)),
             Glyph = PageGlyph,
             AppIds = [.. appIds],
         };
         _store.Save(c);
         Reload(c.Id);
-        SavedText = $"Lista criada com {c.AppIds.Count} apps. Dê um nome a ela ♡";
+        SavedText = L.T($"Lista criada com {c.AppIds.Count} apps. Dê um nome a ela ♡");
     }
 
     private void Duplicate()
@@ -238,23 +238,23 @@ public sealed class CollectionsViewModel : ObservableObject
         {
             var copy = _store.Duplicate(Selected.Model, Items.Select(i => i.Model.Name));
             Reload(copy.Id);
-            SavedText = "Cópia criada ✓";
+            SavedText = L.T("Cópia criada ✓");
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
             _services.Logger.Error("Falha ao duplicar.", ex);
-            SavedText = "Não consegui duplicar. Detalhes nos logs.";
+            SavedText = L.T("Não consegui duplicar. Detalhes nos logs.");
         }
     }
 
     private async Task DeleteAsync()
     {
         if (Selected is not { } item) return;
-        var notes = new List<string> { "Isso apaga só o arquivo da lista. Nenhum programa é desinstalado." };
-        if (item.Model.IsBuiltIn) notes.Add("É um perfil pronto: você pode recriá-lo depois em \"Restaurar perfis prontos\".");
-        else notes.Add("Se quiser guardar uma cópia, use \"Exportar\" antes.");
+        var notes = new List<string> { L.T("Isso apaga só o arquivo da lista. Nenhum programa é desinstalado.") };
+        if (item.Model.IsBuiltIn) notes.Add(L.T("É um perfil pronto: você pode recriá-lo depois em \"Restaurar perfis prontos\"."));
+        else notes.Add(L.T("Se quiser guardar uma cópia, use \"Exportar\" antes."));
         var ok = await _main.ShowDialogAsync(new DialogViewModel($"Excluir \"{item.Model.Name}\"?",
-            $"{item.Model.AppIds.Count} aplicativo(s) nesta {(IsProfiles ? "coleção" : "lista")}.", [], notes, "Excluir"));
+            (IsProfiles ? L.T($"{item.Model.AppIds.Count} aplicativo(s) neste perfil.") : L.T($"{item.Model.AppIds.Count} aplicativo(s) nesta lista.")), [], notes, L.T("Excluir")));
         if (!ok) return;
         try
         {
@@ -264,7 +264,7 @@ public sealed class CollectionsViewModel : ObservableObject
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
             _services.Logger.Error("Falha ao excluir.", ex);
-            SavedText = "Não consegui excluir o arquivo. Detalhes nos logs.";
+            SavedText = L.T("Não consegui excluir o arquivo. Detalhes nos logs.");
         }
     }
 
@@ -278,9 +278,9 @@ public sealed class CollectionsViewModel : ObservableObject
         if (Selected is not { } item) return;
         var dialog = new Microsoft.Win32.SaveFileDialog
         {
-            Title = "Exportar " + (IsProfiles ? "perfil" : "lista"),
+            Title = L.T("Exportar ") + (IsProfiles ? "perfil" : "lista"),
             FileName = SafeFileName(item.Model.Name) + CollectionTransfer.FileExtension,
-            Filter = "Lista do Maid Installer (*.maidlist.json)|*.maidlist.json|JSON (*.json)|*.json",
+            Filter = L.T("Lista do Maid Installer (*.maidlist.json)|*.maidlist.json|JSON (*.json)|*.json"),
             InitialDirectory = DialogFolder,
             AddToRecent = false, // não deixa rastro na lista de "recentes" do Windows
             AddExtension = false,
@@ -290,12 +290,12 @@ public sealed class CollectionsViewModel : ObservableObject
         {
             CollectionTransfer.Export(item.Model, Kind, _services.Catalog, dialog.FileName);
             _services.Logger.Info($"Exportado: {item.Model.Name} → {dialog.FileName}");
-            SavedText = $"Exportado para {Path.GetFileName(dialog.FileName)} ✓";
+            SavedText = L.T($"Exportado para {Path.GetFileName(dialog.FileName)} ✓");
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
             _services.Logger.Error("Falha ao exportar.", ex);
-            await _main.ShowDialogAsync(new DialogViewModel("Não foi possível exportar", ex.Message, [], [], "Entendi", cancelText: null));
+            await _main.ShowDialogAsync(new DialogViewModel(L.T("Não foi possível exportar"), ex.Message, [], [], L.T("Entendi"), cancelText: null));
         }
     }
 
@@ -303,8 +303,8 @@ public sealed class CollectionsViewModel : ObservableObject
     {
         var dialog = new Microsoft.Win32.OpenFileDialog
         {
-            Title = "Importar " + (IsProfiles ? "perfil" : "lista"),
-            Filter = "Lista do Maid Installer (*.maidlist.json;*.json)|*.maidlist.json;*.json",
+            Title = L.T("Importar ") + (IsProfiles ? "perfil" : "lista"),
+            Filter = L.T("Lista do Maid Installer (*.maidlist.json;*.json)|*.maidlist.json;*.json"),
             InitialDirectory = DialogFolder,
             AddToRecent = false, // não deixa rastro na lista de "recentes" do Windows
         };
@@ -318,7 +318,7 @@ public sealed class CollectionsViewModel : ObservableObject
         catch (Exception ex) when (ex is InvalidDataException or IOException or UnauthorizedAccessException)
         {
             _services.Logger.Warn($"Importação recusada ({dialog.FileName}): {ex.Message}");
-            await _main.ShowDialogAsync(new DialogViewModel("Não foi possível importar", ex.Message, [], [], "Entendi", cancelText: null));
+            await _main.ShowDialogAsync(new DialogViewModel(L.T("Não foi possível importar"), ex.Message, [], [], L.T("Entendi"), cancelText: null));
             return;
         }
 
@@ -328,18 +328,18 @@ public sealed class CollectionsViewModel : ObservableObject
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
             _services.Logger.Error("Falha ao salvar importação.", ex);
-            SavedText = "Não consegui salvar o arquivo importado. Detalhes nos logs.";
+            SavedText = L.T("Não consegui salvar o arquivo importado. Detalhes nos logs.");
             return;
         }
         _services.Logger.Info($"Importado: {c.Name} ({c.AppIds.Count} apps, {result.Unknown.Count} desconhecidos) de {dialog.FileName}");
         Reload(c.Id);
-        SavedText = $"Importado com {c.AppIds.Count} apps ✓";
+        SavedText = L.T($"Importado com {c.AppIds.Count} apps ✓");
 
         if (result.Unknown.Count > 0)
-            await _main.ShowDialogAsync(new DialogViewModel("Importado, com avisos",
-                $"\"{c.Name}\" foi importado com {c.AppIds.Count} aplicativo(s).",
-                [], [$"Estes itens não estão no catálogo verificado e foram deixados de fora (por segurança, o Maid Installer só instala apps do catálogo): {string.Join(", ", result.Unknown)}."],
-                "Entendi", cancelText: null));
+            await _main.ShowDialogAsync(new DialogViewModel(L.T("Importado, com avisos"),
+                L.T($"\"{c.Name}\" foi importado com {c.AppIds.Count} aplicativo(s)."),
+                [], [L.T($"Estes itens não estão no catálogo verificado e foram deixados de fora (por segurança, o Maid Installer só instala apps do catálogo): {string.Join(", ", result.Unknown)}.")],
+                L.T("Entendi"), cancelText: null));
     }
 
     private async Task RestoreDefaultsAsync()
@@ -348,7 +348,7 @@ public sealed class CollectionsViewModel : ObservableObject
         var missing = _services.DefaultProfiles.Where(d => existing.All(e => e.BuiltInId != d.BuiltInId)).ToList();
         if (missing.Count == 0)
         {
-            await _main.ShowDialogAsync(new DialogViewModel("Perfis prontos", "Os perfis prontos já estão todos aqui. ♡", [], [], "Entendi", cancelText: null));
+            await _main.ShowDialogAsync(new DialogViewModel(L.T("Perfis prontos"), L.T("Os perfis prontos já estão todos aqui. ♡"), [], [], L.T("Entendi"), cancelText: null));
             return;
         }
         try
@@ -361,7 +361,7 @@ public sealed class CollectionsViewModel : ObservableObject
             _services.Logger.Error("Falha ao restaurar perfis prontos.", ex);
         }
         Reload(Selected?.Model.Id);
-        SavedText = $"Restaurado(s): {string.Join(", ", missing.Select(m => m.Name))} ✓";
+        SavedText = L.T($"Restaurado(s): {string.Join(", ", missing.Select(m => m.Name))} ✓");
     }
 
     private async Task InstallAllAsync()
@@ -377,7 +377,7 @@ public sealed class CollectionsViewModel : ObservableObject
         Selected.Model.AppIds.Remove(app.App.Id);
         Apps.Remove(app);
         OnPropertyChanged(nameof(HasApps));
-        Persist($"{app.App.Name} removido; salvo");
+        Persist(L.T($"{app.App.Name} removido; salvo"));
         Selected.Refresh();
     }
 
@@ -401,7 +401,7 @@ public sealed class CollectionsViewModel : ObservableObject
         Selected.Model.AppIds.AddRange(picked.Select(p => p.Item.App.Id));
         IsPicking = false;
         RebuildApps();
-        Persist($"{picked.Count} app(s) adicionado(s); salvo");
+        Persist(L.T($"{picked.Count} app(s) adicionado(s); salvo"));
         Selected.Refresh();
     }
 
@@ -429,7 +429,7 @@ public sealed class CollectionItemViewModel(AppCollection model) : ObservableObj
     public string Glyph => Model.Glyph;
     public string? Description => Model.Description;
     public bool IsBuiltIn => Model.IsBuiltIn;
-    public string CountText => Model.AppIds.Count == 1 ? "1 aplicativo" : $"{Model.AppIds.Count} aplicativos";
+    public string CountText => L.Plural(Model.AppIds.Count, "aplicativo", "aplicativos");
     public override string ToString() => $"{Name} — {CountText}";
 
     public void Refresh()

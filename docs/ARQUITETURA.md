@@ -34,7 +34,8 @@ MaidInstaller/
 │  │  ├─ PostFormat/               Verificações e ações do Kit (powercfg, %TEMP%, inicialização, extensões, drivers, Windows Update)
 │  ├─ MaidInstaller.AI/           IA local: LlamaChatModel (LLamaSharp/llama.cpp, CPU, contexto 1024)
 │  └─ MaidInstaller.App/           Interface WPF
-│     ├─ Themes/BlackPink.xaml     Paleta e estilos
+│     ├─ Themes/                   Palette.Dark/Light/BlackPink.xaml (cores) + Styles.xaml (estilos)
+│     ├─ Localization/             en.json (dicionário inglês) + TExtension ({loc:T}) — ver Core/Localization/L.cs
 │     ├─ Views/                    Telas (XAML)
 │     ├─ ViewModels/               Estado e comandos das telas
 │     ├─ Services/                 Composição (AppServices), ícones do Shell, BundledIcons (ícones embutidos)

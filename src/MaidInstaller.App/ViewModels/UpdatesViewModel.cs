@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -20,7 +20,7 @@ public sealed class UpdatesViewModel : ObservableObject
     private readonly AppServices _services;
     private readonly MainViewModel _main;
     private bool _isChecking, _checkedOnce;
-    private string _statusLine = "Clique em \"Verificar atualizações\" para consultar o WinGet.";
+    private string _statusLine = L.T("Clique em \"Verificar atualizações\" para consultar o WinGet.");
     private int _selectedCount;
 
     public UpdatesViewModel(AppServices services, MainViewModel main)
@@ -72,9 +72,9 @@ public sealed class UpdatesViewModel : ObservableObject
 
     public string SelectionText => SelectedCount switch
     {
-        0 => "Nenhum programa selecionado",
-        1 => "1 programa selecionado",
-        var n => $"{n} programas selecionados",
+        0 => L.T("Nenhum programa selecionado"),
+        1 => L.T("1 programa selecionado"),
+        var n => L.T($"{n} programas selecionados"),
     };
 
     /// <summary>Ao abrir a página pela primeira vez, consulta (só leitura).</summary>
@@ -87,12 +87,12 @@ public sealed class UpdatesViewModel : ObservableObject
     {
         if (IsChecking) return;
         IsChecking = true;
-        StatusLine = "Perguntando ao WinGet quais programas têm versão nova… (pode levar até um minuto)";
+        StatusLine = L.T("Perguntando ao WinGet quais programas têm versão nova… (pode levar até um minuto)");
         try
         {
             if (!await _services.WinGet.IsAvailableAsync())
             {
-                StatusLine = "WinGet não encontrado neste PC. Veja o cartão WinGet no Kit Pós-Formatação.";
+                StatusLine = L.T("WinGet não encontrado neste PC. Veja o cartão WinGet no Kit Pós-Formatação.");
                 return;
             }
             var list = await _services.WinGet.GetUpgradesAsync();
@@ -105,14 +105,14 @@ public sealed class UpdatesViewModel : ObservableObject
             UpdateQueuedFlags();
             _ = FillIconsAsync();
             StatusLine = Items.Count == 0
-                ? $"Verificado às {DateTime.Now:HH:mm}: tudo em dia ♡"
-                : $"Verificado às {DateTime.Now:HH:mm}: {Items.Count} programa(s) com versão nova. Nada é atualizado sem você pedir.";
+                ? L.T($"Verificado às {DateTime.Now:HH:mm}: tudo em dia ♡")
+                : L.T($"Verificado às {DateTime.Now:HH:mm}: {Items.Count} programa(s) com versão nova. Nada é atualizado sem você pedir.");
             _services.Logger.Info($"Atualizações: {Items.Count} disponíveis ({string.Join(", ", Items.Select(i => i.Candidate.Id))}).");
         }
         catch (Exception ex)
         {
             _services.Logger.Error("Falha ao consultar atualizações.", ex);
-            StatusLine = "Não consegui consultar o WinGet agora. Detalhes nos logs.";
+            StatusLine = L.T("Não consegui consultar o WinGet agora. Detalhes nos logs.");
         }
         finally
         {
@@ -177,22 +177,22 @@ public sealed class UpdatesViewModel : ObservableObject
 
         var notes = new List<string>
         {
-            "Cada programa é atualizado pelo WinGet, das fontes oficiais, em modo silencioso e um de cada vez.",
-            "Feche os programas da lista antes: um programa aberto pode impedir a atualização.",
-            "Alguns atualizadores pedem permissão de administrador (UAC). Se você recusar, só aquele é cancelado.",
-            "Ao confirmar, você aceita as licenças das novas versões. O PC não será reiniciado automaticamente.",
+            L.T("Cada programa é atualizado pelo WinGet, das fontes oficiais, em modo silencioso e um de cada vez."),
+            L.T("Feche os programas da lista antes: um programa aberto pode impedir a atualização."),
+            L.T("Alguns atualizadores pedem permissão de administrador (UAC). Se você recusar, só aquele é cancelado."),
+            L.T("Ao confirmar, você aceita as licenças das novas versões. O PC não será reiniciado automaticamente."),
         };
         if (list.Any(i => i.Candidate.Id.Equals(AppInstallerId, StringComparison.OrdinalIgnoreCase)))
-            notes.Add("O App Installer é o próprio WinGet: ele fica por último e, enquanto se atualiza, o WinGet some por alguns segundos.");
+            notes.Add(L.T("O App Installer é o próprio WinGet: ele fica por último e, enquanto se atualiza, o WinGet some por alguns segundos."));
         if (list.Any(i => i.Candidate.InstalledVersion.StartsWith('<')))
-            notes.Add("Versão com \"<\" significa que o Windows não informa a versão exata instalada; o WinGet só sabe que é mais antiga.");
+            notes.Add(L.T("Versão com \"<\" significa que o Windows não informa a versão exata instalada; o WinGet só sabe que é mais antiga."));
 
         var ok = await _main.ShowDialogAsync(new DialogViewModel(
-            list.Count == 1 ? $"Atualizar {list[0].Name}?" : $"Atualizar {list.Count} programas?",
-            "Confira o que será atualizado:",
+            list.Count == 1 ? L.T($"Atualizar {list[0].Name}?") : L.T($"Atualizar {list.Count} programas?"),
+            L.T("Confira o que será atualizado:"),
             [.. list.Select(i => new DialogItem(i.Name, $"{i.Candidate.InstalledVersion} → {i.Candidate.AvailableVersion} · {i.SourceText}"))],
             notes,
-            list.Count == 1 ? "Atualizar" : $"Atualizar {list.Count}"));
+            list.Count == 1 ? L.T("Atualizar") : L.T($"Atualizar {list.Count}")));
         if (!ok)
         {
             _services.Logger.Info("Atualização cancelada na confirmação.");
@@ -222,7 +222,8 @@ public sealed class UpdateItemViewModel(UpgradeCandidate candidate, CatalogApp a
     public ImageSource? Icon { get => _icon; set => SetProperty(ref _icon, value); }
     public string Name => App.Name;
     public string Monogram => Name[..1].ToUpperInvariant();
-    public string SourceText => Candidate.Source == "msstore" ? "Microsoft Store" : $"WinGet · {Candidate.Id}";
+    public string UpdateButtonName => L.T($"Atualizar {Name}");
+    public string SourceText => Candidate.Source == "msstore" ? "Microsoft Store" : L.T($"WinGet · {Candidate.Id}");
     public string VersionText => $"{Candidate.InstalledVersion}  →  {Candidate.AvailableVersion}";
     public override string ToString() => $"{Name} {VersionText}";
 
@@ -243,23 +244,23 @@ public sealed class UpdateItemViewModel(UpgradeCandidate candidate, CatalogApp a
         }
     }
 
-    public string ButtonText => IsQueued ? "Na fila" : "Atualizar";
+    public string ButtonText => IsQueued ? L.T("Na fila") : L.T("Atualizar");
 }
 
 public sealed class HistoryItemViewModel(HistoryEntry entry)
 {
     public HistoryEntry Entry { get; } = entry;
-    public string DateText => Entry.Date.ToString("dd/MM HH:mm");
-    public string Title => $"{(Entry.Operation == "upgrade" ? "Atualização" : "Instalação")} · {Entry.Name}";
+    public string DateText => Entry.Date.ToString(L.T("dd/MM HH:mm"));
+    public string Title => $"{(Entry.Operation == "upgrade" ? L.T("Atualização") : L.T("Instalação"))} · {Entry.Name}";
     public string VersionText => Entry.FromVersion is not null || Entry.ToVersion is not null
         ? $"{Entry.FromVersion ?? "?"} → {Entry.ToVersion ?? "?"}"
         : Entry.WinGetId ?? "";
     public string ResultText => Entry.Result switch
     {
-        "completed" => Entry.RebootRequired ? "Concluído · reiniciar" : "Concluído",
-        "already" => Entry.Operation == "upgrade" ? "Já estava atualizado" : "Já instalado",
-        "cancelled" => "Cancelado",
-        _ => "Falhou",
+        "completed" => Entry.RebootRequired ? L.T("Concluído · reiniciar") : L.T("Concluído"),
+        "already" => Entry.Operation == "upgrade" ? L.T("Já estava atualizado") : L.T("Já instalado"),
+        "cancelled" => L.T("Cancelado"),
+        _ => L.T("Falhou"),
     };
     public bool IsOk => Entry.Result is "completed" or "already";
     public string? Message => Entry.Message;

@@ -15,7 +15,7 @@ namespace MaidInstaller.App.ViewModels;
 public sealed class InstallsViewModel : ObservableObject
 {
     private readonly AppServices _services;
-    private string _summary = "Nenhuma instalação ainda.";
+    private string _summary = L.T("Nenhuma instalação ainda.");
     private string _sidebarText = "";
     private bool _rebootRequired;
 
@@ -63,9 +63,9 @@ public sealed class InstallsViewModel : ObservableObject
         var waiting = jobs.Count(j => j.State == InstallJobState.Waiting);
         var done = jobs.Count(j => j.State is InstallJobState.Completed or InstallJobState.AlreadyInstalled);
         var failed = jobs.Where(j => j.State == InstallJobState.Failed).Select(j => j.App.Name).ToList();
-        var text = active is null ? "No momento não estou instalando nada." : $"Agora estou com o {active.App.Name}: {active.Message}";
-        text += $" Prontos: {done}. Na fila: {waiting}.";
-        if (failed.Count > 0) text += $" Com falha: {string.Join(", ", failed)}.";
+        var text = active is null ? L.T("No momento não estou instalando nada.") : L.T($"Agora estou com o {active.App.Name}: {active.Message}");
+        text += L.T($" Prontos: {done}. Na fila: {waiting}.");
+        if (failed.Count > 0) text += L.T($" Com falha: {string.Join(", ", failed)}.");
         return text;
     }
 
@@ -78,13 +78,13 @@ public sealed class InstallsViewModel : ObservableObject
         var failed = jobs.Count(j => j.State == InstallJobState.Failed);
         var cancelled = jobs.Count(j => j.State == InstallJobState.Cancelled);
 
-        var parts = new List<string> { $"{finished} de {jobs.Count} finalizados" };
-        if (ok > 0) parts.Add($"{ok} concluídos");
-        if (already > 0) parts.Add($"{already} já instalados");
-        if (failed > 0) parts.Add($"{failed} com falha");
+        var parts = new List<string> { L.T($"{finished} de {jobs.Count} finalizados") };
+        if (ok > 0) parts.Add(L.T($"{ok} concluídos"));
+        if (already > 0) parts.Add(L.T($"{already} já instalados"));
+        if (failed > 0) parts.Add(L.T($"{failed} com falha"));
         if (cancelled > 0) parts.Add($"{cancelled} cancelados");
-        Summary = jobs.Count == 0 ? "Nenhuma instalação ainda." : string.Join(" · ", parts);
-        SidebarText = IsBusy ? $"Instalando {finished + 1} de {jobs.Count}…" : jobs.Count > 0 ? "Instalações ✓" : "";
+        Summary = jobs.Count == 0 ? L.T("Nenhuma instalação ainda.") : string.Join(" · ", parts);
+        SidebarText = IsBusy ? L.T($"Instalando {finished + 1} de {jobs.Count}…") : jobs.Count > 0 ? L.T("Instalações ✓") : "";
         RebootRequired = jobs.Any(j => j.RebootRequired);
         OnPropertyChanged(nameof(IsBusy));
         OnPropertyChanged(nameof(HasJobs));
@@ -121,22 +121,22 @@ public sealed class InstallJobViewModel : ObservableObject
     public ImageSource? Icon { get; }
     public string Name => Job.App.Name;
     public string Monogram => Name[..1].ToUpperInvariant();
-    public string OperationText => Job.Operation == InstallOperation.Upgrade ? "Atualização" : "Instalação";
-    public string SourceText => Job.App.WinGetSource == "msstore" ? "Microsoft Store" : $"WinGet · {Job.App.WinGetId}";
+    public string OperationText => Job.Operation == InstallOperation.Upgrade ? L.T("Atualização") : L.T("Instalação");
+    public string SourceText => Job.App.WinGetSource == "msstore" ? "Microsoft Store" : L.T($"WinGet · {Job.App.WinGetId}");
 
     public string StatusText => Job.State switch
     {
-        InstallJobState.Waiting => "Aguardando",
-        InstallJobState.Downloading => "Baixando",
-        InstallJobState.Installing => "Instalando",
-        InstallJobState.Completed => Job.RebootRequired ? "Concluído · reiniciar" : "Concluído",
-        InstallJobState.AlreadyInstalled => "Já instalado",
-        InstallJobState.Failed => "Falhou",
-        InstallJobState.Cancelled => "Cancelado",
+        InstallJobState.Waiting => L.T("Aguardando"),
+        InstallJobState.Downloading => L.T("Baixando"),
+        InstallJobState.Installing => L.T("Instalando"),
+        InstallJobState.Completed => Job.RebootRequired ? L.T("Concluído · reiniciar") : L.T("Concluído"),
+        InstallJobState.AlreadyInstalled => L.T("Já instalado"),
+        InstallJobState.Failed => L.T("Falhou"),
+        InstallJobState.Cancelled => L.T("Cancelado"),
         _ => "",
     };
 
-    public string ProgressText => Job.Progress is { } p ? $"{p:0}%" : Job.IsActive ? "em andamento…" : "";
+    public string ProgressText => Job.Progress is { } p ? $"{p:0}%" : Job.IsActive ? L.T("em andamento…") : "";
     public double ProgressValue => Job.Progress ?? (Job.IsFinished && Job.State == InstallJobState.Completed ? 100 : 0);
 
     private void OnJobChanged(object? sender, PropertyChangedEventArgs e)

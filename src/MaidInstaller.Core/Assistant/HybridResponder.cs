@@ -118,15 +118,27 @@ public static class PromptBuilder
 
     public static ChatPrompt Build(string userName, string facts, string question)
     {
-        var system =
-            $"Você é a Maid Assistant, a assistente do aplicativo Maid Installer. Fale em português do Brasil, " +
-            $"de forma carinhosa, educada, simpática, levemente divertida, natural e objetiva. O usuário se chama {userName}.\n" +
-            "Regras:\n" +
-            "- Use SOMENTE os FATOS abaixo. Se a resposta não estiver nos fatos, diga que essa informação ainda não está cadastrada.\n" +
-            "- Não invente versões, preços, números, links, recursos nem requisitos.\n" +
-            "- Você não instala, remove, atualiza nem executa nada. Para instalar, o usuário usa a Biblioteca do Maid Installer.\n" +
-            "- Responda em até 4 frases curtas. Pode terminar com ♡.\n\n" +
-            "FATOS:\n" + facts;
+        var hasName = !string.IsNullOrWhiteSpace(userName);
+        // O prompt não passa pelo dicionário: é escrito inteiro em cada idioma, para o modelo responder no idioma do app.
+        var system = L.IsEnglish
+            ? "You are Maid Assistant, the assistant of the Maid Installer app. Speak English, " +
+              "in a warm, polite, friendly, slightly playful, natural and objective way." +
+              (hasName ? $" The user's name is {userName.Trim()}." : "") + "\n" +
+              "Rules:\n" +
+              "- Use ONLY the FACTS below. If the answer is not in the facts, say that this information is not on record yet.\n" +
+              "- Do not make up versions, prices, numbers, links, features or requirements.\n" +
+              "- You do not install, remove, update or run anything. To install, the user uses the Maid Installer Library.\n" +
+              "- Answer in up to 4 short sentences. You may end with ♡.\n\n" +
+              "FACTS:\n" + facts
+            : "Você é a Maid Assistant, a assistente do aplicativo Maid Installer. Fale em português do Brasil, " +
+              "de forma carinhosa, educada, simpática, levemente divertida, natural e objetiva." +
+              (hasName ? $" O usuário se chama {userName.Trim()}." : "") + "\n" +
+              "Regras:\n" +
+              "- Use SOMENTE os FATOS abaixo. Se a resposta não estiver nos fatos, diga que essa informação ainda não está cadastrada.\n" +
+              "- Não invente versões, preços, números, links, recursos nem requisitos.\n" +
+              "- Você não instala, remove, atualiza nem executa nada. Para instalar, o usuário usa a Biblioteca do Maid Installer.\n" +
+              "- Responda em até 4 frases curtas. Pode terminar com ♡.\n\n" +
+              "FATOS:\n" + facts;
         var q = question.Trim();
         if (q.Length > MaxQuestionChars) q = q[..MaxQuestionChars];
         return new ChatPrompt(system, q);
@@ -139,9 +151,9 @@ public static class PromptBuilder
             lines.Add(AppFacts(app, detailed: r.Apps.Count == 1));
         if (r.Apps.Count == 0)
             foreach (var app in r.CategoryApps.Take(8))
-                lines.Add($"- {app.Name} ({app.Category}): {FirstSentence(app.Summary)} Preço: {app.License}.");
+                lines.Add(L.T($"- {app.Name} ({L.T(app.Category)}): {FirstSentence(app.Summary)} Preço: {app.License}."));
         if (r.Topic is not null)
-            lines.Add("- " + r.Topic.Answer.Replace("{nome}", "o usuário", StringComparison.Ordinal));
+            lines.Add("- " + L.Address(r.Topic.Answer, L.T("o usuário")));
 
         var sb = new StringBuilder();
         foreach (var line in lines)
@@ -154,13 +166,13 @@ public static class PromptBuilder
 
     private static string AppFacts(AppKnowledge app, bool detailed)
     {
-        var sb = new StringBuilder($"- {app.Name} (categoria: {app.Category}). {app.Summary}");
+        var sb = new StringBuilder(L.T($"- {app.Name} (categoria: {L.T(app.Category)}). {app.Summary}"));
         if (app.Highlights.Count > 0)
-            sb.Append(" Recursos: ").Append(string.Join("; ", detailed ? app.Highlights : app.Highlights.Take(2))).Append('.');
-        sb.Append($" Desenvolvedor: {app.Developer}. Preço/licença: {app.License}.");
+            sb.Append(L.T(" Recursos: ")).Append(string.Join("; ", detailed ? app.Highlights : app.Highlights.Take(2))).Append('.');
+        sb.Append(L.T($" Desenvolvedor: {app.Developer}. Preço/licença: {app.License}."));
         if (detailed && !string.IsNullOrWhiteSpace(app.Notes)) sb.Append(' ').Append(app.Notes);
-        if (app.HasWinGetPackage is true) sb.Append(" Pode ser instalado pela Biblioteca do Maid Installer.");
-        if (app.HasWinGetPackage is false) sb.Append(" Não tem pacote no WinGet: instala-se pelo site oficial.");
+        if (app.HasWinGetPackage is true) sb.Append(L.T(" Pode ser instalado pela Biblioteca do Maid Installer."));
+        if (app.HasWinGetPackage is false) sb.Append(L.T(" Não tem pacote no WinGet: instala-se pelo site oficial."));
         return sb.ToString();
     }
 
@@ -255,6 +267,12 @@ public static partial class AnswerGuard
         "quais", "ser", "sao", "esta", "estao", "fica", "ficam", "tem", "existe", "voces", "nosso", "nossa", "mesmo", "mesma",
         "cada", "qualquer", "bastante", "bom", "boa", "otimo", "otima", "util", "uteis", "ideal", "opcao", "caso", "serve",
         "usar", "usado", "usada", "fazer", "feito", "precisa", "quer", "querer", "ajuda", "ajudar", "claro", "certo", "dica",
+        // Inglês
+        "this", "that", "these", "those", "with", "from", "your", "yours", "have", "also", "more", "very", "what", "which",
+        "when", "where", "they", "them", "their", "there", "then", "than", "into", "like", "just", "only", "some", "such",
+        "each", "other", "others", "about", "because", "while", "both", "even", "does", "will", "would", "could", "should",
+        "been", "being", "here", "help", "helps", "great", "good", "best", "useful", "used", "using", "make", "makes",
+        "made", "need", "needs", "want", "sure", "option", "lets", "allows", "well", "many", "much", "most", "really",
         // O nome do próprio app aparece em todo lugar e não sustenta fato nenhum.
         "maid", "installer", "assistant",
     ];

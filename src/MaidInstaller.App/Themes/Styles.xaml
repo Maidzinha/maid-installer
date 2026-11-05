@@ -1,100 +1,7 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- ============ MAID INSTALLER — BLACK & PINK EDITION ♡ ============ -->
-
-    <!-- Paleta -->
-    <Color x:Key="BgColor">#FF0A0608</Color>
-    <Color x:Key="Bg2Color">#FF150A10</Color>
-    <Color x:Key="CardColor">#C21A1116</Color>
-    <Color x:Key="PinkNeonColor">#FFFF4FA3</Color>
-    <Color x:Key="PinkHotColor">#FFFF2E8C</Color>
-    <Color x:Key="PinkPastelColor">#FFF7A8CC</Color>
-    <Color x:Key="TextColor">#FFFBEFF4</Color>
-    <Color x:Key="TextDimColor">#FFC4A6B4</Color>
-
-    <SolidColorBrush x:Key="BgBrush" Color="{StaticResource BgColor}" />
-    <SolidColorBrush x:Key="CardBrush" Color="{StaticResource CardColor}" />
-    <SolidColorBrush x:Key="PinkNeonBrush" Color="{StaticResource PinkNeonColor}" />
-    <SolidColorBrush x:Key="PinkPastelBrush" Color="{StaticResource PinkPastelColor}" />
-    <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}" />
-    <SolidColorBrush x:Key="TextDimBrush" Color="{StaticResource TextDimColor}" />
-    <SolidColorBrush x:Key="BorderBrushPink" Color="#66FF4FA3" />
-    <SolidColorBrush x:Key="BorderBrushSoft" Color="#33FF7DBA" />
-    <SolidColorBrush x:Key="TrackBrush" Color="#33FFFFFF" />
-
-    <LinearGradientBrush x:Key="SidebarBrush" StartPoint="0,0" EndPoint="0,1">
-        <GradientStop Color="#F2120A0E" Offset="0" />
-        <GradientStop Color="#F20D070A" Offset="1" />
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="NeonGradient" StartPoint="0,0" EndPoint="1,1">
-        <GradientStop Color="#FFFF5FAE" Offset="0" />
-        <GradientStop Color="#FFE0287A" Offset="1" />
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="GlassBrush" StartPoint="0,0" EndPoint="0,1">
-        <GradientStop Color="#CC22141B" Offset="0" />
-        <GradientStop Color="#B3140C11" Offset="1" />
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="ShortcutBrush" StartPoint="0,0" EndPoint="0,1">
-        <GradientStop Color="#E62A1520" Offset="0" />
-        <GradientStop Color="#E6190D13" Offset="1" />
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="ShortcutHoverBrush" StartPoint="0,0" EndPoint="0,1">
-        <GradientStop Color="#F23D1A2C" Offset="0" />
-        <GradientStop Color="#F2220F19" Offset="1" />
-    </LinearGradientBrush>
-
-    <DropShadowEffect x:Key="PinkGlow" Color="#FFFF4FA3" BlurRadius="22" ShadowDepth="0" Opacity="0.35" />
-    <DropShadowEffect x:Key="PinkGlowStrong" Color="#FFFF4FA3" BlurRadius="26" ShadowDepth="0" Opacity="0.6" />
-    <DropShadowEffect x:Key="TextGlow" Color="#FFFF4FA3" BlurRadius="14" ShadowDepth="0" Opacity="0.7" />
-
-    <FontFamily x:Key="IconFont">Segoe Fluent Icons, Segoe MDL2 Assets</FontFamily>
-
-    <!-- Flor de sakura (decoração discreta) -->
-    <DrawingImage x:Key="SakuraFlower">
-        <DrawingImage.Drawing>
-            <DrawingGroup>
-                <DrawingGroup.Children>
-                    <GeometryDrawing Brush="#FFF06AA8" Geometry="M0,0 C-7,-8 -7,-19 0,-24 C7,-19 7,-8 0,0Z" />
-                    <GeometryDrawing Brush="#FFF06AA8">
-                        <GeometryDrawing.Geometry>
-                            <PathGeometry Figures="M0,0 C-7,-8 -7,-19 0,-24 C7,-19 7,-8 0,0Z">
-                                <PathGeometry.Transform><RotateTransform Angle="72" /></PathGeometry.Transform>
-                            </PathGeometry>
-                        </GeometryDrawing.Geometry>
-                    </GeometryDrawing>
-                    <GeometryDrawing Brush="#FFF06AA8">
-                        <GeometryDrawing.Geometry>
-                            <PathGeometry Figures="M0,0 C-7,-8 -7,-19 0,-24 C7,-19 7,-8 0,0Z">
-                                <PathGeometry.Transform><RotateTransform Angle="144" /></PathGeometry.Transform>
-                            </PathGeometry>
-                        </GeometryDrawing.Geometry>
-                    </GeometryDrawing>
-                    <GeometryDrawing Brush="#FFF06AA8">
-                        <GeometryDrawing.Geometry>
-                            <PathGeometry Figures="M0,0 C-7,-8 -7,-19 0,-24 C7,-19 7,-8 0,0Z">
-                                <PathGeometry.Transform><RotateTransform Angle="216" /></PathGeometry.Transform>
-                            </PathGeometry>
-                        </GeometryDrawing.Geometry>
-                    </GeometryDrawing>
-                    <GeometryDrawing Brush="#FFF06AA8">
-                        <GeometryDrawing.Geometry>
-                            <PathGeometry Figures="M0,0 C-7,-8 -7,-19 0,-24 C7,-19 7,-8 0,0Z">
-                                <PathGeometry.Transform><RotateTransform Angle="288" /></PathGeometry.Transform>
-                            </PathGeometry>
-                        </GeometryDrawing.Geometry>
-                    </GeometryDrawing>
-                    <GeometryDrawing Brush="#FFFFD1E6">
-                        <GeometryDrawing.Geometry><EllipseGeometry Center="0,0" RadiusX="4" RadiusY="4" /></GeometryDrawing.Geometry>
-                    </GeometryDrawing>
-                </DrawingGroup.Children>
-            </DrawingGroup>
-        </DrawingImage.Drawing>
-    </DrawingImage>
+    <!-- Estilos comuns a todos os temas. As cores vêm da paleta escolhida (Palette.*.xaml). -->
 
     <!-- Texto -->
     <Style x:Key="IconText" TargetType="TextBlock">
@@ -152,10 +59,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="#33FF4FA3" />
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource B_33FF4FA3}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="#55FF4FA3" />
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource B_55FF4FA3}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -172,7 +79,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="#E0FF2E6E" />
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource B_E0FF2E6E}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -206,12 +113,12 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="#1FFF4FA3" />
-                            <Setter TargetName="Bd" Property="BorderBrush" Value="#33FF4FA3" />
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource B_1FFF4FA3}" />
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource B_33FF4FA3}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="Bd" Property="Background" Value="{StaticResource NeonGradient}" />
-                            <Setter TargetName="Bd" Property="BorderBrush" Value="#FFFF8CC4" />
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource B_FFFF8CC4}" />
                             <Setter TargetName="Bd" Property="Effect" Value="{StaticResource PinkGlowStrong}" />
                             <Setter TargetName="Glyph" Property="Foreground" Value="White" />
                             <Setter TargetName="Label" Property="Foreground" Value="White" />
@@ -280,7 +187,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="Bd" CornerRadius="14" Background="#B3201218" BorderThickness="1" BorderBrush="{StaticResource BorderBrushSoft}">
+                    <Border x:Name="Bd" CornerRadius="14" Background="{StaticResource B_B3201218}" BorderThickness="1" BorderBrush="{StaticResource BorderBrushSoft}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                     <ControlTemplate.Triggers>
@@ -305,12 +212,12 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="Bd" CornerRadius="12" Padding="12,7" Background="#991E1117" BorderThickness="1" BorderBrush="{StaticResource BorderBrushPink}">
+                    <Border x:Name="Bd" CornerRadius="12" Padding="12,7" Background="{StaticResource B_991E1117}" BorderThickness="1" BorderBrush="{StaticResource BorderBrushPink}">
                         <ContentPresenter />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="#4DFF4FA3" />
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource B_4DFF4FA3}" />
                             <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource PinkNeonBrush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
@@ -333,12 +240,12 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="Bd" CornerRadius="10" Background="#33FFFFFF" BorderThickness="1" BorderBrush="{StaticResource BorderBrushSoft}">
+                    <Border x:Name="Bd" CornerRadius="10" Background="{StaticResource B_33FFFFFF}" BorderThickness="1" BorderBrush="{StaticResource BorderBrushSoft}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="#55FF4FA3" />
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource B_55FF4FA3}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -381,7 +288,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
-                    <Border x:Name="Bd" CornerRadius="12" Background="#CC120A0E" BorderThickness="1" BorderBrush="{StaticResource BorderBrushPink}" Padding="12,0">
+                    <Border x:Name="Bd" CornerRadius="12" Background="{StaticResource B_CC120A0E}" BorderThickness="1" BorderBrush="{StaticResource BorderBrushPink}" Padding="12,0">
                         <Grid>
                             <TextBlock x:Name="Hint" Text="{TemplateBinding Tag}" Foreground="{StaticResource TextDimBrush}" VerticalAlignment="Center"
                                        IsHitTestVisible="False" Visibility="Collapsed" Margin="2,0,0,0" />
@@ -413,7 +320,7 @@
                         <Border x:Name="PART_Track" CornerRadius="4" Background="{StaticResource TrackBrush}" />
                         <Border x:Name="PART_Indicator" CornerRadius="4" HorizontalAlignment="Left" Background="{StaticResource NeonGradient}">
                             <Border.Effect>
-                                <DropShadowEffect Color="#FFFF4FA3" BlurRadius="8" ShadowDepth="0" Opacity="0.8" />
+                                <DropShadowEffect Color="{StaticResource C_FFFF4FA3}" BlurRadius="8" ShadowDepth="0" Opacity="0.8" />
                             </Border.Effect>
                         </Border>
                     </Grid>
@@ -436,9 +343,9 @@
                                     <LinearGradientBrush.RelativeTransform>
                                         <TranslateTransform X="-1" />
                                     </LinearGradientBrush.RelativeTransform>
-                                    <GradientStop Color="#00FF4FA3" Offset="0" />
-                                    <GradientStop Color="#FFFF4FA3" Offset="0.5" />
-                                    <GradientStop Color="#00FF4FA3" Offset="1" />
+                                    <GradientStop Color="{StaticResource C_00FF4FA3}" Offset="0" />
+                                    <GradientStop Color="{StaticResource C_FFFF4FA3}" Offset="0.5" />
+                                    <GradientStop Color="{StaticResource C_00FF4FA3}" Offset="1" />
                                 </LinearGradientBrush>
                             </Rectangle.Fill>
                         </Rectangle>
@@ -479,7 +386,7 @@
                             <Thumb>
                                 <Thumb.Template>
                                     <ControlTemplate TargetType="Thumb">
-                                        <Border CornerRadius="3" Background="#80FF4FA3" />
+                                        <Border CornerRadius="3" Background="{StaticResource B_80FF4FA3}" />
                                     </ControlTemplate>
                                 </Thumb.Template>
                             </Thumb>
@@ -504,13 +411,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="Bd" CornerRadius="11" Background="#661E1117" BorderThickness="1"
+                    <Border x:Name="Bd" CornerRadius="11" Background="{StaticResource B_661E1117}" BorderThickness="1"
                             BorderBrush="{StaticResource BorderBrushPink}" Padding="{TemplateBinding Padding}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="#40FF4FA3" />
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource B_40FF4FA3}" />
                             <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource PinkNeonBrush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
@@ -532,7 +439,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
-                    <Border x:Name="Bd" CornerRadius="15" Padding="14,6" Background="#661E1117" BorderThickness="1"
+                    <Border x:Name="Bd" CornerRadius="15" Padding="14,6" Background="{StaticResource B_661E1117}" BorderThickness="1"
                             BorderBrush="{StaticResource BorderBrushSoft}">
                         <ContentPresenter VerticalAlignment="Center" />
                     </Border>
@@ -542,7 +449,7 @@
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="Bd" Property="Background" Value="{StaticResource NeonGradient}" />
-                            <Setter TargetName="Bd" Property="BorderBrush" Value="#FFFF8CC4" />
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource B_FFFF8CC4}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -559,7 +466,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">
                     <Border x:Name="Box" Width="20" Height="20" CornerRadius="6" BorderThickness="1.5"
-                            BorderBrush="{StaticResource PinkPastelBrush}" Background="#33000000">
+                            BorderBrush="{StaticResource PinkPastelBrush}" Background="{StaticResource B_33000000}">
                         <TextBlock x:Name="Mark" Text="&#xE73E;" FontFamily="{StaticResource IconFont}" FontSize="11"
                                    Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" />
                     </Border>
@@ -592,10 +499,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="#1FFF4FA3" />
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource B_1FFF4FA3}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="#40FF4FA3" />
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource B_40FF4FA3}" />
                             <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource PinkNeonBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -636,13 +543,13 @@
     <Style x:Key="Chip" TargetType="Border">
         <Setter Property="CornerRadius" Value="8" />
         <Setter Property="Padding" Value="7,2" />
-        <Setter Property="Background" Value="#33FFFFFF" />
+        <Setter Property="Background" Value="{StaticResource B_33FFFFFF}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
     </Style>
 
     <Style TargetType="ToolTip">
         <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
-        <Setter Property="Background" Value="#F01A1116" />
+        <Setter Property="Background" Value="{StaticResource B_F01A1116}" />
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrushPink}" />
         <Setter Property="Padding" Value="10,6" />
     </Style>

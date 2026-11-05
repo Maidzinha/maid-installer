@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -76,8 +76,8 @@ public sealed class QuickAccessViewModel(AppServices services, AssistantViewMode
     {
         if (item.App is null)
         {
-            assistant.Post($"O {item.Name} não parece estar instalado neste PC, {services.Settings.UserName}. " +
-                           "Você encontra ele na Biblioteca de Apps ♡");
+            assistant.Post(L.T($"O {item.Name} não parece estar instalado neste PC, {L.Name(services.Settings.UserName)}. ") +
+                           L.T("Você encontra ele na Biblioteca de Apps ♡"));
             return;
         }
         try
@@ -89,7 +89,7 @@ public sealed class QuickAccessViewModel(AppServices services, AssistantViewMode
         catch (Exception ex)
         {
             services.Logger.Error($"Falha ao abrir {item.Name}.", ex);
-            assistant.Post($"Ops, não consegui abrir o {item.Name}. O erro foi registrado nos logs.");
+            assistant.Post(L.T($"Ops, não consegui abrir o {item.Name}. O erro foi registrado nos logs."));
         }
     }
 }
@@ -109,6 +109,6 @@ public sealed class FavoriteItemViewModel
     public ImageSource? Icon { get; }
     public bool IsInstalled => App is not null;
     public string Monogram => Name.Length > 0 ? Name[..1].ToUpperInvariant() : "?";
-    public string Tooltip => IsInstalled ? $"Abrir {Name}" : $"{Name} — não instalado";
+    public string Tooltip => IsInstalled ? L.T($"Abrir {Name}") : L.T($"{Name} — não instalado");
     public ICommand LaunchCommand { get; }
 }

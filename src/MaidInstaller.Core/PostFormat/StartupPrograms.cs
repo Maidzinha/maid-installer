@@ -15,11 +15,11 @@ public static class StartupPrograms
     public static IReadOnlyList<StartupEntry> Read()
     {
         var list = new List<StartupEntry>();
-        ReadRun(list, Registry.CurrentUser, RunKey, "Registro (usuário)", false, "Run");
-        ReadRun(list, Registry.LocalMachine, RunKey, "Registro (todos os usuários)", true, "Run");
-        ReadRun(list, Registry.LocalMachine, Run32Key, "Registro 32 bits (todos)", true, "Run32");
-        ReadFolder(list, Environment.GetFolderPath(Environment.SpecialFolder.Startup), "Pasta Inicializar (usuário)", false, Registry.CurrentUser);
-        ReadFolder(list, Environment.GetFolderPath(Environment.SpecialFolder.CommonStartup), "Pasta Inicializar (todos)", true, Registry.LocalMachine);
+        ReadRun(list, Registry.CurrentUser, RunKey, L.T("Registro (usuário)"), false, "Run");
+        ReadRun(list, Registry.LocalMachine, RunKey, L.T("Registro (todos os usuários)"), true, "Run");
+        ReadRun(list, Registry.LocalMachine, Run32Key, L.T("Registro 32 bits (todos)"), true, "Run32");
+        ReadFolder(list, Environment.GetFolderPath(Environment.SpecialFolder.Startup), L.T("Pasta Inicializar (usuário)"), false, Registry.CurrentUser);
+        ReadFolder(list, Environment.GetFolderPath(Environment.SpecialFolder.CommonStartup), L.T("Pasta Inicializar (todos)"), true, Registry.LocalMachine);
         return [.. list.OrderBy(e => e.Name, StringComparer.CurrentCultureIgnoreCase)];
     }
 

@@ -2,13 +2,15 @@
   // Configuração padrão do Maid Installer.
   // Só é usada na PRIMEIRA execução, quando ainda não existe Config/settings.json.
   // Depois disso, o app grava as escolhas do usuário em Config/settings.json e este arquivo não é mais lido.
-  // Pode ser editado sem recompilar (ex.: trocar o nome ou os favoritos antes de copiar para o pendrive).
+  // Pode ser editado sem recompilar (ex.: trocar o nome, o idioma ou os favoritos antes de copiar para o pendrive).
   "schemaVersion": 1,
 
-  // Como a Maid chama o usuário.
-  "userName": "Helder",
-  "language": "pt-BR",
-  "theme": "BlackPink",
+  // Como a Maid chama o usuário (vazio = sem nome).
+  "userName": "",
+  // Idioma: "en" (inglês), "pt-BR" (português) ou "auto" (o mesmo do Windows).
+  "language": "en",
+  // Tema: "Dark" (escuro), "Light" (claro) ou "BlackPink" (preto e rosa).
+  "theme": "Dark",
   "assistantMinimized": false,
 
   // Usar a IA local quando o modelo estiver na pasta Models (ela continua opcional: sem o modelo, a Maid usa a base).

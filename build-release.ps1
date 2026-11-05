@@ -1,4 +1,4 @@
-﻿<#
+<#
   Gera a entrega completa do Maid Installer (versão Release).
 
   1. Roda os testes automatizados (para se algum falhar).
@@ -54,6 +54,11 @@ foreach ($target in (Split-Path $portableApp), $installRoot) {
     New-Item -ItemType Directory -Force $docs | Out-Null
     Copy-Item (Join-Path $root "docs\INSTALACAO.md"), (Join-Path $root "docs\MANUAL.md"), (Join-Path $root "CHANGELOG.md"), (Join-Path $root "THIRD-PARTY-NOTICES.md") -Destination $docs
     Copy-Item (Join-Path $root "LICENSE") -Destination (Join-Path $docs "LICENSE.txt")
+    # Versões em inglês (a licença em português é a que vale).
+    $en = Join-Path $docs "English"
+    New-Item -ItemType Directory -Force $en | Out-Null
+    Copy-Item (Join-Path $root "docs\en\INSTALL.md"), (Join-Path $root "docs\en\MANUAL.md"), (Join-Path $root "docs\en\CHANGELOG.md") -Destination $en
+    Copy-Item (Join-Path $root "LICENSE.en.md") -Destination (Join-Path $en "LICENSE.en.md")
 }
 
 # --- Zips, SHA-256 e manifesto --------------------------------------------------------------

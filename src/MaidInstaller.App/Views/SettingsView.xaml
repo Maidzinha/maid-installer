@@ -1,6 +1,7 @@
 <UserControl x:Class="MaidInstaller.App.Views.SettingsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:loc="clr-namespace:MaidInstaller.App.Localization">
     <Grid Style="{StaticResource PageRoot}" Margin="22,14,18,18">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -11,7 +12,7 @@
         <StackPanel Margin="0,6,150,14">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="&#xE713;" Style="{StaticResource IconText}" FontSize="24" />
-                <TextBlock Text="Configurações" FontSize="28" FontWeight="Bold" Margin="12,0,0,0" />
+                <TextBlock Text="{loc:T 'Configurações'}" FontSize="28" FontWeight="Bold" Margin="12,0,0,0" />
                 <TextBlock Text=" ♡" FontSize="28" Foreground="{StaticResource PinkNeonBrush}" />
             </StackPanel>
             <TextBlock Text="{Binding Message}" FontSize="13" Foreground="{StaticResource PinkPastelBrush}" Margin="2,4,0,0" TextWrapping="Wrap"
@@ -26,11 +27,11 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                             <TextBlock Text="&#xE77B;" Style="{StaticResource IconText}" FontSize="16" />
-                            <TextBlock Text="Você" Style="{StaticResource PanelTitle}" Margin="8,0,0,0" />
+                            <TextBlock Text="{loc:T 'Você'}" Style="{StaticResource PanelTitle}" Margin="8,0,0,0" />
                         </StackPanel>
-                        <TextBlock Text="Como a Maid deve te chamar?" FontSize="13" Foreground="{StaticResource TextDimBrush}" Margin="0,0,0,6" />
-                        <TextBox Style="{StaticResource ChatTextBox}" Height="38" Width="320" HorizontalAlignment="Left" FontSize="14" Tag="Seu nome"
-                                 MaxLength="40" AutomationProperties.Name="Seu nome" KeyDown="CommitOnEnter"
+                        <TextBlock Text="{loc:T 'Como a Maid deve te chamar? (opcional; deixe vazio para ela não usar nome)'}" FontSize="13" Foreground="{StaticResource TextDimBrush}" Margin="0,0,0,6" />
+                        <TextBox Style="{StaticResource ChatTextBox}" Height="38" Width="320" HorizontalAlignment="Left" FontSize="14" Tag="{loc:T 'Seu nome (opcional)'}"
+                                 MaxLength="40" AutomationProperties.Name="{loc:T 'Seu nome'}" KeyDown="CommitOnEnter"
                                  Text="{Binding UserName, UpdateSourceTrigger=LostFocus}" />
                     </StackPanel>
                 </Border>
@@ -40,9 +41,9 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
                             <TextBlock Text="&#xE88E;" Style="{StaticResource IconText}" FontSize="16" />
-                            <TextBlock Text="Modo portátil e armazenamento" Style="{StaticResource PanelTitle}" Margin="8,0,0,0" />
+                            <TextBlock Text="{loc:T 'Modo portátil e armazenamento'}" Style="{StaticResource PanelTitle}" Margin="8,0,0,0" />
                         </StackPanel>
-                        <Border CornerRadius="12" Padding="14,10" Background="#22FF4FA3" BorderThickness="1" BorderBrush="{StaticResource BorderBrushSoft}" Margin="0,0,0,10">
+                        <Border CornerRadius="12" Padding="14,10" Background="{StaticResource B_22FF4FA3}" BorderThickness="1" BorderBrush="{StaticResource BorderBrushSoft}" Margin="0,0,0,10">
                             <StackPanel>
                                 <TextBlock Text="{Binding ModeTitle}" FontSize="14" FontWeight="SemiBold" />
                                 <TextBlock Text="{Binding ModeDescription}" FontSize="13" TextWrapping="Wrap" Foreground="{StaticResource TextDimBrush}" Margin="0,4,0,0" />
@@ -57,9 +58,9 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <TextBlock Text="Dados em" FontSize="13" Margin="0,2" Foreground="{StaticResource TextDimBrush}" />
+                            <TextBlock Text="{loc:T 'Dados em'}" FontSize="13" Margin="0,2" Foreground="{StaticResource TextDimBrush}" />
                             <TextBlock Grid.Column="1" Text="{Binding DataRoot}" FontSize="13" Margin="0,2" TextTrimming="CharacterEllipsis" ToolTip="{Binding DataRoot}" />
-                            <TextBlock Grid.Row="1" Text="Espaço" FontSize="13" Margin="0,2" Foreground="{StaticResource TextDimBrush}" />
+                            <TextBlock Grid.Row="1" Text="{loc:T 'Espaço'}" FontSize="13" Margin="0,2" Foreground="{StaticResource TextDimBrush}" />
                             <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding FreeSpaceText}" FontSize="13" Margin="0,2" />
                         </Grid>
 
@@ -70,22 +71,22 @@
 
                         <WrapPanel>
                             <Button Style="{StaticResource AccentButton}" Command="{Binding CreatePortableCommand}" Margin="0,0,8,8"
-                                    AutomationProperties.Name="Criar cópia portátil" ToolTip="Copia o app e seus dados para um pendrive (ou outra pasta). Pede confirmação antes.">
+                                    AutomationProperties.Name="{loc:T 'Criar cópia portátil'}" ToolTip="{loc:T 'Copia o app e seus dados para um pendrive (ou outra pasta). Pede confirmação antes.'}">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="&#xE88E;" FontFamily="{StaticResource IconFont}" VerticalAlignment="Center" Margin="0,0,8,0" />
-                                    <TextBlock Text="Criar cópia portátil…" />
+                                    <TextBlock Text="{loc:T 'Criar cópia portátil…'}" />
                                 </StackPanel>
                             </Button>
-                            <Button Style="{StaticResource GhostButton}" Content="Cancelar cópia" Command="{Binding CancelCopyCommand}" Margin="0,0,8,8"
+                            <Button Style="{StaticResource GhostButton}" Content="{loc:T 'Cancelar cópia'}" Command="{Binding CancelCopyCommand}" Margin="0,0,8,8"
                                     Visibility="{Binding IsCopying, Converter={StaticResource BoolToVis}}" />
-                            <Button Style="{StaticResource GhostButton}" Content="Abrir pasta de dados" Command="{Binding OpenDataFolderCommand}" Margin="0,0,8,8" />
+                            <Button Style="{StaticResource GhostButton}" Content="{loc:T 'Abrir pasta de dados'}" Command="{Binding OpenDataFolderCommand}" Margin="0,0,8,8" />
                             <CheckBox Style="{StaticResource PinkCheck}" IsChecked="{Binding IncludeModel}" VerticalAlignment="Center" Margin="10,0,8,8"
-                                      AutomationProperties.Name="Levar o modelo de IA junto" Visibility="{Binding Ai.HasModelFile, Converter={StaticResource BoolToVis}}" />
-                            <TextBlock Text="Levar o modelo de IA junto" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,8"
+                                      AutomationProperties.Name="{loc:T 'Levar o modelo de IA junto'}" Visibility="{Binding Ai.HasModelFile, Converter={StaticResource BoolToVis}}" />
+                            <TextBlock Text="{loc:T 'Levar o modelo de IA junto'}" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,8"
                                        Visibility="{Binding Ai.HasModelFile, Converter={StaticResource BoolToVis}}" />
                         </WrapPanel>
                         <TextBlock FontSize="12" Foreground="{StaticResource TextDimBrush}" TextWrapping="Wrap" Margin="0,4,0,0"
-                                   Text="A cópia vai para uma pasta MaidInstaller dentro do local escolhido (no Ventoy, pode ser a raiz do pendrive, ao lado das ISOs). Se já houver uma cópia lá, ela é atualizada sem apagar as listas e perfis dela." />
+                                   Text="{loc:T 'A cópia vai para uma pasta MaidInstaller dentro do local escolhido (no Ventoy, pode ser a raiz do pendrive, ao lado das ISOs). Se já houver uma cópia lá, ela é atualizada sem apagar as listas e perfis dela.'}" />
                     </StackPanel>
                 </Border>
 
@@ -94,13 +95,13 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
                             <TextBlock Text="&#xE99A;" Style="{StaticResource IconText}" FontSize="16" />
-                            <TextBlock Text="Maid Assistant (IA local)" Style="{StaticResource PanelTitle}" Margin="8,0,0,0" />
+                            <TextBlock Text="{loc:T 'Maid Assistant (IA local)'}" Style="{StaticResource PanelTitle}" Margin="8,0,0,0" />
                         </StackPanel>
                         <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{StaticResource TextDimBrush}" Margin="0,0,0,12"
-                                   Text="Opcional. Sem a IA, a Maid responde com as respostas prontas da base de conhecimento. Com a IA, ela explica de um jeito mais natural, mas continua usando só os fatos da base. A IA roda neste PC, sem internet, e nunca instala, remove ou executa nada." />
+                                   Text="{loc:T 'Opcional. Sem a IA, a Maid responde com as respostas prontas da base de conhecimento. Com a IA, ela explica de um jeito mais natural, mas continua usando só os fatos da base. A IA roda neste PC, sem internet, e nunca instala, remove ou executa nada.'}" />
 
                         <!-- Estado atual -->
-                        <Border CornerRadius="12" Padding="14,10" Background="#22FF4FA3" BorderThickness="1" BorderBrush="{StaticResource BorderBrushSoft}" Margin="0,0,0,12">
+                        <Border CornerRadius="12" Padding="14,10" Background="{StaticResource B_22FF4FA3}" BorderThickness="1" BorderBrush="{StaticResource BorderBrushSoft}" Margin="0,0,0,12">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -129,13 +130,13 @@
                                     <Setter Property="TextWrapping" Value="Wrap" />
                                 </Style>
                             </Grid.Resources>
-                            <TextBlock Text="Modelo" Foreground="{StaticResource TextDimBrush}" />
+                            <TextBlock Text="{loc:T 'Modelo'}" Foreground="{StaticResource TextDimBrush}" />
                             <TextBlock Grid.Column="1">
                                 <Run Text="{Binding Model.DisplayName, Mode=OneWay}" /><Run Text=" · " /><Run Text="{Binding ModelSizeText, Mode=OneWay}" />
                             </TextBlock>
-                            <TextBlock Grid.Row="1" Text="Origem" Foreground="{StaticResource TextDimBrush}" />
+                            <TextBlock Grid.Row="1" Text="{loc:T 'Origem'}" Foreground="{StaticResource TextDimBrush}" />
                             <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ModelSourceText}" />
-                            <TextBlock Grid.Row="2" Text="Pasta" Foreground="{StaticResource TextDimBrush}" />
+                            <TextBlock Grid.Row="2" Text="{loc:T 'Pasta'}" Foreground="{StaticResource TextDimBrush}" />
                             <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding ModelsDir}" TextTrimming="CharacterEllipsis" ToolTip="{Binding ModelsDir}" />
                         </Grid>
 
@@ -151,35 +152,61 @@
                         <!-- Ações -->
                         <WrapPanel>
                             <Button Style="{StaticResource AccentButton}" Command="{Binding DownloadCommand}" Margin="0,0,8,8"
-                                    AutomationProperties.Name="Baixar IA local" Visibility="{Binding ShowDownloadButton, Converter={StaticResource BoolToVis}}">
+                                    AutomationProperties.Name="{loc:T 'Baixar IA local'}" Visibility="{Binding ShowDownloadButton, Converter={StaticResource BoolToVis}}">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="&#xE896;" FontFamily="{StaticResource IconFont}" VerticalAlignment="Center" Margin="0,0,8,0" />
-                                    <TextBlock Text="{Binding ModelSizeText, StringFormat=Baixar IA local ({0})}" />
+                                    <TextBlock Text="{Binding DownloadButtonText}" />
                                 </StackPanel>
                             </Button>
-                            <Button Style="{StaticResource GhostButton}" Content="Cancelar download" Command="{Binding CancelDownloadCommand}" Margin="0,0,8,8"
+                            <Button Style="{StaticResource GhostButton}" Content="{loc:T 'Cancelar download'}" Command="{Binding CancelDownloadCommand}" Margin="0,0,8,8"
                                     Visibility="{Binding Ai.IsDownloading, Converter={StaticResource BoolToVis}}" />
                             <CheckBox Style="{StaticResource PinkCheck}" IsChecked="{Binding IsAiEnabled}" VerticalAlignment="Center" Margin="2,0,8,8"
-                                      AutomationProperties.Name="Usar a IA local" Visibility="{Binding Ai.HasModelFile, Converter={StaticResource BoolToVis}}" />
-                            <TextBlock Text="Usar a IA local" FontSize="14" VerticalAlignment="Center" Margin="0,0,18,8"
+                                      AutomationProperties.Name="{loc:T 'Usar a IA local'}" Visibility="{Binding Ai.HasModelFile, Converter={StaticResource BoolToVis}}" />
+                            <TextBlock Text="{loc:T 'Usar a IA local'}" FontSize="14" VerticalAlignment="Center" Margin="0,0,18,8"
                                        Visibility="{Binding Ai.HasModelFile, Converter={StaticResource BoolToVis}}" />
-                            <Button Style="{StaticResource GhostButton}" Content="Remover modelo" Command="{Binding DeleteModelCommand}" Margin="0,0,8,8"
+                            <Button Style="{StaticResource GhostButton}" Content="{loc:T 'Remover modelo'}" Command="{Binding DeleteModelCommand}" Margin="0,0,8,8"
                                     Visibility="{Binding Ai.HasModelFile, Converter={StaticResource BoolToVis}}" />
-                            <Button Style="{StaticResource GhostButton}" Content="Abrir pasta Models" Command="{Binding OpenModelsFolderCommand}" Margin="0,0,8,8" />
-                            <Button Style="{StaticResource GhostButton}" Content="Procurar de novo" Command="{Binding RescanCommand}" Margin="0,0,8,8"
-                                    ToolTip="Use se você colocou um arquivo .gguf na pasta Models manualmente" />
+                            <Button Style="{StaticResource GhostButton}" Content="{loc:T 'Abrir pasta Models'}" Command="{Binding OpenModelsFolderCommand}" Margin="0,0,8,8" />
+                            <Button Style="{StaticResource GhostButton}" Content="{loc:T 'Procurar de novo'}" Command="{Binding RescanCommand}" Margin="0,0,8,8"
+                                    ToolTip="{loc:T 'Use se você colocou um arquivo .gguf na pasta Models manualmente'}" />
                         </WrapPanel>
                         <TextBlock FontSize="12" Foreground="{StaticResource TextDimBrush}" TextWrapping="Wrap" Margin="0,4,0,0"
-                                   Text="Também dá para usar outro modelo compacto no formato GGUF (de preferência com chat no formato ChatML, como o Qwen): coloque o arquivo .gguf na pasta Models e clique em &quot;Procurar de novo&quot;." />
+                                   Text="{loc:T 'Também dá para usar outro modelo compacto no formato GGUF (de preferência com chat no formato ChatML, como o Qwen): coloque o arquivo .gguf na pasta Models e clique em &quot;Procurar de novo&quot;.'}" />
                     </StackPanel>
                 </Border>
 
-                <!-- O que ainda vem -->
-                <Border Style="{StaticResource GlassPanel}" Padding="20,14">
+                <!-- Idioma e aparência -->
+                <Border Style="{StaticResource GlassPanel}" Padding="20,16">
                     <StackPanel>
-                        <TextBlock Text="Em desenvolvimento" Style="{StaticResource PanelTitle}" FontSize="15" />
-                        <TextBlock FontSize="13" Foreground="{StaticResource TextDimBrush}" TextWrapping="Wrap" Margin="0,6,0,0"
-                                   Text="Tema, idioma, inicialização, logs e limpeza de cache chegam na Etapa 11." />
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <TextBlock Text="&#xE790;" Style="{StaticResource IconText}" FontSize="16" />
+                            <TextBlock Text="{loc:T 'Idioma e aparência'}" Style="{StaticResource PanelTitle}" Margin="8,0,0,0" />
+                        </StackPanel>
+                        <TextBlock Text="Idioma / Language" FontSize="13" Foreground="{StaticResource TextDimBrush}" Margin="0,0,0,6" />
+                        <ItemsControl ItemsSource="{Binding LanguageOptions}" Focusable="False">
+                            <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <RadioButton Style="{StaticResource PillRadio}" GroupName="language" Margin="0,0,8,8"
+                                                 Content="{Binding Label}" IsChecked="{Binding IsSelected}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <TextBlock Text="{loc:T 'Tema'}" FontSize="13" Foreground="{StaticResource TextDimBrush}" Margin="0,8,0,6" />
+                        <ItemsControl ItemsSource="{Binding ThemeOptions}" Focusable="False">
+                            <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <RadioButton Style="{StaticResource PillRadio}" GroupName="theme" Margin="0,0,8,8"
+                                                 Content="{Binding Label}" IsChecked="{Binding IsSelected}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <TextBlock FontSize="12.5" Foreground="{StaticResource TextDimBrush}" TextWrapping="Wrap" Margin="0,6,0,10"
+                                   Text="{loc:T 'O idioma e o tema mudam ao reabrir o Maid Installer. Só o app reabre: o PC não é reiniciado.'}" />
+                        <Button Style="{StaticResource AccentButton}" HorizontalAlignment="Left" Content="{loc:T 'Aplicar e reabrir o app'}"
+                                Command="{Binding ApplyAppearanceCommand}"
+                                Visibility="{Binding HasPendingAppearance, Converter={StaticResource BoolToVis}}" />
                     </StackPanel>
                 </Border>
             </StackPanel>

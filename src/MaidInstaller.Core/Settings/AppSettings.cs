@@ -6,9 +6,18 @@ public sealed class AppSettings
     public const int CurrentSchemaVersion = 1;
 
     public int SchemaVersion { get; set; } = CurrentSchemaVersion;
-    public string UserName { get; set; } = "Helder";
-    public string Language { get; set; } = "pt-BR";
-    public string Theme { get; set; } = "BlackPink";
+    /// <summary>Como a Maid chama o usuário. Vazio = sem nome (a Maid fala sem vocativo).</summary>
+    public string UserName { get; set; } = "";
+
+    /// <summary>"en" (padrão), "pt-BR" ou "auto" (idioma do Windows).</summary>
+    public string Language { get; set; } = "en";
+
+    /// <summary>"Dark" (padrão), "Light" ou "BlackPink".</summary>
+    public string Theme { get; set; } = ThemeDark;
+
+    public const string ThemeDark = "Dark", ThemeLight = "Light", ThemeBlackPink = "BlackPink";
+    public static readonly string[] Themes = [ThemeDark, ThemeLight, ThemeBlackPink];
+    public static readonly string[] Languages = [L.English, L.Portuguese, L.Auto];
     public bool AssistantMinimized { get; set; }
 
     /// <summary>Usar a IA local quando o modelo estiver na pasta Models (ligada por padrão).</summary>

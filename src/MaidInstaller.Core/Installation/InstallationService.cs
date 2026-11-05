@@ -74,7 +74,7 @@ public sealed class InstallationService
         var job = new InstallJob(app, InstallOperation.Install)
         {
             State = InstallJobState.AlreadyInstalled,
-            Message = "Já estava instalado. Nada foi alterado.",
+            Message = L.T("Já estava instalado. Nada foi alterado."),
             FinishedAt = DateTime.Now,
         };
         lock (_lock) _jobs.Add(job);
@@ -90,7 +90,7 @@ public sealed class InstallationService
             {
                 job.CancelRequested = true;
                 job.State = InstallJobState.Cancelled;
-                job.Message = "Cancelado antes de começar.";
+                job.Message = L.T("Cancelado antes de começar.");
                 job.FinishedAt = DateTime.Now;
                 _logger.Info($"Cancelado na fila: {job.App.Name}.");
             }
@@ -121,7 +121,7 @@ public sealed class InstallationService
             job.RebootRequired = false;
             job.FinishedAt = null;
             job.State = InstallJobState.Waiting;
-            job.Message = "Aguardando para tentar de novo.";
+            job.Message = L.T("Aguardando para tentar de novo.");
         }
         _queue.Writer.TryWrite(job);
         _logger.Info($"Nova tentativa: {job.App.Name}.");
@@ -167,7 +167,7 @@ public sealed class InstallationService
             catch (Exception ex)
             {
                 _logger.Error($"Erro inesperado instalando {job.App.Name}.", ex);
-                Finish(job, InstallJobState.Failed, "Erro inesperado. Detalhes nos logs.");
+                Finish(job, InstallJobState.Failed, L.T("Erro inesperado. Detalhes nos logs."));
             }
             if (!IsBusy) QueueDrained?.Invoke();
         }
@@ -182,7 +182,7 @@ public sealed class InstallationService
             job.Cancellation = cts;
             job.StartedAt = DateTime.Now;
             job.State = InstallJobState.Downloading;
-            job.Message = "Procurando o pacote na fonte oficial…";
+            job.Message = L.T("Procurando o pacote na fonte oficial…");
         }
         JobStarted?.Invoke(job);
 
@@ -220,18 +220,18 @@ public sealed class InstallationService
         {
             lock (logLock) log.WriteLine("[Maid Installer] Cancelado pelo usuário.");
             Finish(job, InstallJobState.Cancelled,
-                "Cancelado por você. Se o instalador já tinha começado, ele pode terminar sozinho.");
+                L.T("Cancelado por você. Se o instalador já tinha começado, ele pode terminar sozinho."));
             return;
         }
         catch (System.ComponentModel.Win32Exception)
         {
-            Finish(job, InstallJobState.Failed, "O WinGet não foi encontrado. Use o Kit Pós-Formatação para instalá-lo.");
+            Finish(job, InstallJobState.Failed, L.T("O WinGet não foi encontrado. Use o Kit Pós-Formatação para instalá-lo."));
             return;
         }
 
         var info = WinGetExitCodes.Describe(exitCode);
         var message = info.Outcome == InstallOutcome.Success && job.Operation == InstallOperation.Upgrade
-            ? "Atualização concluída."
+            ? L.T("Atualização concluída.")
             : info.Message;
         if (!info.Known && await _runner.DescribeErrorAsync(exitCode, CancellationToken.None).ConfigureAwait(false) is { } detail)
             message += $" WinGet: {detail}";

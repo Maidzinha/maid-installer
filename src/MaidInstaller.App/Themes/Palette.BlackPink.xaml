@@ -1,0 +1,169 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============ MAID INSTALLER — TEMA PRETO E ROSA ♡ ============ -->
+
+    <!-- Paleta -->
+    <Color x:Key="BgColor">#FF0A0608</Color>
+    <Color x:Key="Bg2Color">#FF150A10</Color>
+    <Color x:Key="CardColor">#C21A1116</Color>
+    <Color x:Key="PinkNeonColor">#FFFF4FA3</Color>
+    <Color x:Key="PinkHotColor">#FFFF2E8C</Color>
+    <Color x:Key="PinkPastelColor">#FFF7A8CC</Color>
+    <Color x:Key="TextColor">#FFFBEFF4</Color>
+    <Color x:Key="TextDimColor">#FFC4A6B4</Color>
+
+    <SolidColorBrush x:Key="BgBrush" Color="{StaticResource BgColor}" />
+    <SolidColorBrush x:Key="CardBrush" Color="{StaticResource CardColor}" />
+    <SolidColorBrush x:Key="PinkNeonBrush" Color="{StaticResource PinkNeonColor}" />
+    <SolidColorBrush x:Key="PinkPastelBrush" Color="{StaticResource PinkPastelColor}" />
+    <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}" />
+    <SolidColorBrush x:Key="TextDimBrush" Color="{StaticResource TextDimColor}" />
+    <SolidColorBrush x:Key="BorderBrushPink" Color="#66FF4FA3" />
+    <SolidColorBrush x:Key="BorderBrushSoft" Color="#33FF7DBA" />
+    <SolidColorBrush x:Key="TrackBrush" Color="#33FFFFFF" />
+
+    <LinearGradientBrush x:Key="SidebarBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#F2120A0E" Offset="0" />
+        <GradientStop Color="#F20D070A" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="NeonGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#FFFF5FAE" Offset="0" />
+        <GradientStop Color="#FFE0287A" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="GlassBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#CC22141B" Offset="0" />
+        <GradientStop Color="#B3140C11" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ShortcutBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#E62A1520" Offset="0" />
+        <GradientStop Color="#E6190D13" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ShortcutHoverBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#F23D1A2C" Offset="0" />
+        <GradientStop Color="#F2220F19" Offset="1" />
+    </LinearGradientBrush>
+
+    <DropShadowEffect x:Key="PinkGlow" Color="#FFFF4FA3" BlurRadius="22" ShadowDepth="0" Opacity="0.35" />
+    <DropShadowEffect x:Key="PinkGlowStrong" Color="#FFFF4FA3" BlurRadius="26" ShadowDepth="0" Opacity="0.6" />
+    <DropShadowEffect x:Key="TextGlow" Color="#FFFF4FA3" BlurRadius="14" ShadowDepth="0" Opacity="0.7" />
+
+    <FontFamily x:Key="IconFont">Segoe Fluent Icons, Segoe MDL2 Assets</FontFamily>
+
+    <!-- Flor de sakura (decoração discreta) -->
+    <DrawingImage x:Key="SakuraFlower">
+        <DrawingImage.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#FFF06AA8" Geometry="M0,0 C-7,-8 -7,-19 0,-24 C7,-19 7,-8 0,0Z" />
+                    <GeometryDrawing Brush="#FFF06AA8">
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry Figures="M0,0 C-7,-8 -7,-19 0,-24 C7,-19 7,-8 0,0Z">
+                                <PathGeometry.Transform><RotateTransform Angle="72" /></PathGeometry.Transform>
+                            </PathGeometry>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FFF06AA8">
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry Figures="M0,0 C-7,-8 -7,-19 0,-24 C7,-19 7,-8 0,0Z">
+                                <PathGeometry.Transform><RotateTransform Angle="144" /></PathGeometry.Transform>
+                            </PathGeometry>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FFF06AA8">
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry Figures="M0,0 C-7,-8 -7,-19 0,-24 C7,-19 7,-8 0,0Z">
+                                <PathGeometry.Transform><RotateTransform Angle="216" /></PathGeometry.Transform>
+                            </PathGeometry>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FFF06AA8">
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry Figures="M0,0 C-7,-8 -7,-19 0,-24 C7,-19 7,-8 0,0Z">
+                                <PathGeometry.Transform><RotateTransform Angle="288" /></PathGeometry.Transform>
+                            </PathGeometry>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FFFFD1E6">
+                        <GeometryDrawing.Geometry><EllipseGeometry Center="0,0" RadiusX="4" RadiusY="4" /></GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+
+    <!-- Cores usadas direto nas telas (geradas a partir do tema preto e rosa) -->
+    <Color x:Key="C_00FF3E95">#00FF3E95</Color>
+    <Color x:Key="C_00FF4FA3">#00FF4FA3</Color>
+    <Color x:Key="C_1FFF4FA3">#1FFF4FA3</Color>
+    <Color x:Key="C_22FF4FA3">#22FF4FA3</Color>
+    <Color x:Key="C_33000000">#33000000</Color>
+    <Color x:Key="C_331E1117">#331E1117</Color>
+    <Color x:Key="C_33FF4FA3">#33FF4FA3</Color>
+    <Color x:Key="C_33FFFFFF">#33FFFFFF</Color>
+    <Color x:Key="C_40FF4FA3">#40FF4FA3</Color>
+    <Color x:Key="C_4432C878">#4432C878</Color>
+    <Color x:Key="C_44FF4FA3">#44FF4FA3</Color>
+    <Color x:Key="C_4DFF4FA3">#4DFF4FA3</Color>
+    <Color x:Key="C_5532C878">#5532C878</Color>
+    <Color x:Key="C_55FF4FA3">#55FF4FA3</Color>
+    <Color x:Key="C_661E1117">#661E1117</Color>
+    <Color x:Key="C_66FF4FA3">#66FF4FA3</Color>
+    <Color x:Key="C_77E0344A">#77E0344A</Color>
+    <Color x:Key="C_77E0A034">#77E0A034</Color>
+    <Color x:Key="C_80FF4FA3">#80FF4FA3</Color>
+    <Color x:Key="C_991E1117">#991E1117</Color>
+    <Color x:Key="C_AAFF3E95">#AAFF3E95</Color>
+    <Color x:Key="C_B3050304">#B3050304</Color>
+    <Color x:Key="C_B3201218">#B3201218</Color>
+    <Color x:Key="C_B33A1427">#B33A1427</Color>
+    <Color x:Key="C_CC120A0E">#CC120A0E</Color>
+    <Color x:Key="C_CC24161D">#CC24161D</Color>
+    <Color x:Key="C_E0FF2E6E">#E0FF2E6E</Color>
+    <Color x:Key="C_F01A1116">#F01A1116</Color>
+    <Color x:Key="C_F2160C12">#F2160C12</Color>
+    <Color x:Key="C_FF0A0608">#FF0A0608</Color>
+    <Color x:Key="C_FF12070D">#FF12070D</Color>
+    <Color x:Key="C_FF2A0E1C">#FF2A0E1C</Color>
+    <Color x:Key="C_FFFF4FA3">#FFFF4FA3</Color>
+    <Color x:Key="C_FFFF8CC4">#FFFF8CC4</Color>
+    <SolidColorBrush x:Key="B_00FF3E95" Color="{StaticResource C_00FF3E95}" />
+    <SolidColorBrush x:Key="B_00FF4FA3" Color="{StaticResource C_00FF4FA3}" />
+    <SolidColorBrush x:Key="B_1FFF4FA3" Color="{StaticResource C_1FFF4FA3}" />
+    <SolidColorBrush x:Key="B_22FF4FA3" Color="{StaticResource C_22FF4FA3}" />
+    <SolidColorBrush x:Key="B_33000000" Color="{StaticResource C_33000000}" />
+    <SolidColorBrush x:Key="B_331E1117" Color="{StaticResource C_331E1117}" />
+    <SolidColorBrush x:Key="B_33FF4FA3" Color="{StaticResource C_33FF4FA3}" />
+    <SolidColorBrush x:Key="B_33FFFFFF" Color="{StaticResource C_33FFFFFF}" />
+    <SolidColorBrush x:Key="B_40FF4FA3" Color="{StaticResource C_40FF4FA3}" />
+    <SolidColorBrush x:Key="B_4432C878" Color="{StaticResource C_4432C878}" />
+    <SolidColorBrush x:Key="B_44FF4FA3" Color="{StaticResource C_44FF4FA3}" />
+    <SolidColorBrush x:Key="B_4DFF4FA3" Color="{StaticResource C_4DFF4FA3}" />
+    <SolidColorBrush x:Key="B_5532C878" Color="{StaticResource C_5532C878}" />
+    <SolidColorBrush x:Key="B_55FF4FA3" Color="{StaticResource C_55FF4FA3}" />
+    <SolidColorBrush x:Key="B_661E1117" Color="{StaticResource C_661E1117}" />
+    <SolidColorBrush x:Key="B_66FF4FA3" Color="{StaticResource C_66FF4FA3}" />
+    <SolidColorBrush x:Key="B_77E0344A" Color="{StaticResource C_77E0344A}" />
+    <SolidColorBrush x:Key="B_77E0A034" Color="{StaticResource C_77E0A034}" />
+    <SolidColorBrush x:Key="B_80FF4FA3" Color="{StaticResource C_80FF4FA3}" />
+    <SolidColorBrush x:Key="B_991E1117" Color="{StaticResource C_991E1117}" />
+    <SolidColorBrush x:Key="B_AAFF3E95" Color="{StaticResource C_AAFF3E95}" />
+    <SolidColorBrush x:Key="B_B3050304" Color="{StaticResource C_B3050304}" />
+    <SolidColorBrush x:Key="B_B3201218" Color="{StaticResource C_B3201218}" />
+    <SolidColorBrush x:Key="B_B33A1427" Color="{StaticResource C_B33A1427}" />
+    <SolidColorBrush x:Key="B_CC120A0E" Color="{StaticResource C_CC120A0E}" />
+    <SolidColorBrush x:Key="B_CC24161D" Color="{StaticResource C_CC24161D}" />
+    <SolidColorBrush x:Key="B_E0FF2E6E" Color="{StaticResource C_E0FF2E6E}" />
+    <SolidColorBrush x:Key="B_F01A1116" Color="{StaticResource C_F01A1116}" />
+    <SolidColorBrush x:Key="B_F2160C12" Color="{StaticResource C_F2160C12}" />
+    <SolidColorBrush x:Key="B_FF0A0608" Color="{StaticResource C_FF0A0608}" />
+    <SolidColorBrush x:Key="B_FF12070D" Color="{StaticResource C_FF12070D}" />
+    <SolidColorBrush x:Key="B_FF2A0E1C" Color="{StaticResource C_FF2A0E1C}" />
+    <SolidColorBrush x:Key="B_FFFF4FA3" Color="{StaticResource C_FFFF4FA3}" />
+    <SolidColorBrush x:Key="B_FFFF8CC4" Color="{StaticResource C_FFFF8CC4}" />
+</ResourceDictionary>

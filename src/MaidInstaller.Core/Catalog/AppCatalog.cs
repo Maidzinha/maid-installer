@@ -13,6 +13,22 @@ public sealed class AppCatalog
 
     public CatalogCategory? FindCategory(string id) => Categories.FirstOrDefault(c => c.Id == id);
     public CatalogApp? FindApp(string id) => Apps.FirstOrDefault(a => a.Id == id);
+
+    /// <summary>
+    /// Passa descrição, preço, licença, tamanho e observações para o idioma do app. Nomes de apps, IDs e links não mudam.
+    /// O nome das categorias continua em português (é a chave interna) e é traduzido na hora de mostrar.
+    /// </summary>
+    public void Localize()
+    {
+        foreach (var app in Apps)
+        {
+            app.Description = L.T(app.Description);
+            app.Price = L.T(app.Price);
+            app.License = L.T(app.License);
+            if (app.ApproxSize is not null) app.ApproxSize = L.T(app.ApproxSize);
+            if (app.Notes is not null) app.Notes = L.T(app.Notes);
+        }
+    }
 }
 
 public sealed class CatalogCategory
@@ -44,7 +60,8 @@ public sealed class CatalogApp
     public string? Notes { get; set; }
 
     public bool HasWinGet => WinGetId is not null;
-    public bool IsFree => Price.StartsWith("Gratuito", StringComparison.OrdinalIgnoreCase);
+    // "Gratuito…" no catálogo; "Free…" depois da tradução (Localize).
+    public bool IsFree => Price.StartsWith("Gratuito", StringComparison.OrdinalIgnoreCase) || Price.StartsWith("Free", StringComparison.OrdinalIgnoreCase);
 }
 
 /// <summary>

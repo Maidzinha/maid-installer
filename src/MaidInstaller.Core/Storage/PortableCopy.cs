@@ -100,12 +100,12 @@ public static class PortableCopy
     public static void Validate(AppPaths paths, string dest)
     {
         if (IsSameOrInside(dest, paths.AppDirectory) || IsSameOrInside(paths.AppDirectory, dest))
-            throw new PortableCopyException("Escolha uma pasta fora da pasta do próprio Maid Installer.");
+            throw new PortableCopyException(L.T("Escolha uma pasta fora da pasta do próprio Maid Installer."));
         if (IsSameOrInside(dest, paths.DataRoot))
-            throw new PortableCopyException("Escolha uma pasta fora da pasta de dados do Maid Installer.");
+            throw new PortableCopyException(L.T("Escolha uma pasta fora da pasta de dados do Maid Installer."));
         if (Directory.Exists(dest) && Directory.EnumerateFileSystemEntries(dest).Any()
             && !File.Exists(Path.Combine(dest, AppPaths.PortableMarkerFile)))
-            throw new PortableCopyException($"A pasta {dest} já existe e não é uma cópia portátil do Maid Installer. Escolha outra pasta.");
+            throw new PortableCopyException(L.T($"A pasta {dest} já existe e não é uma cópia portátil do Maid Installer. Escolha outra pasta."));
     }
 
     /// <summary>Bytes que realmente faltam gravar (arquivos substituídos liberam o espaço deles).</summary>

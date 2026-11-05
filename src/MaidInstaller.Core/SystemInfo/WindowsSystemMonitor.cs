@@ -101,7 +101,7 @@ public sealed partial class WindowsSystemMonitor(IAppLogger logger) : ISystemMon
     {
         using var key = Registry.LocalMachine.OpenSubKey(@"HARDWARE\DESCRIPTION\System\CentralProcessor\0");
         var raw = key?.GetValue("ProcessorNameString") as string;
-        return string.IsNullOrWhiteSpace(raw) ? "Processador desconhecido" : CleanCpuName(raw);
+        return string.IsNullOrWhiteSpace(raw) ? L.T("Processador desconhecido") : CleanCpuName(raw);
     }
 
     internal static string CleanCpuName(string raw)

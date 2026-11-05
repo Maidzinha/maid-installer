@@ -36,7 +36,6 @@ public sealed class SettingsService(string settingsFile, IAppLogger logger, stri
         try
         {
             var defaults = JsonStore.Read<AppSettings>(defaultsFile) ?? new AppSettings();
-            if (string.IsNullOrWhiteSpace(defaults.UserName)) defaults.UserName = new AppSettings().UserName;
             logger.Info($"Configuração padrão carregada de {defaultsFile}.");
             return defaults;
         }
@@ -64,6 +63,9 @@ public sealed class SettingsService(string settingsFile, IAppLogger logger, stri
         // Migrações futuras entram aqui, uma por versão de formato: if (settings.SchemaVersion == 1) { ...; settings.SchemaVersion = 2; }
         settings.Favorites ??= FavoriteApp.Defaults();
         settings.SeededProfiles ??= [];
+        settings.UserName = settings.UserName?.Trim() ?? "";
+        if (!AppSettings.Languages.Contains(settings.Language)) settings.Language = new AppSettings().Language;
+        if (!AppSettings.Themes.Contains(settings.Theme)) settings.Theme = new AppSettings().Theme;
         return settings;
     }
 

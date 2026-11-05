@@ -57,11 +57,11 @@ public sealed class AssistantViewModel : ObservableObject
         var name = services.Settings.UserName;
 
         Messages.Add(new ChatMessage(
-            $"Oii, {name}! ♡\nEu sou a Maid Assistant, sua ajudante aqui no Maid Installer!\n\n" +
-            "Posso te explicar para que serve cada aplicativo, qual é o mais indicado, ou tirar dúvidas sobre downloads e instalações.",
+            L.T($"Oii, {L.Name(name)}! ♡\nEu sou a Maid Assistant, sua ajudante aqui no Maid Installer!\n\n") +
+            L.T("Posso te explicar para que serve cada aplicativo, qual é o mais indicado, ou tirar dúvidas sobre downloads e instalações."),
             fromUser: false));
 
-        Suggestions = ["Para que serve o Discord?", "Quais apps são essenciais?", "Qual navegador escolher?"];
+        Suggestions = [L.T("Para que serve o Discord?"), L.T("Quais apps são essenciais?"), L.T("Qual navegador escolher?")];
 
         SendCommand = new RelayCommand(() => _ = AskAsync(Input), () => !string.IsNullOrWhiteSpace(Input) && !IsTyping);
         AskCommand = new RelayCommand(p => { if (p is string q) _ = AskAsync(q); }, _ => !IsTyping);
@@ -80,8 +80,8 @@ public sealed class AssistantViewModel : ObservableObject
     public string StatusText => _services.Ai.AssistantStatus;
 
     public string StatusTooltip => _services.Ai.IsReady
-        ? "A IA local roda só neste PC e responde usando apenas a base de conhecimento do Maid Installer."
-        : "Respondendo com a base de conhecimento local. A IA local (opcional) pode ser baixada em Configurações.";
+        ? L.T("A IA local roda só neste PC e responde usando apenas a base de conhecimento do Maid Installer.")
+        : L.T("Respondendo com a base de conhecimento local. A IA local (opcional) pode ser baixada em Configurações.");
 
     public string Input
     {
@@ -152,7 +152,7 @@ public sealed class AssistantViewModel : ObservableObject
             {
                 await Task.Delay(300); // pequena pausa para a conversa parecer natural
                 reply.Text = status;
-                reply.SourceNote = "Estado real da fila de instalação";
+                reply.SourceNote = L.T("Estado real da fila de instalação");
                 return;
             }
 
@@ -169,22 +169,22 @@ public sealed class AssistantViewModel : ObservableObject
             reply.Text = answer.Text;
             reply.SourceNote = answer.Source switch
             {
-                AnswerSource.Model => "Resposta da IA local, com base nos fatos da base de conhecimento",
-                AnswerSource.ModelRejected => "Resposta da base de conhecimento (a da IA local foi descartada por não bater com os fatos)",
-                _ => "Resposta da base de conhecimento local",
+                AnswerSource.Model => L.T("Resposta da IA local, com base nos fatos da base de conhecimento"),
+                AnswerSource.ModelRejected => L.T("Resposta da base de conhecimento (a da IA local foi descartada por não bater com os fatos)"),
+                _ => L.T("Resposta da base de conhecimento local"),
             };
         }
         catch (OperationCanceledException)
         {
             finished = true;
             reply.Text = _services.Responder.Offline.Answer(question);
-            reply.SourceNote = "A IA local demorou demais; resposta da base de conhecimento";
+            reply.SourceNote = L.T("A IA local demorou demais; resposta da base de conhecimento");
         }
         catch (Exception ex)
         {
             finished = true;
             _services.Logger.Error("Falha na Maid Assistant.", ex);
-            reply.Text = "Ops, me enrolei aqui. Pode perguntar de novo? ♡";
+            reply.Text = L.T("Ops, me enrolei aqui. Pode perguntar de novo? ♡");
         }
         finally
         {

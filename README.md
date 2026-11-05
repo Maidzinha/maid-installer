@@ -4,7 +4,10 @@
 
 **Prepare seu PC com carinho.**
 
-Instale, atualize e organize seus programas depois de formatar o Windows, num app preto e rosa com a mascote Maid e uma assistente que tira dúvidas.
+Instale, atualize e organize seus programas depois de formatar o Windows, num app com a mascote Maid, três temas
+(escuro, claro e preto e rosa) e uma assistente que tira dúvidas. Em português (Brasil) e inglês.
+
+**Português** · [English](README.en.md)
 
 [![Baixar](https://img.shields.io/github/v/release/Maidzinha/maid-installer?label=baixar&color=ff4fa3&style=for-the-badge)](https://github.com/Maidzinha/maid-installer/releases/latest)
 ![Windows 10/11](https://img.shields.io/badge/Windows-10%20%7C%2011-1a1a1a?style=for-the-badge&logo=windows)
@@ -44,7 +47,7 @@ No modo portátil, tudo fica no pendrive: configurações, listas, perfis, logs 
 2. Dê dois cliques em **`Instalar.cmd`** e confirme.
 3. Abra o **Maid Installer** pelo Menu Iniciar.
 
-O instalador não pede administrador e não mexe no registro. Para atualizar, rode o `Instalar.cmd` da versão nova: seus dados continuam. Para desinstalar, use o `Desinstalar.ps1` da pasta do programa (`%LocalAppData%\Programs\MaidInstaller`).
+O instalador não pede administrador e não mexe no registro. As mensagens dele seguem o idioma do Windows. Para atualizar, rode o `Instalar.cmd` da versão nova: seus dados continuam. Para desinstalar, use o `Desinstalar.ps1` da pasta do programa (`%LocalAppData%\Programs\MaidInstaller`).
 
 > **"O Windows protegeu o computador"?** Esse aviso do SmartScreen aparece porque o app não tem assinatura digital comercial.
 > Clique em **Mais informações → Executar assim mesmo**. Para conferir o download, compare o SHA-256 do arquivo com o `SHA256SUMS.txt` da release.
@@ -55,6 +58,10 @@ O instalador não pede administrador e não mexe no registro. Para atualizar, ro
 2. Ou use um **Perfil** pronto (PC Gamer, PC Trabalho, PC Completo) com **Instalar todos**.
 3. Rode as verificações do **Kit Pós-Formatação**: Windows Update, drivers, Visual C++ e DirectX, runtimes, temporários e energia.
 4. Ficou com dúvida sobre algum programa? Pergunte à **Maid Assistant** ("Para que serve o 7-Zip?", "Qual navegador escolher?").
+5. Quer outro visual ou idioma? **Configurações › Idioma e aparência**: Português (Brasil), English ou Automático, e o tema Escuro, Claro ou Preto e rosa.
+
+> Numa instalação nova, o app abre em **inglês** e no tema **Escuro**. Para usar em português, escolha **Português (Brasil)** em
+> Configurações › Idioma e aparência (ou **Automático**, que segue o idioma do Windows) e clique em **Aplicar e reabrir o app**.
 
 O passo a passo de cada tela está no **[Manual de uso](docs/MANUAL.md)**.
 
@@ -66,12 +73,13 @@ O passo a passo de cada tela está no **[Manual de uso](docs/MANUAL.md)**.
 ## O que ele faz
 
 - **Biblioteca com 39 apps:** navegadores, comunicação, jogos, utilitários, multimídia, desenvolvimento, drivers e escritório. Todos com ID do WinGet conferido, pesquisa, filtros e status real de instalação.
-- **Instalação organizada:** um programa por vez, mostrando a etapa real. Dá para cancelar, tentar de novo, ver o log de cada app e ler os erros explicados em português.
+- **Instalação organizada:** um programa por vez, mostrando a etapa real. Dá para cancelar, tentar de novo, ver o log de cada app e ler os erros explicados no seu idioma.
 - **Perfis e listas:** use os prontos ou crie os seus, e exporte ou importe arquivos `.maidlist.json`.
 - **Kit Pós-Formatação:** 10 verificações reais do sistema. As ações são opcionais e sempre pedem confirmação.
 - **Atualizações:** mostra o que o WinGet encontrou e só atualiza o que você escolher.
 - **Maid Assistant:** responde offline com uma base de conhecimento. A IA local (Qwen2.5 0.5B, cerca de 470 MB) é opcional, pode ser baixada pelo app em Configurações e fica limitada aos fatos da base.
 - **Status do Sistema:** uso real de CPU, GPU e RAM e a temperatura da GPU, quando o PC permite.
+- **Dois idiomas e três temas:** português (Brasil) e inglês; Escuro (padrão), Claro e Preto e rosa.
 
 ## Segurança
 
@@ -87,6 +95,7 @@ O passo a passo de cada tela está no **[Manual de uso](docs/MANUAL.md)**.
 | [Instalação](docs/INSTALACAO.md) | Requisitos, portátil, instalar, atualizar, desinstalar, configuração padrão |
 | [Manual de uso](docs/MANUAL.md) | Todas as telas, a Maid Assistant e problemas comuns |
 | [Histórico de versões](CHANGELOG.md) | O que mudou em cada versão |
+| [English documentation](README.en.md) | README, installation, manual and changelog in English (`docs/en`) |
 | [Testes](docs/TESTES.md) | O que foi testado de verdade e as limitações conhecidas |
 | [Arquitetura](docs/ARQUITETURA.md) · [Roadmap](docs/ROADMAP.md) · [Atualizações](docs/ATUALIZACOES.md) · [Ícones](docs/ICONES.md) | Documentação técnica |
 
@@ -138,12 +147,12 @@ powershell -ExecutionPolicy Bypass -File .\build-release.ps1
 
 | Caminho | O quê |
 |---|---|
-| `src/MaidInstaller.Core` | Lógica: WinGet, fila, catálogo, perfis, Kit, assistente, armazenamento |
+| `src/MaidInstaller.Core` | Lógica: WinGet, fila, catálogo, perfis, Kit, assistente, armazenamento, tradução (`Localization/L.cs`) |
 | `src/MaidInstaller.AI` | IA local (llama.cpp via LLamaSharp) |
-| `src/MaidInstaller.App` | Interface WPF, catálogo (`Catalog/`), configuração padrão (`Defaults/`), imagens (`Assets/`) |
-| `tests/MaidInstaller.Core.Tests` | Testes xUnit |
+| `src/MaidInstaller.App` | Interface WPF, temas (`Themes/`), dicionário inglês (`Localization/en.json`), catálogo (`Catalog/`), configuração padrão (`Defaults/`), imagens (`Assets/`) |
+| `tests/MaidInstaller.Core.Tests` | Testes xUnit (inclusive um que confere se todo texto tem tradução em inglês) |
 | `installer/` | `Instalar.cmd`, `Instalar.ps1`, `Desinstalar.ps1` |
-| `docs/` | Documentação |
+| `docs/` | Documentação (`docs/en` em inglês) |
 
 </details>
 

@@ -1,4 +1,4 @@
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 
@@ -25,7 +25,7 @@ public partial class MainWindow : Window
         // Com WindowChrome, a janela maximizada ultrapassa a tela pela espessura da borda.
         Root.Margin = WindowState == WindowState.Maximized ? new Thickness(7) : new Thickness(0);
         MaxButton.Content = WindowState == WindowState.Maximized ? "" : "";
-        MaxButton.ToolTip = WindowState == WindowState.Maximized ? "Restaurar" : "Maximizar";
+        MaxButton.ToolTip = WindowState == WindowState.Maximized ? L.T("Restaurar") : L.T("Maximizar");
     }
 
     /// <summary>Cantos arredondados e barra escura no Windows 11 (ignorado no Windows 10).</summary>

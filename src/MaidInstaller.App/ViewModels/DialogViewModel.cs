@@ -1,4 +1,4 @@
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using MaidInstaller.App.Mvvm;
 
 namespace MaidInstaller.App.ViewModels;
@@ -11,17 +11,20 @@ public sealed record DialogItem(string Name, string Detail);
 /// </summary>
 public sealed class DialogViewModel : ObservableObject
 {
+    /// <summary>Texto padrão do botão de cancelar (traduzido ao mostrar). <c>null</c> = sem botão de cancelar.</summary>
+    public const string DefaultCancel = "Cancelar";
+
     private readonly TaskCompletionSource<bool> _result = new();
 
     public DialogViewModel(string title, string message, IReadOnlyList<DialogItem> items, IReadOnlyList<string> notes,
-        string confirmText, string? cancelText = "Cancelar")
+        string confirmText, string? cancelText = DefaultCancel)
     {
         Title = title;
         Message = message;
         Items = items;
         Notes = notes;
         ConfirmText = confirmText;
-        CancelText = cancelText;
+        CancelText = cancelText == DefaultCancel ? L.T(DefaultCancel) : cancelText;
         ConfirmCommand = new RelayCommand(() => _result.TrySetResult(true));
         CancelCommand = new RelayCommand(() => _result.TrySetResult(false));
     }
