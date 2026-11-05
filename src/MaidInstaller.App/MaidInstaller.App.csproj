@@ -11,6 +11,8 @@
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
     <Version>1.0.0</Version>
     <Product>Maid Installer — Personal Edition</Product>
+    <Company>Helder (Maidzinha)</Company>
+    <Copyright>Copyright (c) 2026 Helder (Maidzinha). Todos os direitos reservados. Licença de uso privado.</Copyright>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <!-- Só as traduções em português das bibliotecas (deixa a versão portátil menor). -->
     <SatelliteResourceLanguages>pt-BR</SatelliteResourceLanguages>
@@ -28,5 +30,8 @@
     <Content Include="Assets\AppIcons\*.png" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Catalog\**\*.json" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Defaults\settings.default.json" CopyToOutputDirectory="PreserveNewest" />
+    <!-- A licença e os avisos de terceiros acompanham o app (e toda cópia portátil). -->
+    <Content Include="..\..\LICENSE" Link="LICENSE.txt" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\..\THIRD-PARTY-NOTICES.md" Link="THIRD-PARTY-NOTICES.md" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

@@ -9,6 +9,7 @@ Instale, atualize e organize seus programas depois de formatar o Windows, num ap
 [![Baixar](https://img.shields.io/github/v/release/Maidzinha/maid-installer?label=baixar&color=ff4fa3&style=for-the-badge)](https://github.com/Maidzinha/maid-installer/releases/latest)
 ![Windows 10/11](https://img.shields.io/badge/Windows-10%20%7C%2011-1a1a1a?style=for-the-badge&logo=windows)
 ![.NET 10](https://img.shields.io/badge/.NET-10-512BD4?style=for-the-badge&logo=dotnet)
+[![Licença: uso privado](https://img.shields.io/badge/licen%C3%A7a-uso%20privado-ff4fa3?style=for-the-badge)](LICENSE)
 
 ![Tela inicial do Maid Installer](docs/images/home.png)
 
@@ -89,9 +90,24 @@ O passo a passo de cada tela está no **[Manual de uso](docs/MANUAL.md)**.
 | [Testes](docs/TESTES.md) | O que foi testado de verdade e as limitações conhecidas |
 | [Arquitetura](docs/ARQUITETURA.md) · [Roadmap](docs/ROADMAP.md) · [Atualizações](docs/ATUALIZACOES.md) · [Ícones](docs/ICONES.md) | Documentação técnica |
 
+## Licença
+
+O Maid Installer é **proprietário**, sob uma [licença de uso privado](LICENSE). Todos os direitos são reservados.
+
+- ✅ **Pode:** baixar daqui, instalar e usar de graça, em quantos PCs quiser, e indicar o link oficial.
+- ❌ **Não pode:**
+  - modificar o app ou criar versões derivadas dele;
+  - apresentá-lo como obra sua;
+  - redistribuir as cópias fora deste repositório;
+  - vender;
+  - usar o nome, a mascote ou o visual em outros projetos.
+
+O código está visível só para consulta, o que não dá permissão para reutilizá-lo.
+Os componentes de terceiros (.NET, LLamaSharp, llama.cpp…) continuam com as licenças deles: veja [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
+
 ## Compilar a partir do código
 
-É preciso o [.NET SDK 10](https://dotnet.microsoft.com/download) no Windows.
+Compilar é permitido só para uso pessoal, sem modificar o app (veja a [licença](LICENSE)). É preciso o [.NET SDK 10](https://dotnet.microsoft.com/download) no Windows.
 
 ```bash
 git clone https://github.com/Maidzinha/maid-installer.git
@@ -133,4 +149,4 @@ powershell -ExecutionPolicy Bypass -File .\build-release.ps1
 
 ---
 
-<div align="center"><sub>Maid Installer — Personal Edition · feito para o Helder ♡</sub></div>
+<div align="center"><sub>Maid Installer — Personal Edition · © 2026 Helder (Maidzinha) · todos os direitos reservados ♡</sub></div>

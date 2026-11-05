@@ -16,3 +16,4 @@ Primeira versão completa.
 - Modo portátil para pendrive / Ventoy e "Criar cópia portátil".
 - Versão instalável sem administrador (`Instalar.cmd`), configuração padrão em `Defaults\settings.default.json`,
   pacotes com SHA-256 e manifesto `release.json`.
+- Licença de uso privado (proprietária, todos os direitos reservados) e avisos de componentes de terceiros.

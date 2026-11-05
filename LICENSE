@@ -1,0 +1,68 @@
+LICENÇA DE USO PRIVADO — MAID INSTALLER (PERSONAL EDITION)
+
+Copyright (c) 2026 Helder (Maidzinha). Todos os direitos reservados.
+
+Este software é proprietário. Ele não é de código aberto: o fato de o código estar
+visível no GitHub não concede nenhuma permissão além das escritas abaixo.
+
+"Software" é o aplicativo Maid Installer: o código-fonte, os executáveis, os pacotes
+de instalação, o catálogo, a base de conhecimento, os textos, a interface, a identidade
+visual preto e rosa, o nome "Maid Installer" e a mascote Maid, e a documentação.
+
+1. O QUE VOCÊ PODE FAZER
+
+   a) Baixar o Software pelas páginas oficiais do autor
+      (https://github.com/Maidzinha/maid-installer).
+   b) Instalar e usar o Software sem custo, em quantos computadores quiser, para uso
+      pessoal ou para preparar computadores seus ou de outras pessoas.
+   c) Ver o código-fonte no GitHub, como os Termos de Serviço do GitHub permitem
+      para repositórios públicos.
+   d) Indicar o Software a outras pessoas compartilhando o link oficial.
+
+2. O QUE VOCÊ NÃO PODE FAZER
+
+   a) Modificar, adaptar, traduzir ou criar obras derivadas do Software, no todo ou em
+      parte, incluindo versões com outro nome, outra aparência ou outra mascote.
+   b) Apresentar o Software, ou qualquer parte dele, como obra sua ou de terceiros.
+      Isso inclui retirar ou alterar o nome do autor, os avisos de copyright e esta
+      licença.
+   c) Distribuir, publicar, hospedar ou disponibilizar cópias do Software, modificadas
+      ou não, fora das páginas oficiais do autor.
+   d) Vender, alugar, sublicenciar ou cobrar de qualquer forma pelo Software ou pelo
+      acesso a ele.
+   e) Usar o código, a interface, o nome "Maid Installer", a mascote Maid ou a
+      identidade visual em outros projetos.
+   f) Fazer engenharia reversa dos executáveis, exceto quando a lei aplicável permitir
+      expressamente, apesar desta proibição.
+
+   Para qualquer uso fora do item 1, é preciso autorização prévia e por escrito do
+   autor.
+
+3. COMPONENTES DE TERCEIROS
+
+   O Software usa componentes de terceiros, que continuam sob as licenças deles
+   (veja THIRD-PARTY-NOTICES.md). Esta licença não restringe os direitos que essas
+   licenças concedem sobre os componentes originais.
+
+   Os programas instalados pelo Software (via WinGet) são de seus respectivos
+   fabricantes, com as licenças deles. Os nomes e ícones desses programas são marcas
+   de seus donos e aparecem apenas para identificá-los.
+
+4. SEM GARANTIA
+
+   O SOFTWARE É FORNECIDO "NO ESTADO EM QUE SE ENCONTRA", SEM GARANTIAS DE QUALQUER
+   TIPO, EXPRESSAS OU IMPLÍCITAS, INCLUINDO GARANTIAS DE COMERCIALIZAÇÃO, ADEQUAÇÃO A
+   UM FIM ESPECÍFICO E NÃO VIOLAÇÃO. EM NENHUMA HIPÓTESE O AUTOR SERÁ RESPONSÁVEL POR
+   QUALQUER DANO, PERDA DE DADOS OU OUTRA RESPONSABILIDADE DECORRENTE DO USO OU DA
+   IMPOSSIBILIDADE DE USO DO SOFTWARE.
+
+5. ENCERRAMENTO
+
+   Qualquer violação desta licença encerra automaticamente as permissões do item 1.
+   Nesse caso, você deve apagar todas as cópias do Software que estiverem com você.
+
+6. LEGISLAÇÃO
+
+   Esta licença segue as leis da República Federativa do Brasil, em especial a
+   Lei nº 9.610/1998 (direitos autorais) e a Lei nº 9.609/1998 (programas de
+   computador).

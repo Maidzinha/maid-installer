@@ -14,7 +14,7 @@
 #>
 param([switch]$SkipTests)
 $ErrorActionPreference = "Stop"
-Add-Type -AssemblyName System.IO.Compression.FileSystem
+Add-Type -AssemblyName System.IO.Compression, System.IO.Compression.FileSystem
 
 $root = $PSScriptRoot
 $csproj = Join-Path $root "src\MaidInstaller.App\MaidInstaller.App.csproj"
@@ -52,7 +52,8 @@ Copy-Item (Join-Path $installer "Desinstalar.ps1") -Destination $installApp
 foreach ($target in (Split-Path $portableApp), $installRoot) {
     $docs = Join-Path $target "LEIA-ME"
     New-Item -ItemType Directory -Force $docs | Out-Null
-    Copy-Item (Join-Path $root "docs\INSTALACAO.md"), (Join-Path $root "docs\MANUAL.md"), (Join-Path $root "CHANGELOG.md") -Destination $docs
+    Copy-Item (Join-Path $root "docs\INSTALACAO.md"), (Join-Path $root "docs\MANUAL.md"), (Join-Path $root "CHANGELOG.md"), (Join-Path $root "THIRD-PARTY-NOTICES.md") -Destination $docs
+    Copy-Item (Join-Path $root "LICENSE") -Destination (Join-Path $docs "LICENSE.txt")
 }
 
 # --- Zips, SHA-256 e manifesto --------------------------------------------------------------
@@ -60,11 +61,28 @@ $packages = @(
     @{ Name = "MaidInstaller-$version-portatil-win-x64.zip"; Source = (Split-Path $portableApp); Kind = "portatil" },
     @{ Name = "MaidInstaller-$version-win-x64.zip"; Source = $installRoot; Kind = "instalavel" }
 )
+# Zip com "/" nos caminhos (padrão do formato). O ZipFile.CreateFromDirectory do Windows PowerShell grava "\",
+# e outros extratores criam arquivos com nomes quebrados. Pastas vazias (dados do modo portátil) também entram.
+function New-Zip([string]$Source, [string]$Zip) {
+    $base = (Resolve-Path $Source).Path.TrimEnd('\') + '\'
+    $archive = [IO.Compression.ZipFile]::Open($Zip, [IO.Compression.ZipArchiveMode]::Create)
+    try {
+        foreach ($item in Get-ChildItem $Source -Recurse -Force) {
+            $rel = $item.FullName.Substring($base.Length).Replace('\', '/')
+            if ($item.PSIsContainer) {
+                if (-not (Get-ChildItem $item.FullName -Force | Select-Object -First 1)) { [void]$archive.CreateEntry("$rel/") }
+            } else {
+                [void][IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, $item.FullName, $rel, [IO.Compression.CompressionLevel]::Optimal)
+            }
+        }
+    } finally { $archive.Dispose() }
+}
+
 $files = @()
 foreach ($p in $packages) {
     $zip = Join-Path $release $p.Name
     Write-Host "Compactando $($p.Name)..." -ForegroundColor Magenta
-    [IO.Compression.ZipFile]::CreateFromDirectory($p.Source, $zip, [IO.Compression.CompressionLevel]::Optimal, $false)
+    New-Zip -Source $p.Source -Zip $zip
     $hash = (Get-FileHash $zip -Algorithm SHA256).Hash.ToLowerInvariant()
     $files += [ordered]@{ name = $p.Name; kind = $p.Kind; bytes = (Get-Item $zip).Length; sha256 = $hash }
 }
