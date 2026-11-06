@@ -4,6 +4,11 @@
 
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). As versões seguem `MAIOR.MENOR.CORREÇÃO`.
 
+## [1.1.1] — 2026-11-06
+
+- Tema **Claro**: o mascote da tela inicial não tem mais a moldura escura; as bordas da imagem esmaecem no fundo claro.
+  Os temas Escuro e Preto e rosa não mudam.
+
 ## [1.1.0] — 2026-11-05
 
 - **Inglês** no app inteiro: telas, mensagens, erros, catálogo, base de conhecimento da Maid Assistant e perfis prontos.

@@ -4,6 +4,11 @@
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versions follow `MAJOR.MINOR.PATCH`.
 
+## [1.1.1] — 2026-11-06
+
+- **Light** theme: the mascot on the Home screen no longer has a dark frame; the edges of the image fade into the light background.
+  The Dark and Black and pink themes are unchanged.
+
 ## [1.1.0] — 2026-11-05
 
 - **English** across the whole app: screens, messages, errors, the catalog, Maid Assistant's knowledge base and the ready-made
