@@ -1,4 +1,4 @@
-<UserControl x:Class="MaidInstaller.App.Views.HomeView"
+﻿<UserControl x:Class="MaidInstaller.App.Views.HomeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:loc="clr-namespace:MaidInstaller.App.Localization">
@@ -35,7 +35,7 @@
 
                 <Image Grid.ColumnSpan="2" Source="{Binding MascotImage}" Stretch="Uniform" VerticalAlignment="Bottom" HorizontalAlignment="Left"
                        Margin="-14,6,0,0" MaxWidth="470" RenderOptions.BitmapScalingMode="HighQuality"
-                       Visibility="{Binding MascotImage, Converter={StaticResource NullToVis}}" />
+                       OpacityMask="{DynamicResource MascotMask}" Visibility="{Binding MascotImage, Converter={StaticResource NullToVis}}" />
 
                 <ItemsControl Grid.Column="1" ItemsSource="{Binding Shortcuts}" VerticalAlignment="Center" Margin="0,0,0,90">
                     <ItemsControl.ItemsPanel>

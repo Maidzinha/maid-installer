@@ -166,4 +166,9 @@
     <SolidColorBrush x:Key="B_FF2A0E1C" Color="{StaticResource C_FF2A0E1C}" />
     <SolidColorBrush x:Key="B_FFFF4FA3" Color="{StaticResource C_FFFF4FA3}" />
     <SolidColorBrush x:Key="B_FFFF8CC4" Color="{StaticResource C_FFFF8CC4}" />
+    <!-- Só no tema Claro: esmaece as bordas escuras da imagem do mascote. -->
+    <RadialGradientBrush x:Key="MascotMask" Center="0.52,0.45" GradientOrigin="0.52,0.45" RadiusX="0.58" RadiusY="0.62">
+        <GradientStop Color="Black" Offset="0.45" />
+        <GradientStop Color="Transparent" Offset="1" />
+    </RadialGradientBrush>
 </ResourceDictionary>
