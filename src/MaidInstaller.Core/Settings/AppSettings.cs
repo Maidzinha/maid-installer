@@ -20,6 +20,12 @@ public sealed class AppSettings
     public static readonly string[] Languages = [L.English, L.Portuguese, L.Auto];
     public bool AssistantMinimized { get; set; }
 
+    /// <summary>Aviso do Windows quando a fila de instalação termina e o app não está em primeiro plano (ligado por padrão).</summary>
+    public bool NotifyWhenQueueEnds { get; set; } = true;
+
+    /// <summary>O tour de boas-vindas já foi visto (ou pulado).</summary>
+    public bool TourSeen { get; set; }
+
     /// <summary>Usar a IA local quando o modelo estiver na pasta Models (ligada por padrão).</summary>
     public bool AssistantAiEnabled { get; set; } = true;
 

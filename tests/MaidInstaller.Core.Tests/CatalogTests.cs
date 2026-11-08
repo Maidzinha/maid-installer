@@ -17,7 +17,7 @@ public class CatalogTests
     {
         var problems = CatalogValidator.Validate(Raw, out var clean);
         Assert.Empty(problems);
-        Assert.Equal(39, clean.Apps.Count);
+        Assert.Equal(61, clean.Apps.Count);
         Assert.Equal(8, clean.Categories.Count);
     }
 

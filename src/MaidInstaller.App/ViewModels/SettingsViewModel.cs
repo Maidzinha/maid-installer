@@ -281,6 +281,22 @@ public sealed class SettingsViewModel : ObservableObject
     public bool IsVerifying => Ai.Progress?.Verifying == true;
     public bool ShowDownloadButton => !Ai.IsDownloading && !Ai.HasModelFile;
 
+    /// <summary>Aviso do Windows quando a fila de instalação termina.</summary>
+    public bool NotifyWhenQueueEnds
+    {
+        get => _services.Settings.NotifyWhenQueueEnds;
+        set
+        {
+            if (value == _services.Settings.NotifyWhenQueueEnds) return;
+            _services.Settings.NotifyWhenQueueEnds = value;
+            _services.SaveSettings();
+            OnPropertyChanged();
+        }
+    }
+
+    public ICommand ShowTourCommand => _showTourCommand ??= new RelayCommand(() => _main.StartTour());
+    private ICommand? _showTourCommand;
+
     /// <summary>Liga/desliga o uso da IA local (o modelo continua na pasta).</summary>
     public bool IsAiEnabled
     {

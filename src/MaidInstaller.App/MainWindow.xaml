@@ -125,6 +125,43 @@
             </StackPanel>
         </Grid>
 
+        <!-- ============ Tour de boas-vindas ============ -->
+        <Grid Visibility="{Binding Tour, Converter={StaticResource NullToVis}}">
+            <Rectangle Fill="{StaticResource B_B3050304}" Opacity="0.55" />
+            <Border DataContext="{Binding Tour}" Style="{StaticResource GlassPanel}" Background="{StaticResource B_F2160C12}" Padding="24,20"
+                    Width="580" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,48">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Ellipse Width="58" Height="58" VerticalAlignment="Top" Margin="0,2,16,0" Stroke="{StaticResource PinkNeonBrush}" StrokeThickness="2">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/Assets/avatar.png" Stretch="UniformToFill" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{Binding Title}" FontSize="20" FontWeight="Bold" TextWrapping="Wrap" />
+                        <TextBlock Text="{Binding Text}" Margin="0,6,0,0" FontSize="14" Foreground="{StaticResource TextDimBrush}" TextWrapping="Wrap" />
+                    </StackPanel>
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,18,0,0">
+                        <TextBlock Text="{Binding StepText}" VerticalAlignment="Center" FontSize="13" Foreground="{StaticResource TextDimBrush}" />
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Style="{StaticResource GhostButton}" Content="{loc:T 'Pular tour'}" Command="{Binding SkipCommand}" Margin="0,0,10,0"
+                                    IsCancel="True" Visibility="{Binding IsLast, Converter={StaticResource BoolToVis}, ConverterParameter=Invert}" />
+                            <Button Style="{StaticResource GhostButton}" Content="{loc:T 'Voltar'}" Command="{Binding BackCommand}" Margin="0,0,10,0"
+                                    Visibility="{Binding IsFirst, Converter={StaticResource BoolToVis}, ConverterParameter=Invert}" />
+                            <Button Style="{StaticResource AccentButton}" Content="{Binding NextText}" Command="{Binding NextCommand}" IsDefault="True" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+
         <!-- ============ Diálogo de confirmação ============ -->
         <Grid Visibility="{Binding Dialog, Converter={StaticResource NullToVis}}" Background="{StaticResource B_B3050304}">
             <Border DataContext="{Binding Dialog}" Style="{StaticResource GlassPanel}" Background="{StaticResource B_F2160C12}" Padding="28,24"

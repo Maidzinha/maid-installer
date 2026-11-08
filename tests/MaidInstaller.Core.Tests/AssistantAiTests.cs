@@ -63,7 +63,7 @@ public class AssistantAiTests
     [Fact]
     public void Every_catalog_app_is_in_the_knowledge_base_with_package_info()
     {
-        Assert.True(Kb.Apps.Count >= 39);
+        Assert.True(Kb.Apps.Count >= 61);
         Assert.All(Kb.Apps, a => Assert.NotNull(a.HasWinGetPackage));
     }
 

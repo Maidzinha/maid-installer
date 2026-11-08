@@ -362,7 +362,7 @@ public class ScenarioTests : IDisposable
     public void Local_information_loads_from_bundled_files_only()
     {
         // Catálogo, perfis e base de conhecimento vêm de arquivos que acompanham o app: nenhum acesso à rede.
-        Assert.Equal(39, Catalog.Apps.Count);
+        Assert.Equal(61, Catalog.Apps.Count);
         Assert.NotEmpty(DefaultProfiles.Load(Path.Combine(CatalogDir, "profiles.json"), Catalog, NullLogger.Instance));
         Assert.True(FullKb().Topics.Count >= 13);
     }

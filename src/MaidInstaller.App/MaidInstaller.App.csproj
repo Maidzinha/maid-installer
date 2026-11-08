@@ -9,7 +9,7 @@
     <RootNamespace>MaidInstaller.App</RootNamespace>
     <AssemblyName>MaidInstaller</AssemblyName>
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
-    <Version>1.1.1</Version>
+    <Version>1.2.0</Version>
     <Product>Maid Installer — Personal Edition</Product>
     <Company>Maidzinha</Company>
     <Copyright>Copyright (c) 2026 Helder (Maidzinha). Todos os direitos reservados. Licença de uso privado.</Copyright>

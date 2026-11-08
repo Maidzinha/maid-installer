@@ -49,7 +49,26 @@ public sealed class MainViewModel : ObservableObject
         CurrentPage = GetPage(PageKey.Home);
         SystemStatus.Start();
         ShowInstallsCommand = new RelayCommand(ShowInstalls);
+        if (!services.Settings.TourSeen) StartTour();
     }
+
+    private TourViewModel? _tour;
+
+    /// <summary>Tour de boas-vindas aberto (ou null).</summary>
+    public TourViewModel? Tour
+    {
+        get => _tour;
+        private set => SetProperty(ref _tour, value);
+    }
+
+    /// <summary>Abre o tour de boas-vindas (na primeira abertura ou por Configurações).</summary>
+    public void StartTour() => Tour = new TourViewModel(Navigate, () =>
+    {
+        Tour = null;
+        if (_services.Settings.TourSeen) return;
+        _services.Settings.TourSeen = true;
+        _services.SaveSettings();
+    });
 
     public IReadOnlyList<NavItem> NavItems { get; }
     public AssistantViewModel Assistant { get; }
@@ -207,6 +226,7 @@ public sealed class MainViewModel : ObservableObject
             Assistant.Post(failed == 0
                 ? L.T($"Prontinho, {L.Name(name)}! Terminei a fila: {ok} instalação(ões) concluída(s). ♡")
                 : L.T($"Terminei a fila, {L.Name(name)}: {ok} concluída(s) e {failed} com falha. Os detalhes estão na tela de instalações ♡"), expand: false);
+            NotifyQueueEnded(jobs);
 
             // Atualiza o que está instalado (Biblioteca e Acesso Rápido).
             _services.ShellApps.Invalidate();
@@ -214,6 +234,36 @@ public sealed class MainViewModel : ObservableObject
             if (_pages.TryGetValue(PageKey.Library, out var lib) && lib is LibraryViewModel library) _ = library.RefreshStatusAsync();
             if (_pages.TryGetValue(PageKey.Updates, out var up) && up is UpdatesViewModel updatesPage && jobs.Any(j => j.Operation == InstallOperation.Upgrade)) _ = updatesPage.CheckAsync();
         });
+    }
+
+    private DateTime _lastQueueEnd = DateTime.MinValue;
+    private Services.WindowsNotifier? _notifier;
+
+    /// <summary>
+    /// Aviso do Windows com o resumo da fila que acabou de terminar. Só aparece se a janela do app
+    /// não estiver em primeiro plano e se o aviso estiver ligado nas Configurações.
+    /// </summary>
+    private void NotifyQueueEnded(IReadOnlyList<InstallJob> jobs)
+    {
+        var since = _lastQueueEnd;
+        _lastQueueEnd = DateTime.Now;
+        var batch = jobs.Where(j => j.FinishedAt is { } f && f > since).ToList();
+        var ok = batch.Count(j => j.State == InstallJobState.Completed);
+        var failed = batch.Count(j => j.State == InstallJobState.Failed);
+        if (ok + failed == 0 || !_services.Settings.NotifyWhenQueueEnds) return;
+        if (Application.Current?.MainWindow is not { } window || (window.IsActive && window.WindowState != WindowState.Minimized)) return;
+
+        _notifier ??= new Services.WindowsNotifier(window);
+        var text = failed == 0
+            ? L.T($"Terminei a fila: {ok} pronto(s). ♡")
+            : L.T($"Terminei a fila: {ok} pronto(s) e {failed} com falha. Clique para ver os detalhes.");
+        var shown = _notifier.Show(L.T("Maid Installer: fila concluída"), text, () =>
+        {
+            if (window.WindowState == WindowState.Minimized) window.WindowState = WindowState.Normal;
+            window.Activate();
+            ShowInstalls();
+        });
+        _services.Logger.Info($"Aviso do Windows de fim da fila ({ok} concluído(s), {failed} com falha): {(shown ? "mostrado" : "não foi possível mostrar")}.");
     }
 
     private static string FirstSentence(string text)
@@ -243,5 +293,9 @@ public sealed class MainViewModel : ObservableObject
         return page;
     }
 
-    public void Shutdown() => SystemStatus.Stop();
+    public void Shutdown()
+    {
+        SystemStatus.Stop();
+        _notifier?.Dispose();
+    }
 }

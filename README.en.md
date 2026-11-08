@@ -77,12 +77,13 @@ Each screen is explained step by step in the **[User manual](docs/en/MANUAL.md)*
 
 ## What it does
 
-- **Library with 39 apps:** browsers, communication, games, utilities, multimedia, development, drivers and office. All with a verified WinGet ID, search, filters and real installation status.
-- **Organized installation:** one program at a time, showing the real step. You can cancel, try again, see each app's log and read errors explained in plain language.
+- **Library with 61 apps:** browsers, communication, games, utilities, multimedia, development, drivers and office. All with a verified WinGet ID, search, filters and real installation status.
+- **Organized installation:** one program at a time, showing the real step. You can cancel, try again, see each app's log and read errors explained in plain language. When the queue finishes with the app in the background, a Windows notification shows the result.
 - **Profiles and lists:** use the ready-made ones or create your own, and export or import `.maidlist.json` files.
 - **Post-Format Kit:** 10 real system checks. The actions are optional and always ask for confirmation.
 - **Updates:** shows what WinGet found and only updates what you choose.
 - **Maid Assistant:** answers offline from a knowledge base. The local AI (Qwen2.5 0.5B, about 470 MB) is optional, can be downloaded from Settings and is limited to the facts in the base.
+- **Welcome tour:** on first launch, Maid introduces the main screens in a few balloons.
 - **System Status:** real CPU, GPU and RAM usage and the GPU temperature, when the PC allows it.
 - **Two languages and three themes:** English and Portuguese (Brazil); Dark (default), Light and Black and pink.
 

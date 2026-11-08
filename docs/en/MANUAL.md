@@ -25,7 +25,7 @@ official sources (WinGet), check the system and ask Maid Assistant your question
 
 ## 2. App Library
 
-39 verified programs, split into 8 categories. Each card shows the description, developer, price and license,
+61 verified programs, split into 8 categories. Each card shows the description, developer, price and license,
 the official link and whether the program is already installed.
 
 - **Search**: by name, purpose or nickname, without worrying about accents.
@@ -42,6 +42,9 @@ the official link and whether the program is already installed.
 3. Windows may ask for administrator permission (UAC). If you decline, that program is not installed and the others continue.
 4. In **Installations** you follow the queue, cancel what hasn't started, try again and open each program's **log**.
 5. If something fails, the message explains why (no internet, full disk, file in use…).
+
+If Maid Installer isn't in front when the queue finishes, a Windows notification shows how many programs are ready and
+how many failed. Clicking it opens the Installations screen.
 
 The app never updates an installed program during an installation. That is what the Updates screen is for.
 
@@ -96,6 +99,9 @@ confirmation and shows what will change:
   - **Download local AI**: 469 MB, from Qwen's official repository on Hugging Face. The app checks the file's SHA-256.
   - **Use the local AI**: turns it on or off.
   - **Remove model**, **Open Models folder** and **Scan again**.
+- **Notifications and help**:
+  - **Notify me through Windows when the installation queue finishes** (on by default).
+  - **Show the welcome tour**: shows the first-launch balloons again.
 - **Language and appearance**:
   - **Language**: English, Português (Brasil) or Automatic (follows the Windows language).
   - **Theme**: Dark (default), Light or Black and pink.

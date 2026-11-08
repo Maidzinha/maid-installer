@@ -4,6 +4,17 @@
 
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). As versões seguem `MAIOR.MENOR.CORREÇÃO`.
 
+## [1.2.0] — 2026-11-08
+
+- **Biblioteca com 61 apps** (eram 39). Os 22 novos tiveram o ID conferido no WinGet: Zoom, Microsoft Teams, Thunderbird, GOG Galaxy,
+  Battle.net, MSI Afterburner, qBittorrent, Notepad++, Bitwarden, Malwarebytes, CPU-Z, HWiNFO, CrystalDiskInfo, Rufus, Ventoy,
+  K-Lite Codec Pack, GIMP, Krita, HandBrake, Paint.NET, Windows Terminal e Notion. Os ícones vêm dos sites oficiais.
+- **Aviso do Windows quando a fila termina**: se o Maid Installer não estiver na frente, aparece uma notificação com quantos
+  programas ficaram prontos e quantos falharam. Clicar nela abre a tela de Instalações. Pode ser desligado em
+  **Configurações › Avisos e ajuda**. O PC continua nunca reiniciando sozinho.
+- **Tour de boas-vindas**: na primeira abertura, cinco balões rápidos apresentam a Biblioteca, os Perfis, o Kit Pós-Formatação e a
+  Maid Assistant. Dá para pular e rever em **Configurações › Avisos e ajuda**.
+
 ## [1.1.1] — 2026-11-06
 
 - Tema **Claro**: o mascote da tela inicial não tem mais a moldura escura; as bordas da imagem esmaecem no fundo claro.

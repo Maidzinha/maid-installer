@@ -23,7 +23,7 @@ sem instalar nada antes.
 Junto dos `.zip` vem o `SHA256SUMS.txt`. No PowerShell:
 
 ```powershell
-Get-FileHash .\MaidInstaller-1.1.1-win-x64.zip -Algorithm SHA256
+Get-FileHash .\MaidInstaller-1.2.0-win-x64.zip -Algorithm SHA256
 ```
 
 O resultado precisa ser igual ao do arquivo (sem diferenciar maiúsculas e minúsculas).

@@ -1,6 +1,6 @@
-{
+﻿{
   // Catálogo do Maid Installer.
-  // Todo "winGetId" foi conferido com `winget show --id <id> -e` em 2026-11-04 (versão em "verifiedVersion").
+  // Todo "winGetId" foi conferido com `winget show --id <id> -e` em 2026-11-04 (apps novos da 1.2.0: 2026-11-08). A versão fica em "verifiedVersion".
   // Apps sem pacote no WinGet ficam com "winGetId": null e só o link oficial.
   // O catálogo NUNCA contém comandos: só dados. O instalador aceita apenas IDs validados.
   "schemaVersion": 1,
@@ -74,6 +74,30 @@
       "startMenuNames": ["Telegram"], "aliases": ["telegram"]
     },
     {
+      "id": "zoom", "name": "Zoom Workplace", "category": "comunicacao", "developer": "Zoom",
+      "description": "Reuniões e chamadas de vídeo com compartilhamento de tela, chat e gravação.",
+      "price": "Gratuito (planos pagos opcionais)", "license": "Proprietária",
+      "officialUrl": "https://zoom.us/download",
+      "winGetId": "Zoom.Zoom", "winGetSource": "winget", "verifiedVersion": "7.2.51704",
+      "startMenuNames": ["Zoom Workplace", "Zoom"], "aliases": ["zoom", "reuniao", "videochamada"]
+    },
+    {
+      "id": "teams", "name": "Microsoft Teams", "category": "comunicacao", "developer": "Microsoft",
+      "description": "Chat, reuniões e chamadas da Microsoft, para trabalho, escola ou uso pessoal.",
+      "price": "Gratuito (planos pagos opcionais)", "license": "Proprietária",
+      "officialUrl": "https://www.microsoft.com/microsoft-teams/download-app",
+      "winGetId": "Microsoft.Teams", "winGetSource": "winget", "verifiedVersion": "26276.513.5241.9675",
+      "startMenuNames": ["Microsoft Teams"], "aliases": ["teams", "microsoft teams"]
+    },
+    {
+      "id": "thunderbird", "name": "Mozilla Thunderbird", "category": "comunicacao", "developer": "Mozilla",
+      "description": "Cliente de e-mail de código aberto da Mozilla, com agenda e várias contas no mesmo lugar. Esta é a versão em português (Brasil).",
+      "price": "Gratuito (código aberto)", "license": "MPL-2.0",
+      "officialUrl": "https://www.thunderbird.net/",
+      "winGetId": "Mozilla.Thunderbird.pt-BR", "winGetSource": "winget", "verifiedVersion": "159.0",
+      "startMenuNames": ["Thunderbird", "Mozilla Thunderbird"], "aliases": ["thunderbird", "email", "e-mail"]
+    },
+    {
       "id": "steam", "name": "Steam", "category": "jogos", "developer": "Valve",
       "description": "Loja e biblioteca de jogos para PC: compra, download, atualização e salvamento na nuvem.",
       "price": "Gratuito (jogos à parte)", "license": "Proprietária",
@@ -123,6 +147,30 @@
       "startMenuNames": ["Minecraft Launcher", "Minecraft"], "aliases": ["minecraft", "mine"]
     },
     {
+      "id": "gog", "name": "GOG Galaxy", "category": "jogos", "developer": "GOG.com",
+      "description": "Launcher da GOG para jogos sem DRM, que também reúne bibliotecas de outras lojas num só lugar.",
+      "price": "Gratuito (jogos à parte)", "license": "Proprietária",
+      "officialUrl": "https://www.gog.com/galaxy",
+      "winGetId": "GOG.Galaxy", "winGetSource": "winget", "verifiedVersion": "2.1.10.56",
+      "startMenuNames": ["GOG GALAXY", "GOG Galaxy"], "aliases": ["gog", "galaxy", "gog galaxy"]
+    },
+    {
+      "id": "battlenet", "name": "Battle.net", "category": "jogos", "developer": "Blizzard Entertainment",
+      "description": "Launcher da Blizzard para jogos como World of Warcraft, Diablo, Overwatch e Call of Duty.",
+      "price": "Gratuito (jogos à parte)", "license": "Proprietária",
+      "officialUrl": "https://download.battle.net/",
+      "winGetId": "Blizzard.BattleNet", "winGetSource": "winget", "verifiedVersion": "2.0.0.4232",
+      "startMenuNames": ["Battle.net"], "aliases": ["battle.net", "battlenet", "blizzard"]
+    },
+    {
+      "id": "afterburner", "name": "MSI Afterburner", "category": "jogos", "developer": "MSI",
+      "description": "Monitora a placa de vídeo (temperatura, uso, FPS) e permite ajustar velocidade e ventoinhas. Funciona com placas de qualquer marca.",
+      "price": "Gratuito", "license": "Freeware",
+      "officialUrl": "https://www.msi.com/Landing/afterburner/graphics-cards",
+      "winGetId": "Guru3D.Afterburner", "winGetSource": "winget", "verifiedVersion": "4.6.6",
+      "startMenuNames": ["MSI Afterburner"], "aliases": ["afterburner", "msi afterburner", "overclock", "fps"]
+    },
+    {
       "id": "7zip", "name": "7-Zip", "category": "utilitarios", "developer": "Igor Pavlov",
       "description": "Compactador de arquivos: cria e abre .7z e .zip e extrai .rar e muitos outros formatos.",
       "price": "Gratuito (código aberto)", "license": "LGPL-2.1",
@@ -163,6 +211,78 @@
       "startMenuNames": ["PowerToys"], "aliases": ["powertoys"]
     },
     {
+      "id": "qbittorrent", "name": "qBittorrent", "category": "utilitarios", "developer": "The qBittorrent project",
+      "description": "Cliente de torrent de código aberto, leve e sem anúncios, com busca integrada.",
+      "price": "Gratuito (código aberto)", "license": "GPL-3.0",
+      "officialUrl": "https://www.qbittorrent.org/",
+      "winGetId": "qBittorrent.qBittorrent", "winGetSource": "winget", "verifiedVersion": "5.3.0",
+      "startMenuNames": ["qBittorrent"], "aliases": ["qbittorrent", "torrent"]
+    },
+    {
+      "id": "notepadplusplus", "name": "Notepad++", "category": "utilitarios", "developer": "Notepad++ Team",
+      "description": "Editor de texto e código leve, com abas, destaque de sintaxe e busca avançada.",
+      "price": "Gratuito (código aberto)", "license": "GPL-3.0",
+      "officialUrl": "https://notepad-plus-plus.org/",
+      "winGetId": "Notepad++.Notepad++", "winGetSource": "winget", "verifiedVersion": "8.9.9",
+      "startMenuNames": ["Notepad++"], "aliases": ["notepad++", "notepad plus", "notepadpp"]
+    },
+    {
+      "id": "bitwarden", "name": "Bitwarden", "category": "utilitarios", "developer": "Bitwarden Inc.",
+      "description": "Gerenciador de senhas de código aberto, com cofre criptografado sincronizado entre PC e celular.",
+      "price": "Gratuito (plano Premium opcional)", "license": "GPL-3.0",
+      "officialUrl": "https://bitwarden.com/download/",
+      "winGetId": "Bitwarden.Bitwarden", "winGetSource": "winget", "verifiedVersion": "2026.10.4",
+      "startMenuNames": ["Bitwarden"], "aliases": ["bitwarden", "senhas", "gerenciador de senhas"]
+    },
+    {
+      "id": "malwarebytes", "name": "Malwarebytes", "category": "utilitarios", "developer": "Malwarebytes",
+      "description": "Verificador de malware para uma segunda opinião. A versão gratuita faz varreduras manuais e convive com o Microsoft Defender.",
+      "price": "Gratuito (proteção em tempo real paga)", "license": "Proprietária",
+      "officialUrl": "https://www.malwarebytes.com/mwb-download",
+      "winGetId": "Malwarebytes.Malwarebytes", "winGetSource": "winget", "verifiedVersion": "5.7.3.376",
+      "startMenuNames": ["Malwarebytes"], "aliases": ["malwarebytes", "malware", "virus"]
+    },
+    {
+      "id": "cpuz", "name": "CPU-Z", "category": "utilitarios", "developer": "CPUID",
+      "description": "Mostra os detalhes do processador, placa-mãe, memória RAM e placa de vídeo.",
+      "price": "Gratuito", "license": "Freeware",
+      "officialUrl": "https://www.cpuid.com/softwares/cpu-z.html",
+      "winGetId": "CPUID.CPU-Z", "winGetSource": "winget", "verifiedVersion": "3.02",
+      "startMenuNames": ["CPU-Z"], "aliases": ["cpu-z", "cpuz"]
+    },
+    {
+      "id": "hwinfo", "name": "HWiNFO", "category": "utilitarios", "developer": "REALiX",
+      "description": "Informações completas do hardware e sensores em tempo real: temperaturas, tensões, ventoinhas e uso.",
+      "price": "Gratuito (uso pessoal)", "license": "Proprietária (freeware)",
+      "officialUrl": "https://www.hwinfo.com/download/",
+      "winGetId": "REALiX.HWiNFO", "winGetSource": "winget", "verifiedVersion": "8.54",
+      "startMenuNames": ["HWiNFO64", "HWiNFO"], "aliases": ["hwinfo", "sensores", "temperatura"]
+    },
+    {
+      "id": "crystaldiskinfo", "name": "CrystalDiskInfo", "category": "utilitarios", "developer": "Crystal Dew World",
+      "description": "Mostra a saúde e a temperatura de HDs e SSDs (S.M.A.R.T.) e avisa quando um disco começa a falhar.",
+      "price": "Gratuito (código aberto)", "license": "MIT",
+      "officialUrl": "https://crystalmark.info/en/software/crystaldiskinfo/",
+      "winGetId": "CrystalDewWorld.CrystalDiskInfo", "winGetSource": "winget", "verifiedVersion": "9.9.4",
+      "startMenuNames": ["CrystalDiskInfo"], "aliases": ["crystaldiskinfo", "crystal disk", "ssd", "hd"]
+    },
+    {
+      "id": "rufus", "name": "Rufus", "category": "utilitarios", "developer": "Pete Batard",
+      "description": "Cria pendrives de instalação do Windows ou Linux a partir de uma ISO.",
+      "price": "Gratuito (código aberto)", "license": "GPL-3.0",
+      "officialUrl": "https://rufus.ie/",
+      "winGetId": "Rufus.Rufus", "winGetSource": "winget", "verifiedVersion": "4.15",
+      "startMenuNames": ["Rufus"], "aliases": ["rufus", "pendrive bootavel", "iso"]
+    },
+    {
+      "id": "ventoy", "name": "Ventoy", "category": "utilitarios", "developer": "Ventoy",
+      "description": "Prepara um pendrive para dar boot em várias ISOs: basta copiar os arquivos para ele.",
+      "price": "Gratuito (código aberto)", "license": "GPL-3.0",
+      "officialUrl": "https://www.ventoy.net/",
+      "winGetId": "Ventoy.Ventoy", "winGetSource": "winget", "verifiedVersion": "1.1.18",
+      "startMenuNames": ["Ventoy2Disk", "Ventoy"], "aliases": ["ventoy", "pendrive bootavel", "iso"]
+    },
+    {
       "id": "vlc", "name": "VLC Media Player", "category": "multimidia", "developer": "VideoLAN",
       "description": "Reprodutor de vídeo e áudio que abre praticamente qualquer formato sem codecs extras.",
       "price": "Gratuito (código aberto)", "license": "GPL-2.0",
@@ -193,6 +313,46 @@
       "officialUrl": "https://www.audacityteam.org/",
       "winGetId": "Audacity.Audacity", "winGetSource": "winget", "verifiedVersion": "4.0.2",
       "startMenuNames": ["Audacity"], "aliases": ["audacity"]
+    },
+    {
+      "id": "klite", "name": "K-Lite Codec Pack Standard", "category": "multimidia", "developer": "Codec Guide",
+      "description": "Pacote de codecs com o player MPC-HC, para abrir praticamente qualquer formato de vídeo e áudio.",
+      "price": "Gratuito", "license": "Freeware",
+      "officialUrl": "https://codecguide.com/download_k-lite_codec_pack_standard.htm",
+      "winGetId": "CodecGuide.K-LiteCodecPack.Standard", "winGetSource": "winget", "verifiedVersion": "20.2.0",
+      "startMenuNames": ["MPC-HC x64", "MPC-HC", "Codec Tweak Tool"], "aliases": ["k-lite", "codec", "codecs", "mpc-hc"]
+    },
+    {
+      "id": "gimp", "name": "GIMP", "category": "multimidia", "developer": "The GIMP Team",
+      "description": "Editor de imagens de código aberto, para retoque de fotos, montagens e desenho.",
+      "price": "Gratuito (código aberto)", "license": "GPL-3.0",
+      "officialUrl": "https://www.gimp.org/downloads/",
+      "winGetId": "GIMP.GIMP.3", "winGetSource": "winget", "verifiedVersion": "3.2.8.0",
+      "startMenuNames": ["GIMP 3", "GIMP"], "aliases": ["gimp", "editor de imagem", "photoshop gratis"]
+    },
+    {
+      "id": "krita", "name": "Krita", "category": "multimidia", "developer": "Krita Foundation",
+      "description": "Programa de pintura digital e ilustração de código aberto, com pincéis, camadas e animação.",
+      "price": "Gratuito (código aberto)", "license": "GPL-3.0",
+      "officialUrl": "https://krita.org/",
+      "winGetId": "KDE.Krita", "winGetSource": "winget", "verifiedVersion": "5.3.4.1",
+      "startMenuNames": ["Krita"], "aliases": ["krita", "desenho", "pintura digital"]
+    },
+    {
+      "id": "handbrake", "name": "HandBrake", "category": "multimidia", "developer": "The HandBrake Team",
+      "description": "Converte e comprime vídeos para formatos como MP4 e MKV, com perfis prontos.",
+      "price": "Gratuito (código aberto)", "license": "GPL-2.0",
+      "officialUrl": "https://handbrake.fr/",
+      "winGetId": "HandBrake.HandBrake", "winGetSource": "winget", "verifiedVersion": "1.11.2",
+      "startMenuNames": ["HandBrake"], "aliases": ["handbrake", "converter video", "comprimir video"]
+    },
+    {
+      "id": "paintdotnet", "name": "Paint.NET", "category": "multimidia", "developer": "dotPDN",
+      "description": "Editor de imagens simples e rápido, com camadas e efeitos. Mais completo que o Paint.",
+      "price": "Gratuito", "license": "Proprietária (freeware)",
+      "officialUrl": "https://www.getpaint.net/",
+      "winGetId": "dotPDN.PaintDotNet", "winGetSource": "winget", "verifiedVersion": "5.1.12",
+      "startMenuNames": ["Paint.NET", "paint.net"], "aliases": ["paint.net", "paintnet", "paint net"]
     },
     {
       "id": "vscode", "name": "Visual Studio Code", "category": "desenvolvimento", "developer": "Microsoft",
@@ -233,6 +393,14 @@
       "officialUrl": "https://visualstudio.microsoft.com/",
       "winGetId": "Microsoft.VisualStudio.Community", "winGetSource": "winget", "verifiedVersion": "18.11.3",
       "startMenuNames": ["Visual Studio 2026"], "aliases": ["visual studio", "vs community", "visual studio community"]
+    },
+    {
+      "id": "windowsterminal", "name": "Windows Terminal", "category": "desenvolvimento", "developer": "Microsoft",
+      "description": "Terminal moderno da Microsoft, com abas, PowerShell, Prompt de Comando e WSL na mesma janela.",
+      "price": "Gratuito (código aberto)", "license": "MIT",
+      "officialUrl": "https://github.com/microsoft/terminal",
+      "winGetId": "Microsoft.WindowsTerminal", "winGetSource": "winget", "verifiedVersion": "1.25.2733.0",
+      "startMenuNames": ["Terminal", "Windows Terminal"], "aliases": ["terminal", "windows terminal", "powershell"]
     },
     {
       "id": "nvidiaapp", "name": "NVIDIA App", "category": "drivers", "developer": "NVIDIA",
@@ -332,6 +500,14 @@
       "officialUrl": "https://get.adobe.com/reader/",
       "winGetId": "Adobe.Acrobat.Reader.64-bit", "winGetSource": "winget", "verifiedVersion": "26.003.22075",
       "startMenuNames": ["Adobe Acrobat", "Adobe Acrobat Reader"], "aliases": ["acrobat", "adobe reader", "pdf"]
+    },
+    {
+      "id": "notion", "name": "Notion", "category": "escritorio", "developer": "Notion Labs",
+      "description": "Notas, tarefas, wikis e bancos de dados num só lugar, sincronizados na nuvem.",
+      "price": "Gratuito (planos pagos opcionais)", "license": "Proprietária",
+      "officialUrl": "https://www.notion.com/desktop",
+      "winGetId": "Notion.Notion", "winGetSource": "winget", "verifiedVersion": "7.41.1",
+      "startMenuNames": ["Notion"], "aliases": ["notion", "notas", "anotacoes"]
     }
   ]
 }

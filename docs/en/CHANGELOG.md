@@ -4,6 +4,17 @@
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versions follow `MAJOR.MINOR.PATCH`.
 
+## [1.2.0] — 2026-11-08
+
+- **Library with 61 apps** (up from 39). The 22 new ones had their WinGet ID verified: Zoom, Microsoft Teams, Thunderbird, GOG Galaxy,
+  Battle.net, MSI Afterburner, qBittorrent, Notepad++, Bitwarden, Malwarebytes, CPU-Z, HWiNFO, CrystalDiskInfo, Rufus, Ventoy,
+  K-Lite Codec Pack, GIMP, Krita, HandBrake, Paint.NET, Windows Terminal and Notion. The icons come from the official websites.
+- **Windows notification when the queue finishes**: if Maid Installer isn't in front, a notification shows how many programs are
+  ready and how many failed. Clicking it opens the Installations screen. It can be turned off in
+  **Settings › Notifications and help**. The PC is still never restarted on its own.
+- **Welcome tour**: on first launch, five quick balloons introduce the Library, Profiles, the Post-Format Kit and Maid Assistant.
+  You can skip it and see it again in **Settings › Notifications and help**.
+
 ## [1.1.1] — 2026-11-06
 
 - **Light** theme: the mascot on the Home screen no longer has a dark frame; the edges of the image fade into the light background.

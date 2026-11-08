@@ -25,7 +25,7 @@ fontes oficiais (WinGet), confere o sistema e tira dúvidas com a Maid Assistant
 
 ## 2. Biblioteca de Apps
 
-São 39 programas verificados, divididos em 8 categorias. Cada cartão mostra a descrição, o desenvolvedor, o preço e a licença,
+São 61 programas verificados, divididos em 8 categorias. Cada cartão mostra a descrição, o desenvolvedor, o preço e a licença,
 o link oficial e se o programa já está instalado.
 
 - **Pesquisar**: por nome, função ou apelido, sem se preocupar com acentos. Por exemplo, "gravar tela" encontra o OBS e o ShareX.
@@ -42,6 +42,9 @@ o link oficial e se o programa já está instalado.
 3. O Windows pode pedir permissão de administrador (UAC). Se você recusar, aquele programa não é instalado e os outros seguem.
 4. Em **Instalações** você acompanha a fila, cancela o que ainda não começou, tenta de novo e abre o **log** de cada programa.
 5. Se algo falhar, a mensagem explica o motivo no seu idioma (sem internet, disco cheio, arquivo em uso…).
+
+Se o Maid Installer não estiver na frente quando a fila terminar, um aviso do Windows mostra quantos programas ficaram prontos e
+quantos falharam. Clicar no aviso abre a tela Instalações.
 
 O app nunca atualiza um programa já instalado durante uma instalação. Para isso existe a tela Atualizações.
 
@@ -96,6 +99,9 @@ e mostra o que vai mudar:
   - **Baixar IA local**: 469 MB, do repositório oficial da Qwen no Hugging Face. O app confere o arquivo pelo SHA-256.
   - **Usar a IA local**: liga ou desliga.
   - **Remover modelo**, **Abrir pasta Models** e **Procurar de novo**.
+- **Avisos e ajuda**:
+  - **Avisar pelo Windows quando a fila de instalação terminar** (ligado por padrão).
+  - **Ver o tour de boas-vindas**: mostra de novo os balões da primeira abertura.
 - **Idioma e aparência**:
   - **Idioma / Language**: English, Português (Brasil) ou Automático (segue o idioma do Windows).
   - **Tema**: Escuro (padrão), Claro ou Preto e rosa.

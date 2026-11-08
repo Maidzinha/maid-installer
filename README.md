@@ -72,13 +72,14 @@ O passo a passo de cada tela está no **[Manual de uso](docs/MANUAL.md)**.
 
 ## O que ele faz
 
-- **Biblioteca com 39 apps:** navegadores, comunicação, jogos, utilitários, multimídia, desenvolvimento, drivers e escritório. Todos com ID do WinGet conferido, pesquisa, filtros e status real de instalação.
-- **Instalação organizada:** um programa por vez, mostrando a etapa real. Dá para cancelar, tentar de novo, ver o log de cada app e ler os erros explicados no seu idioma.
+- **Biblioteca com 61 apps:** navegadores, comunicação, jogos, utilitários, multimídia, desenvolvimento, drivers e escritório. Todos com ID do WinGet conferido, pesquisa, filtros e status real de instalação.
+- **Instalação organizada:** um programa por vez, mostrando a etapa real. Dá para cancelar, tentar de novo, ver o log de cada app e ler os erros explicados no seu idioma. Quando a fila termina com o app em segundo plano, um aviso do Windows mostra o resultado.
 - **Perfis e listas:** use os prontos ou crie os seus, e exporte ou importe arquivos `.maidlist.json`.
 - **Kit Pós-Formatação:** 10 verificações reais do sistema. As ações são opcionais e sempre pedem confirmação.
 - **Atualizações:** mostra o que o WinGet encontrou e só atualiza o que você escolher.
 - **Maid Assistant:** responde offline com uma base de conhecimento. A IA local (Qwen2.5 0.5B, cerca de 470 MB) é opcional, pode ser baixada pelo app em Configurações e fica limitada aos fatos da base.
 - **Status do Sistema:** uso real de CPU, GPU e RAM e a temperatura da GPU, quando o PC permite.
+- **Tour de boas-vindas:** na primeira abertura, a Maid apresenta as telas principais em poucos balões.
 - **Dois idiomas e três temas:** português (Brasil) e inglês; Escuro (padrão), Claro e Preto e rosa.
 
 ## Segurança

@@ -23,7 +23,7 @@ without installing anything first.
 Next to the `.zip` files there is `SHA256SUMS.txt`. In PowerShell:
 
 ```powershell
-Get-FileHash .\MaidInstaller-1.1.1-win-x64.zip -Algorithm SHA256
+Get-FileHash .\MaidInstaller-1.2.0-win-x64.zip -Algorithm SHA256
 ```
 
 The result must match the one in the file (case does not matter).

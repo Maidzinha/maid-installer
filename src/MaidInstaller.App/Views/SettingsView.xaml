@@ -175,6 +175,25 @@
                     </StackPanel>
                 </Border>
 
+                <!-- Avisos e ajuda -->
+                <Border Style="{StaticResource GlassPanel}" Padding="20,16" Margin="0,0,0,14">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <TextBlock Text="&#xEA8F;" Style="{StaticResource IconText}" FontSize="16" />
+                            <TextBlock Text="{loc:T 'Avisos e ajuda'}" Style="{StaticResource PanelTitle}" Margin="8,0,0,0" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                            <CheckBox Style="{StaticResource PinkCheck}" IsChecked="{Binding NotifyWhenQueueEnds}" VerticalAlignment="Center" Margin="2,0,8,0"
+                                      AutomationProperties.Name="{loc:T 'Avisar pelo Windows quando a fila de instalação terminar'}" />
+                            <TextBlock Text="{loc:T 'Avisar pelo Windows quando a fila de instalação terminar'}" FontSize="14" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <TextBlock FontSize="12.5" Foreground="{StaticResource TextDimBrush}" TextWrapping="Wrap" Margin="0,2,0,12"
+                                   Text="{loc:T 'O aviso só aparece quando o Maid Installer não está na frente, para você poder fazer outra coisa enquanto instala.'}" />
+                        <Button Style="{StaticResource GhostButton}" HorizontalAlignment="Left" Content="{loc:T 'Ver o tour de boas-vindas'}"
+                                Command="{Binding ShowTourCommand}" />
+                    </StackPanel>
+                </Border>
+
                 <!-- Idioma e aparência -->
                 <Border Style="{StaticResource GlassPanel}" Padding="20,16">
                     <StackPanel>
